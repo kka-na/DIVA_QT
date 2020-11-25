@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Kakao map start</title>
+</head>
+<body>
+    <div id="map" style="width:410px;height:350px;"></div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ad36b929779fece2584de7e55ab6762"></script>
+    <script>
+        var map; 
+        var container = document.getElementById('map'),
+            options = {
+                center: new kakao.maps.LatLng(37.449620, 126.653155),
+                level: 3
+            };
+
+        var markers = [];
+
+        var car_pointer = '/car_marker.png', 
+            car_pointer_size = new kakao.maps.Size(28,36),
+            car_marker_image = new kakao.maps.MarkerImage(car_pointer, car_pointer_size);
+
+        initMap();
+        addMarker(37.449620,126.653155);
+        
+
+        function initMap(){
+            map = new kakao.maps.Map(container, options);
+            map.setCenter( new kakao.maps.LatLng(37.449620,126.653155) );
+        }
+
+        function addMarker(lat, lng){
+            map.setCenter( new kakao.maps.LatLng(lat,lng));
+            marker = new kakao.maps.Marker({
+                image : car_marker_image,
+                position: new kakao.maps.LatLng(lat, lng)
+            });
+            marker.setMap(map);
+            markers.push(marker);
+        }
+
+        function resetMarker(){
+            for(var i=0; i<markers.length; i++){
+                markers[i].setMap(null);
+            }
+        }
+       
+    </script>
+</body>
+</html>
