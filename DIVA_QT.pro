@@ -23,10 +23,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     bmpfuncs.cpp \
     camthread.cpp \
+    canthread.cpp \
+    displaythread.cpp \
     glwidget.cpp \
     gpsthread.cpp \
+    imuwidget.cpp \
+    lidarthread.cpp \
+    lidarvtkwidget.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    qcgaugewidget.cpp
 
 HEADERS += \
     Can_serial.h \
@@ -35,9 +41,15 @@ HEADERS += \
     Timestamp.h \
     bmpfuncs.h \
     camthread.h \
+    canthread.h \
+    displaythread.h \
     glwidget.h \
     gpsthread.h \
-    mainwindow.h
+    imuwidget.h \
+    lidarthread.h \
+    lidarvtkwidget.h \
+    mainwindow.h \
+    qcgaugewidget.h
 
 FORMS += \
     mainwindow.ui

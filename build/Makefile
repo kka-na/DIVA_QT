@@ -48,24 +48,13 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kanakim/Test/DIVA_02
+CMAKE_SOURCE_DIR = /home/kanakim/DIVA_QT
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kanakim/Test/DIVA_02/build
+CMAKE_BINARY_DIR = /home/kanakim/DIVA_QT/build
 
 #=============================================================================
 # Targets provided globally by CMake.
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -78,11 +67,22 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kanakim/Test/DIVA_02/build/CMakeFiles /home/kanakim/Test/DIVA_02/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kanakim/DIVA_QT/build/CMakeFiles /home/kanakim/DIVA_QT/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kanakim/Test/DIVA_02/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kanakim/DIVA_QT/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,30 +111,56 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named diva02
+# Target rules for targets named ouster_viz
 
 # Build rule for target.
-diva02: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 diva02
-.PHONY : diva02
+ouster_viz: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ouster_viz
+.PHONY : ouster_viz
 
 # fast build rule for target.
-diva02/fast:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/build
-.PHONY : diva02/fast
+ouster_viz/fast:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/build
+.PHONY : ouster_viz/fast
 
 #=============================================================================
-# Target rules for targets named diva02_autogen
+# Target rules for targets named diva
 
 # Build rule for target.
-diva02_autogen: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 diva02_autogen
-.PHONY : diva02_autogen
+diva: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 diva
+.PHONY : diva
 
 # fast build rule for target.
-diva02_autogen/fast:
-	$(MAKE) -f CMakeFiles/diva02_autogen.dir/build.make CMakeFiles/diva02_autogen.dir/build
-.PHONY : diva02_autogen/fast
+diva/fast:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/build
+.PHONY : diva/fast
+
+#=============================================================================
+# Target rules for targets named ouster_viz_autogen
+
+# Build rule for target.
+ouster_viz_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ouster_viz_autogen
+.PHONY : ouster_viz_autogen
+
+# fast build rule for target.
+ouster_viz_autogen/fast:
+	$(MAKE) -f CMakeFiles/ouster_viz_autogen.dir/build.make CMakeFiles/ouster_viz_autogen.dir/build
+.PHONY : ouster_viz_autogen/fast
+
+#=============================================================================
+# Target rules for targets named diva_autogen
+
+# Build rule for target.
+diva_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 diva_autogen
+.PHONY : diva_autogen
+
+# fast build rule for target.
+diva_autogen/fast:
+	$(MAKE) -f CMakeFiles/diva_autogen.dir/build.make CMakeFiles/diva_autogen.dir/build
+.PHONY : diva_autogen/fast
 
 camthread.o: camthread.cpp.o
 
@@ -142,7 +168,7 @@ camthread.o: camthread.cpp.o
 
 # target to build an object file
 camthread.cpp.o:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/camthread.cpp.o
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/camthread.cpp.o
 .PHONY : camthread.cpp.o
 
 camthread.i: camthread.cpp.i
@@ -151,7 +177,7 @@ camthread.i: camthread.cpp.i
 
 # target to preprocess a source file
 camthread.cpp.i:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/camthread.cpp.i
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/camthread.cpp.i
 .PHONY : camthread.cpp.i
 
 camthread.s: camthread.cpp.s
@@ -160,35 +186,62 @@ camthread.s: camthread.cpp.s
 
 # target to generate assembly for a file
 camthread.cpp.s:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/camthread.cpp.s
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/camthread.cpp.s
 .PHONY : camthread.cpp.s
 
-diva02_autogen/mocs_compilation.o: diva02_autogen/mocs_compilation.cpp.o
+canthread.o: canthread.cpp.o
 
-.PHONY : diva02_autogen/mocs_compilation.o
+.PHONY : canthread.o
 
 # target to build an object file
-diva02_autogen/mocs_compilation.cpp.o:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/diva02_autogen/mocs_compilation.cpp.o
-.PHONY : diva02_autogen/mocs_compilation.cpp.o
+canthread.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/canthread.cpp.o
+.PHONY : canthread.cpp.o
 
-diva02_autogen/mocs_compilation.i: diva02_autogen/mocs_compilation.cpp.i
+canthread.i: canthread.cpp.i
 
-.PHONY : diva02_autogen/mocs_compilation.i
+.PHONY : canthread.i
 
 # target to preprocess a source file
-diva02_autogen/mocs_compilation.cpp.i:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/diva02_autogen/mocs_compilation.cpp.i
-.PHONY : diva02_autogen/mocs_compilation.cpp.i
+canthread.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/canthread.cpp.i
+.PHONY : canthread.cpp.i
 
-diva02_autogen/mocs_compilation.s: diva02_autogen/mocs_compilation.cpp.s
+canthread.s: canthread.cpp.s
 
-.PHONY : diva02_autogen/mocs_compilation.s
+.PHONY : canthread.s
 
 # target to generate assembly for a file
-diva02_autogen/mocs_compilation.cpp.s:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/diva02_autogen/mocs_compilation.cpp.s
-.PHONY : diva02_autogen/mocs_compilation.cpp.s
+canthread.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/canthread.cpp.s
+.PHONY : canthread.cpp.s
+
+diva_autogen/mocs_compilation.o: diva_autogen/mocs_compilation.cpp.o
+
+.PHONY : diva_autogen/mocs_compilation.o
+
+# target to build an object file
+diva_autogen/mocs_compilation.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o
+.PHONY : diva_autogen/mocs_compilation.cpp.o
+
+diva_autogen/mocs_compilation.i: diva_autogen/mocs_compilation.cpp.i
+
+.PHONY : diva_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+diva_autogen/mocs_compilation.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.i
+.PHONY : diva_autogen/mocs_compilation.cpp.i
+
+diva_autogen/mocs_compilation.s: diva_autogen/mocs_compilation.cpp.s
+
+.PHONY : diva_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+diva_autogen/mocs_compilation.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.s
+.PHONY : diva_autogen/mocs_compilation.cpp.s
 
 glwidget.o: glwidget.cpp.o
 
@@ -196,7 +249,7 @@ glwidget.o: glwidget.cpp.o
 
 # target to build an object file
 glwidget.cpp.o:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/glwidget.cpp.o
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/glwidget.cpp.o
 .PHONY : glwidget.cpp.o
 
 glwidget.i: glwidget.cpp.i
@@ -205,7 +258,7 @@ glwidget.i: glwidget.cpp.i
 
 # target to preprocess a source file
 glwidget.cpp.i:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/glwidget.cpp.i
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/glwidget.cpp.i
 .PHONY : glwidget.cpp.i
 
 glwidget.s: glwidget.cpp.s
@@ -214,7 +267,7 @@ glwidget.s: glwidget.cpp.s
 
 # target to generate assembly for a file
 glwidget.cpp.s:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/glwidget.cpp.s
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/glwidget.cpp.s
 .PHONY : glwidget.cpp.s
 
 gpsthread.o: gpsthread.cpp.o
@@ -223,7 +276,7 @@ gpsthread.o: gpsthread.cpp.o
 
 # target to build an object file
 gpsthread.cpp.o:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/gpsthread.cpp.o
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/gpsthread.cpp.o
 .PHONY : gpsthread.cpp.o
 
 gpsthread.i: gpsthread.cpp.i
@@ -232,7 +285,7 @@ gpsthread.i: gpsthread.cpp.i
 
 # target to preprocess a source file
 gpsthread.cpp.i:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/gpsthread.cpp.i
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/gpsthread.cpp.i
 .PHONY : gpsthread.cpp.i
 
 gpsthread.s: gpsthread.cpp.s
@@ -241,8 +294,89 @@ gpsthread.s: gpsthread.cpp.s
 
 # target to generate assembly for a file
 gpsthread.cpp.s:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/gpsthread.cpp.s
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/gpsthread.cpp.s
 .PHONY : gpsthread.cpp.s
+
+imuwidget.o: imuwidget.cpp.o
+
+.PHONY : imuwidget.o
+
+# target to build an object file
+imuwidget.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/imuwidget.cpp.o
+.PHONY : imuwidget.cpp.o
+
+imuwidget.i: imuwidget.cpp.i
+
+.PHONY : imuwidget.i
+
+# target to preprocess a source file
+imuwidget.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/imuwidget.cpp.i
+.PHONY : imuwidget.cpp.i
+
+imuwidget.s: imuwidget.cpp.s
+
+.PHONY : imuwidget.s
+
+# target to generate assembly for a file
+imuwidget.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/imuwidget.cpp.s
+.PHONY : imuwidget.cpp.s
+
+lidarthread.o: lidarthread.cpp.o
+
+.PHONY : lidarthread.o
+
+# target to build an object file
+lidarthread.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/lidarthread.cpp.o
+.PHONY : lidarthread.cpp.o
+
+lidarthread.i: lidarthread.cpp.i
+
+.PHONY : lidarthread.i
+
+# target to preprocess a source file
+lidarthread.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/lidarthread.cpp.i
+.PHONY : lidarthread.cpp.i
+
+lidarthread.s: lidarthread.cpp.s
+
+.PHONY : lidarthread.s
+
+# target to generate assembly for a file
+lidarthread.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/lidarthread.cpp.s
+.PHONY : lidarthread.cpp.s
+
+lidarvtkwidget.o: lidarvtkwidget.cpp.o
+
+.PHONY : lidarvtkwidget.o
+
+# target to build an object file
+lidarvtkwidget.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/lidarvtkwidget.cpp.o
+.PHONY : lidarvtkwidget.cpp.o
+
+lidarvtkwidget.i: lidarvtkwidget.cpp.i
+
+.PHONY : lidarvtkwidget.i
+
+# target to preprocess a source file
+lidarvtkwidget.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/lidarvtkwidget.cpp.i
+.PHONY : lidarvtkwidget.cpp.i
+
+lidarvtkwidget.s: lidarvtkwidget.cpp.s
+
+.PHONY : lidarvtkwidget.s
+
+# target to generate assembly for a file
+lidarvtkwidget.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/lidarvtkwidget.cpp.s
+.PHONY : lidarvtkwidget.cpp.s
 
 main.o: main.cpp.o
 
@@ -250,7 +384,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -259,7 +393,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -268,7 +402,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 mainwindow.o: mainwindow.cpp.o
@@ -277,7 +411,7 @@ mainwindow.o: mainwindow.cpp.o
 
 # target to build an object file
 mainwindow.cpp.o:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/mainwindow.cpp.o
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/mainwindow.cpp.o
 .PHONY : mainwindow.cpp.o
 
 mainwindow.i: mainwindow.cpp.i
@@ -286,7 +420,7 @@ mainwindow.i: mainwindow.cpp.i
 
 # target to preprocess a source file
 mainwindow.cpp.i:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/mainwindow.cpp.i
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/mainwindow.cpp.i
 .PHONY : mainwindow.cpp.i
 
 mainwindow.s: mainwindow.cpp.s
@@ -295,8 +429,143 @@ mainwindow.s: mainwindow.cpp.s
 
 # target to generate assembly for a file
 mainwindow.cpp.s:
-	$(MAKE) -f CMakeFiles/diva02.dir/build.make CMakeFiles/diva02.dir/mainwindow.cpp.s
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/mainwindow.cpp.s
 .PHONY : mainwindow.cpp.s
+
+ouster_viz_autogen/mocs_compilation.o: ouster_viz_autogen/mocs_compilation.cpp.o
+
+.PHONY : ouster_viz_autogen/mocs_compilation.o
+
+# target to build an object file
+ouster_viz_autogen/mocs_compilation.cpp.o:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/ouster_viz_autogen/mocs_compilation.cpp.o
+.PHONY : ouster_viz_autogen/mocs_compilation.cpp.o
+
+ouster_viz_autogen/mocs_compilation.i: ouster_viz_autogen/mocs_compilation.cpp.i
+
+.PHONY : ouster_viz_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+ouster_viz_autogen/mocs_compilation.cpp.i:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/ouster_viz_autogen/mocs_compilation.cpp.i
+.PHONY : ouster_viz_autogen/mocs_compilation.cpp.i
+
+ouster_viz_autogen/mocs_compilation.s: ouster_viz_autogen/mocs_compilation.cpp.s
+
+.PHONY : ouster_viz_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+ouster_viz_autogen/mocs_compilation.cpp.s:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/ouster_viz_autogen/mocs_compilation.cpp.s
+.PHONY : ouster_viz_autogen/mocs_compilation.cpp.s
+
+qcgaugewidget.o: qcgaugewidget.cpp.o
+
+.PHONY : qcgaugewidget.o
+
+# target to build an object file
+qcgaugewidget.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/qcgaugewidget.cpp.o
+.PHONY : qcgaugewidget.cpp.o
+
+qcgaugewidget.i: qcgaugewidget.cpp.i
+
+.PHONY : qcgaugewidget.i
+
+# target to preprocess a source file
+qcgaugewidget.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/qcgaugewidget.cpp.i
+.PHONY : qcgaugewidget.cpp.i
+
+qcgaugewidget.s: qcgaugewidget.cpp.s
+
+.PHONY : qcgaugewidget.s
+
+# target to generate assembly for a file
+qcgaugewidget.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/qcgaugewidget.cpp.s
+.PHONY : qcgaugewidget.cpp.s
+
+src/os1.o: src/os1.cpp.o
+
+.PHONY : src/os1.o
+
+# target to build an object file
+src/os1.cpp.o:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/src/os1.cpp.o
+.PHONY : src/os1.cpp.o
+
+src/os1.i: src/os1.cpp.i
+
+.PHONY : src/os1.i
+
+# target to preprocess a source file
+src/os1.cpp.i:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/src/os1.cpp.i
+.PHONY : src/os1.cpp.i
+
+src/os1.s: src/os1.cpp.s
+
+.PHONY : src/os1.s
+
+# target to generate assembly for a file
+src/os1.cpp.s:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/src/os1.cpp.s
+.PHONY : src/os1.cpp.s
+
+src/os1_util.o: src/os1_util.cpp.o
+
+.PHONY : src/os1_util.o
+
+# target to build an object file
+src/os1_util.cpp.o:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/src/os1_util.cpp.o
+.PHONY : src/os1_util.cpp.o
+
+src/os1_util.i: src/os1_util.cpp.i
+
+.PHONY : src/os1_util.i
+
+# target to preprocess a source file
+src/os1_util.cpp.i:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/src/os1_util.cpp.i
+.PHONY : src/os1_util.cpp.i
+
+src/os1_util.s: src/os1_util.cpp.s
+
+.PHONY : src/os1_util.s
+
+# target to generate assembly for a file
+src/os1_util.cpp.s:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/src/os1_util.cpp.s
+.PHONY : src/os1_util.cpp.s
+
+src/viz.o: src/viz.cpp.o
+
+.PHONY : src/viz.o
+
+# target to build an object file
+src/viz.cpp.o:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/src/viz.cpp.o
+.PHONY : src/viz.cpp.o
+
+src/viz.i: src/viz.cpp.i
+
+.PHONY : src/viz.i
+
+# target to preprocess a source file
+src/viz.cpp.i:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/src/viz.cpp.i
+.PHONY : src/viz.cpp.i
+
+src/viz.s: src/viz.cpp.s
+
+.PHONY : src/viz.s
+
+# target to generate assembly for a file
+src/viz.cpp.s:
+	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/src/viz.cpp.s
+.PHONY : src/viz.cpp.s
 
 # Help Target
 help:
@@ -304,28 +573,57 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
-	@echo "... diva02"
 	@echo "... edit_cache"
-	@echo "... diva02_autogen"
+	@echo "... ouster_viz"
+	@echo "... rebuild_cache"
+	@echo "... diva"
+	@echo "... ouster_viz_autogen"
+	@echo "... diva_autogen"
 	@echo "... camthread.o"
 	@echo "... camthread.i"
 	@echo "... camthread.s"
-	@echo "... diva02_autogen/mocs_compilation.o"
-	@echo "... diva02_autogen/mocs_compilation.i"
-	@echo "... diva02_autogen/mocs_compilation.s"
+	@echo "... canthread.o"
+	@echo "... canthread.i"
+	@echo "... canthread.s"
+	@echo "... diva_autogen/mocs_compilation.o"
+	@echo "... diva_autogen/mocs_compilation.i"
+	@echo "... diva_autogen/mocs_compilation.s"
 	@echo "... glwidget.o"
 	@echo "... glwidget.i"
 	@echo "... glwidget.s"
 	@echo "... gpsthread.o"
 	@echo "... gpsthread.i"
 	@echo "... gpsthread.s"
+	@echo "... imuwidget.o"
+	@echo "... imuwidget.i"
+	@echo "... imuwidget.s"
+	@echo "... lidarthread.o"
+	@echo "... lidarthread.i"
+	@echo "... lidarthread.s"
+	@echo "... lidarvtkwidget.o"
+	@echo "... lidarvtkwidget.i"
+	@echo "... lidarvtkwidget.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
 	@echo "... mainwindow.o"
 	@echo "... mainwindow.i"
 	@echo "... mainwindow.s"
+	@echo "... ouster_viz_autogen/mocs_compilation.o"
+	@echo "... ouster_viz_autogen/mocs_compilation.i"
+	@echo "... ouster_viz_autogen/mocs_compilation.s"
+	@echo "... qcgaugewidget.o"
+	@echo "... qcgaugewidget.i"
+	@echo "... qcgaugewidget.s"
+	@echo "... src/os1.o"
+	@echo "... src/os1.i"
+	@echo "... src/os1.s"
+	@echo "... src/os1_util.o"
+	@echo "... src/os1_util.i"
+	@echo "... src/os1_util.s"
+	@echo "... src/viz.o"
+	@echo "... src/viz.i"
+	@echo "... src/viz.s"
 .PHONY : help
 
 

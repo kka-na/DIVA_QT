@@ -8,8 +8,8 @@
 #include <QThread>
 #include <QDebug>
 #include <QCoreApplication>
+#include <string>
 #include <QtWebEngineWidgets/QtWebEngineWidgets>
-#include <QWebEnginePage>
 
 #include "Timestamp.h"
 #include "Strtok_m.h"

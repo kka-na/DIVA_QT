@@ -1,15 +1,13 @@
 #include "glwidget.h"
 
-ObjParser *car = new ObjParser("/home/kanakim/Test/DIVA_02/obj/Car.obj");
-
 glwidget::glwidget(QWidget *parent) : QGLWidget(parent)
 {
-    
+    car = new ObjParser("/home/kanakim/DIVA_QT/obj/Car.obj");
 }
 
 glwidget::~glwidget(){}
 
-mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM1", 115200);
+mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM0", 115200);
 mscl::InertialNode node(connection);
 
 class IMUdata {
@@ -75,7 +73,7 @@ void glwidget::paintGL(){
             }
         }
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
@@ -85,17 +83,21 @@ void glwidget::paintGL(){
         glRotatef(0, 0.0, 1.0, 0.0);
         glRotatef(45, 0.0, 0.0, 1.0);
 
-        draw_line();
-        glRotatef(180 * atan(accel_x / sqrt(accel_y * accel_y + accel_z * accel_z)) / M_PI, 0.0, 1.0, 0.0);
-        //glRotatef(180 * atan(accel_z / sqrt(accel_x * accel_x + accel_z * accel_z)) / M_PI, 0.0, 0.0, 1.0);
-        glRotatef(180 * atan(accel_y / sqrt(accel_x * accel_x + accel_z * accel_z)) / M_PI, 1.0, 0.0, 0.0);
 
-        //draw_cube();
+
+        double pitch = 180 * atan(accel_x / sqrt(accel_y * accel_y + accel_z * accel_z)) / M_PI;
+        double yaw = 180 * atan(accel_z / sqrt(accel_x * accel_x + accel_z * accel_z)) / M_PI;
+        double roll =   180 * atan(accel_y / sqrt(accel_x * accel_x + accel_z * accel_z)) / M_PI;
+
+        draw_line(roll, pitch, yaw);
+
+        glRotatef(float(roll), 1.0, 0.0, 0.0);
+        glRotatef(float(pitch), 0.0, 1.0, 0.0);
+        //glRotatef(yaw, 0.0, 0.0, 1.0);
+
         draw_obj(car);
-        QThread::msleep(15);
+        //QThread::msleep(10);
 
-        //draw_obj(block1);
-        //glutSwapBuffers();f
 }
 
 void glwidget::resizeGL(int w, int h){
@@ -111,7 +113,7 @@ void glwidget::resizeGL(int w, int h){
 
 
 void glwidget::streaming_start(){
-    
+
     mtime = ts.p_time();
     path = "/home/kanakim/Documents/IMU/i30_IMU_"+ts.getMilliTime()+".csv";
     writeFile.open(path.c_str());
@@ -124,7 +126,6 @@ void glwidget::streaming_start(){
 void glwidget::initialize_glwidget(){
     disconnect(&timer, SIGNAL(timeout()),this, SLOT(updateGL()));
     timer.stop();
-    //fclose(fp);
     writeFile.close();
 }
 
@@ -179,8 +180,18 @@ void glwidget::drawBitmapText(const char *str, float x, float y, float z)
 
 
 
-void glwidget::draw_line()
+void glwidget::draw_line(double roll, double pitch, double yaw)
 {
+    char *xroll = new char[256];
+    char *ypitch = new char[256];
+    char *zyaw = new char[256];
+
+    sprintf(xroll, "R_%f", roll);
+    sprintf(ypitch, "P_%f", pitch);
+    sprintf(zyaw, "Y_%f", yaw);
+
+
+
     glPushMatrix();
 
     glPushMatrix();
@@ -189,7 +200,7 @@ void glwidget::draw_line()
             glVertex3f(5.0, 0.0, 0.0);
             glVertex3f(-5.0, 0.0, 0.0);
         glEnd();
-        drawBitmapText("+X", -2.0, 0.0, 0.0);
+        drawBitmapText(xroll, -2.0, 0.0, 0.0);
     glPopMatrix();
 
     glPushMatrix();
@@ -198,7 +209,7 @@ void glwidget::draw_line()
             glVertex3f(0.0, 5.0, 0.0);
             glVertex3f(0.0, -5.0, 0.0);
         glEnd();
-        drawBitmapText("+Y", 0.0, 2.0, 0.0);
+        drawBitmapText(ypitch, 0.0, 2.0, 0.0);
     glPopMatrix();
 
     glPushMatrix();
@@ -207,76 +218,10 @@ void glwidget::draw_line()
             glVertex3f(0.0, 0.0, 5.0);
             glVertex3f(0.0, 0.0, -5.0);
         glEnd();
-        drawBitmapText("+Z", 0.0, -0.1, 1.0);
+        drawBitmapText(zyaw, 0.0, -0.1, 1.0);
     glPopMatrix();
 
     glPopMatrix();
 
     glFlush();
 }
-
-/*
-static void glwidget::cubebase(void)
-{
-    glBegin(GL_POLYGON);
-    glVertex3d(-0.5, -0.5, -0.5);
-    glVertex3d(-0.5, 0.5, -0.5);
-    glVertex3d(0.5, 0.5, -0.5);
-    glVertex3d(0.5, -0.5, -0.5);
-    glEnd();
-}
-
-
-void glwidget::draw_cube(){
-
-    glMatrixMode(GL_MODELVIEW);
-
-
-    glPushMatrix();
-
-    glColor3f(0.0f, 0.0f, 1.0f);
-    cubebase();
-
-    glPushMatrix();
-    //construct side on +x axis
-    glTranslated(1.0, 0.0, 0.0);
-    glRotated(90.0, 0.0, 1.0, 0.0);
-    glColor3f(1.0f, 0.0f, 0.0f);
-    cubebase();
-
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslated(-1.0, 0.0, 0.0);
-    glRotated(-90.0, 0.0, 1.0, 0.0);
-    glColor3f(1.0f, 0.0f, 0.0f);
-    cubebase();
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslated(0.0, 1.0, 0.0);
-    glRotated(-90.0, 1.0, 0.0, 0.0);
-    glColor3f(0.0f, 1.0f, 0.0f);
-    cubebase();
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslated(0.0, -1.0, 0.0);
-    glRotated(90.0, 1.0, 0.0, 0.0);
-    glColor3f(0.0f, 1.0f, 0.0f);
-    cubebase();
-    glPopMatrix();
-
-    glColor3f(0.0f, 0.0f, 1.0f);
-    glBegin(GL_POLYGON);
-    glVertex3d(-0.5, -0.5, 0.5);
-    glVertex3d(0.5, -0.5, 0.5);
-    glVertex3d(0.5, 0.5, 0.5);
-    glVertex3d(-0.5, 0.5, 0.5);
-    glEnd();
-
-    glPopMatrix();
-
-    glFlush();
-}
-*/

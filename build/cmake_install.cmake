@@ -1,4 +1,4 @@
-# Install script for directory: /home/kanakim/Test/DIVA_02
+# Install script for directory: /home/kanakim/DIVA_QT
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/kanakim/Test/DIVA_02/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/kanakim/DIVA_QT/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

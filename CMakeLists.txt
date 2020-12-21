@@ -3,42 +3,58 @@ cmake_minimum_required(VERSION 3.6)
 
 project(diva)
 
-# init_qt: Let's do the CMake job for us
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 
+#pragma warning(push) #pragma warning(disable : 4345) #pragma warning(pop) 
+
+
+# init_qt: Let's do the CMake job for us
 set(CMAKE_AUTOMOC ON) # For meta object compiler
 set(CMAKE_AUTORCC ON) # Resource files
 set(CMAKE_AUTOUIC ON) # UI files
 
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
-
-
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Find the QtWidgets library
-set( QTDIR $ENV{QTDIR} )
-set( CMAKE_PREFIX_PATH ${QTDIR} )
-find_package(Qt5 REQUIRED Widgets)
+#set( QTDIR $ENV{QTDIR} )
+#set( CMAKE_PREFIX_PATH ${QTDIR} )
+find_package(Qt5 REQUIRED Widgets Gui)
 ADD_DEFINITIONS (${QT_DEFINITIONS})
+find_package(Qt5 REQUIRED COMPONENTS Core Gui Sql X11Extras OpenGL Network PrintSupport WebEngineWidgets SerialPort SerialBus)
 
+
+find_package(Threads)
+find_package(Eigen3 REQUIRED)
 set( VTK_DIR "$ENV{PCL_ROOT}/3rdParty/VTK" )
-find_package(VTK REQUIRED)
-find_package(PCL 1.8.1 REQUIRED)
-
-find_package(Qt5X11Extras ${QT_MIN_VERSION} CONFIG)
-find_package(Qt5OpenGL)
-find_package(Qt5 REQUIRED COMPONENTS Core Gui Sql Network PrintSupport WebEngineWidgets)
-find_package(Qt5OpenGLExtensions)
-
-
-include_directories(${PCL_INCLUDE_DIRS})
-link_directories( ${PCL_LIBRARY_DIRS} )
-add_definitions(${PCL_DEFINITIONS})
-
+find_package(VTK REQUIRED COMPONENTS vtkCommonCore NO_MODULE)
 find_package(PkgConfig REQUIRED)
+find_package(PCL 1.11.1 REQUIRED)
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+#pkg_check_modules(jsoncpp REQUIRED jsoncpp)
 pkg_check_modules(JSONCPP jsoncpp)
 link_libraries(${JSONCPP_LIBRARIES})
+
+# Load additional vtk components; prefer newer vtk opengl module
+set(VIZ_VTK_COMPONENTS vtkCommonCore vtkCommonDataModel vtkCommonMath
+  vtkCommonTransforms vtkFiltersSources vtkImagingCore vtkInteractionStyle
+  vtkRenderingCore
+  )
+if(TARGET vtkRenderingOpenGL2)
+  list(APPEND VIZ_VTK_COMPONENTS vtkRenderingOpenGL2)
+else()
+  list(APPEND VIZ_VTK_COMPONENTS vtkRenderingOpenGL)
+endif()
+find_package(VTK REQUIRED COMPONENTS ${VIZ_VTK_COMPONENTS} NO_MODULE)
+include(${VTK_USE_FILE})
+
 
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS}) 
@@ -61,13 +77,28 @@ link_directories(/usr/share/c++-mscl)
 link_libraries(mscl pthread GL GLU glut GLEW glfw X11 Xxf86vm Xrandr pthread Xi dl Xinerama Xcursor m)
 
 
-set(project_SOURCES main.cpp mainwindow.cpp camthread.cpp glwidget.cpp gpsthread.cpp)
+add_definitions(-DBOOST_ERROR_CODE_HEADER_ONLY)
 
+include_directories(include)
+include_directories(SYSTEM
+  ${EIGEN3_INCLUDE_DIR}
+  ${VTK_INCLUDE_DIRS}
+   ${PCL_LIBRARIES}
+)
+
+add_library(ouster_viz STATIC src/viz.cpp src/os1.cpp src/os1_util.cpp)
+set_target_properties(ouster_viz PROPERTIES POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(ouster_viz jsoncpp)
+target_include_directories(ouster_viz PUBLIC include)
+target_include_directories(ouster_viz SYSTEM PRIVATE ${jsoncpp_INCLUDE_DIRS})
+
+#set(project_SOURCES main.cpp mainwindow.cpp camthread.cpp glwidget.cpp gpsthread.cpp lidarthread.cpp lidarvtkwidget.cpp)
+set(project_SOURCES main.cpp  canthread.cpp imuwidget.cpp  mainwindow.cpp camthread.cpp gpsthread.cpp lidarthread.cpp lidarvtkwidget.cpp  glwidget.cpp qcgaugewidget.cpp )
+#
 add_executable(${PROJECT_NAME} ${project_SOURCES} ${MSCL_INC_PATH} ${MSCL_LIB} ${MSCL_INC})
 
 target_link_libraries(${PROJECT_NAME} ${PCL_LIBRARIES} ${VTK_LIBRARIES} ${JSONCPP_LIBRARIES} ${OpenCV_LIBS} ${GTK2_LIBRARIES}
-${OPENGL_LIBRARIES} ${GLUT_LIBRARY} 
-
+${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${CMAKE_THREAD_LIBS_INIT}
 	Qt5::Core
         Qt5::Gui
         Qt5::Widgets
@@ -75,12 +106,12 @@ ${OPENGL_LIBRARIES} ${GLUT_LIBRARY}
         Qt5::PrintSupport
  	Qt5::Network
         Qt5::WebEngineWidgets
+        Qt5::SerialBus
 	Qt5::OpenGL
+
 	/usr/share/c++-mscl/libmscl.so
 	GL
 	GLU
 	glut
+	ouster_viz
 )
-
-
-include( ${VTK_USE_FILE} )

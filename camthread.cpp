@@ -3,7 +3,7 @@
 camThread::camThread(QObject *parent) : QThread(parent)
 {
     Compression_params.push_back(cv::IMWRITE_JPEG_QUALITY); //Select jpeg
-    Compression_params.push_back(10);
+    Compression_params.push_back(30);
 }
 
 void camThread::run(){
@@ -12,7 +12,12 @@ void camThread::run(){
     path = "/home/kanakim/Documents/CAM/i30_CAM_ts_"+ts.getMilliTime()+".txt";
     wirteFile.open(path.c_str());
     std::cout<<"The CAM_ts.txt file saved to ["<<path<<"]\n";
-    cap.open(0, cv::CAP_ANY);
+    cap.open(2);
+    cap.read(frame);
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 4000);
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 4000);
+    cap.read(frame);
+
     if( !cap.isOpened() )
           QThread::msleep(10);
 
@@ -25,18 +30,17 @@ void camThread::run(){
         string tmp = "\n";
 
         //opencv uses bgr order, need to conver it to rgb
-        cvtColor(frame,mat,cv::COLOR_BGR2RGB);
+        cvtColor(frame, mat,cv::COLOR_BGR2RGB);
         //image is created according to mat dimensions
         QImage image(mat.size().width, mat.size().height, QImage::Format_RGB888);
-        //copy cv::Mat to QImages
-        memcpy(image.scanLine(0), mat.data, static_cast<size_t>(image.width() * image.height() * mat.channels()));
+        memcpy(image.scanLine(0), mat.data, static_cast<size_t>(image.width() * image.height() * frame.channels()));
+        emit send_qimage(image);
 
         wirteFile.write(now_time, m_time.size());
         wirteFile.write(tmp.c_str(), tmp.size());
-        imwrite(buf, frame,Compression_params);
-
-        emit send_qimage(image);
-        QThread::msleep(30);
+        imwrite(buf, frame, Compression_params);
+        
+        QThread::msleep(10);
         QCoreApplication::processEvents();
     }
 }

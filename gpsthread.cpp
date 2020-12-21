@@ -43,10 +43,13 @@ void gpsThread::run(){
             }
             sprintf(nnnmea,"%s,%s,%s,%s,%s,%s,%s\n", nmea[1], nmea[2], nmea[3], nmea[4], nmea[5], nmea[9], nmea[10]);
             writeFile.write(nnnmea, strlen(nnnmea));
-
-            latitude = to_string(Convert_to_dd(stold(nmea[2])));
-            longitude = to_string(Convert_to_dd(stold(nmea[4])));
-
+            if(strlen(nmea[2]) < 1 || strlen(nmea[4]) < 1){
+                latitude = "0"; longitude="0";
+            }else{
+                latitude = to_string(Convert_to_dd(stold(nmea[2])));
+                longitude = to_string(Convert_to_dd(stold(nmea[4])));
+            }
+            
             emit send_ll(QString::fromLocal8Bit(latitude.c_str()), QString::fromLocal8Bit(longitude.c_str()));
         }
         QCoreApplication::processEvents();
