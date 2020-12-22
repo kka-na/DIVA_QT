@@ -27,7 +27,7 @@ class imuWidget : public QGLWidget
    Q_OBJECT
 
    public:
-      imuWidget(QWidget *parent = 0);
+       imuWidget(QWidget *parent = 0);
 
        void initializeGL();
        void paintGL();
@@ -44,7 +44,8 @@ class imuWidget : public QGLWidget
        float accel_y = 0.0;
        float accel_z = 0.0;
 
-
+public slots:
+  void doWork();
 private slots:
   void streaming_start(float ax, float ay, float az);
   void initialize_glwidget();

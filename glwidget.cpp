@@ -7,8 +7,6 @@ glwidget::glwidget(QWidget *parent) : QGLWidget(parent)
 
 glwidget::~glwidget(){}
 
-mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM0", 115200);
-mscl::InertialNode node(connection);
 
 class IMUdata {
 public:
@@ -22,6 +20,9 @@ void glwidget::initializeGL(){
 }
 
 void glwidget::paintGL(){
+    mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM0", 115200);
+    mscl::InertialNode node(connection);
+
     mscl::MipDataPackets packets = node.getDataPackets(500);
     IMUdata temp;
 

@@ -309,8 +309,6 @@ GL/gl.h
 -
 GL/glu.h
 -
-mainwindow.h
-/home/kanakim/DIVA_QT/mainwindow.h
 Timestamp.h
 /home/kanakim/DIVA_QT/Timestamp.h
 ObjParser.h
@@ -30952,7 +30950,5 @@ QtWidgets/QPushButton
 QtWidgets/QSlider
 -
 QtWidgets/QWidget
--
-glwidget.h
 -
 

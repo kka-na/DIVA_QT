@@ -21,7 +21,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QWidget>
-#include <glwidget.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -41,7 +40,6 @@ public:
     QSlider *horizontalSlider;
     QPushButton *pushButton;
     QListWidget *label_3;
-    glwidget *imu_label;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
     QWidget *gridLayoutWidget_2;
@@ -94,9 +92,6 @@ public:
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(15, 600, 271, 221));
         label_3->setStyleSheet(QString::fromUtf8("background-color: rgba(238, 238, 236, 180);"));
-        imu_label = new glwidget(centralwidget);
-        imu_label->setObjectName(QString::fromUtf8("imu_label"));
-        imu_label->setGeometry(QRect(1250, 540, 352, 262));
         gridLayoutWidget = new QWidget(centralwidget);
         gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
         gridLayoutWidget->setGeometry(QRect(10, 140, 271, 201));
@@ -105,7 +100,7 @@ public:
         gridLayout->setContentsMargins(0, 0, 0, 0);
         gridLayoutWidget_2 = new QWidget(centralwidget);
         gridLayoutWidget_2->setObjectName(QString::fromUtf8("gridLayoutWidget_2"));
-        gridLayoutWidget_2->setGeometry(QRect(1250, 540, 361, 261));
+        gridLayoutWidget_2->setGeometry(QRect(1210, 530, 361, 261));
         gridLayout_2 = new QGridLayout(gridLayoutWidget_2);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -115,7 +110,6 @@ public:
         label_7->raise();
         horizontalSlider->raise();
         pushButton->raise();
-        imu_label->raise();
         gridLayoutWidget->raise();
         gridLayoutWidget_2->raise();
         menubar = new QMenuBar(MainWindow);

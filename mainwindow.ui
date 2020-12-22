@@ -95,16 +95,6 @@ background-color: rgba(238, 238, 236, 180);</string>
      <string notr="true">background-color: rgba(238, 238, 236, 180);</string>
     </property>
    </widget>
-   <widget class="glwidget" name="imu_label">
-    <property name="geometry">
-     <rect>
-      <x>1250</x>
-      <y>540</y>
-      <width>352</width>
-      <height>262</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
@@ -119,8 +109,8 @@ background-color: rgba(238, 238, 236, 180);</string>
    <widget class="QWidget" name="gridLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>1250</x>
-      <y>540</y>
+      <x>1210</x>
+      <y>530</y>
       <width>361</width>
       <height>261</height>
      </rect>
@@ -132,7 +122,6 @@ background-color: rgba(238, 238, 236, 180);</string>
    <zorder>label_7</zorder>
    <zorder>horizontalSlider</zorder>
    <zorder>pushButton</zorder>
-   <zorder>imu_label</zorder>
    <zorder>gridLayoutWidget</zorder>
    <zorder>gridLayoutWidget_2</zorder>
   </widget>
@@ -207,13 +196,6 @@ color: rgba(103, 73, 203, 230);</string>
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>glwidget</class>
-   <extends>QOpenGLWidget</extends>
-   <header location="global">glwidget.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -96,7 +96,7 @@ void MainWindow::Make(){
     mview = new QWebEngineView(this);
     
     layout()->addWidget(lvw);
-    lvw->setGeometry(300, 40, 928, 780);
+    lvw->setGeometry(300, 40,1280, 780);
     mview->setGeometry(1240,80,352,462);
     mpage->setUrl(QUrl("http://localhost:8080/map_display.html"));
     mpage->setView(mview);
@@ -152,6 +152,9 @@ void MainWindow::Initializing_for_Live(){
     diva->setPixmap(temp_jpeg.scaled(diva->width(), diva->height(),Qt::KeepAspectRatio));
     diva->show();
 
+    gw = new glwidget();
+    layout()->addWidget(gw);
+    gw->setGeometry(1160, 540, 420, 260);
     
     connect(ui->actionLive_Streaming, SIGNAL(triggered()), ct, SLOT(start()));
     connect(ui->actionLive_Streaming, SIGNAL(triggered()), gt, SLOT(start()));
@@ -169,12 +172,12 @@ void MainWindow::Initializing_for_Live(){
     //connect(cant, SIGNAL(send_handle(QString)),this, SLOT(display_can_info(QString)));
     connect(cant, SIGNAL(send_speed(int)),this, SLOT(speedChanged(int)));
 
-    connect(ui->actionLive_Streaming, SIGNAL(triggered()), ui->imu_label, SLOT(streaming_start()));
+    connect(ui->actionLive_Streaming, SIGNAL(triggered()), gw, SLOT(streaming_start()));
 
 
     //conenct to widget for close
     connect(ui->actionStreaming_End, SIGNAL(triggered()), ct, SLOT(stop()));
-    connect(ui->actionStreaming_End, SIGNAL(triggered()), ui->imu_label, SLOT(initialize_glwidget()));
+    connect(ui->actionStreaming_End, SIGNAL(triggered()), gw, SLOT(initialize_glwidget()));
     connect(ui->actionStreaming_End, SIGNAL(triggered()), gt, SLOT(stop()));
     connect(ui->actionStreaming_End, SIGNAL(triggered()), lt, SLOT(stop()));
     connect(gt, SIGNAL(send_end()), this, SLOT(gps_view_initialize()));
@@ -221,11 +224,15 @@ void MainWindow::on_actionStroing_To_DB_triggered(){
 void MainWindow::Initializing_for_Playback(){
 
     this->Make();
-
+    workerThread_imu = new QThread;
     iw = new imuWidget();
-    ui->gridLayout_2->layout()->addWidget(iw);
+    iw->setGeometry(1160, 540, 420, 260);
+    layout()->addWidget(iw);
+    iw->moveToThread(workerThread_imu);
+    connect(workerThread_imu, SIGNAL(started()), iw, SLOT(doWork()));
 
     if(this->setting_db()){
+        workerThread_imu->start();
         connect(ui->actionGet_Log, SIGNAL(triggered()), this, SLOT(get_log_token()));
         connect(ui->actionGet_Log, SIGNAL(triggered()), lvw, SLOT(init()), Qt::QueuedConnection);
         connect(this, SIGNAL(send_pcd(QString)), lvw, SLOT(display_pcd(QString)));
@@ -233,6 +240,8 @@ void MainWindow::Initializing_for_Playback(){
     }else{
         std::cout<<"Can't connect to DB"<<std::endl;
     }
+
+    //connect(ui->actionFinish, SIGNAL(triggered()), wokerThread_imu, SLOT(quit()));
 
 }
 
@@ -406,7 +415,7 @@ void MainWindow::Display_Can_Data(QString Text){
     this->can_from_db->first();
     handle = this->can_from_db->value(2).toString();
     handle_ac =this->can_from_db->value(3).toString();
-    speed =this->can_from_db->value(4).toS tring(); //speed 
+    speed =this->can_from_db->value(4).toString(); //speed 
     
     this->display_can_info(handle, handle_ac);
     this->speedChanged(speed.toInt());
@@ -445,7 +454,7 @@ bool MainWindow::setting_db(){
 
         qDebug() << "db connection" << database.open();
         return con;
-    }
+}
 
 
 

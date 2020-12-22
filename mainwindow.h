@@ -95,8 +95,6 @@ public:
     QWebEnginePage *mpage;
 
     QLabel *camWidget;
-    imuWidget *iw;
-
     QLabel *gpsWidget;
     QLabel *gpsWidget2;
     QLabel *diva;
@@ -135,6 +133,11 @@ private:
     class lidarThread::lidarThread *lt;
     class lidarVTKWidget::lidarVTKWidget *lvw;
     class canThread::canThread *cant;
+
+    glwidget *gw;
+    QThread *workerThread_gl;
+    imuWidget *iw;
+    QThread *workerThread_imu;
 
 
 public slots:

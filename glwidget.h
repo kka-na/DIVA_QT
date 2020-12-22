@@ -21,16 +21,12 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "mainwindow.h"
 #include "Timestamp.h"
 #include "ObjParser.h"
 
 class glwidget : public QGLWidget
 {
     Q_OBJECT
-
-
-
 public:
     explicit glwidget(QWidget *parent = 0);
     ~glwidget();
@@ -44,9 +40,7 @@ public:
 
 
     ObjParser *car;
-
     QTimer timer;
-
     Timestamp ts;
 
 	float accel_x = 0.1;
@@ -54,7 +48,6 @@ public:
 	float accel_z = 0.1;
 
     const char * mtime;
-    //char path[256];
     char fp[526];
     string path;
     ofstream writeFile;

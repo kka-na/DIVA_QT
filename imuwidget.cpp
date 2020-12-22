@@ -49,11 +49,13 @@ void imuWidget::resizeGL(int w, int h){
         glMatrixMode(GL_MODELVIEW);
 }
 
+void imuWidget::doWork(){
+    updateGL();
+}
 
 void imuWidget::streaming_start(float ax, float ay, float az){
     accel_x = ax; accel_y = ay; accel_z = az;
-    connect(&timer, SIGNAL(timeout()), this, SLOT(updateGL()));
-    timer.start(10);
+    updateGL();
 }
 
 void imuWidget::initialize_glwidget(){
