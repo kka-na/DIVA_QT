@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1600</width>
+    <width>1602</width>
     <height>900</height>
    </rect>
   </property>
@@ -20,10 +20,10 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>15</x>
-      <y>349</y>
-      <width>271</width>
-      <height>241</height>
+      <x>20</x>
+      <y>459</y>
+      <width>270</width>
+      <height>131</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -39,25 +39,29 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>1160</x>
+      <x>1250</x>
       <y>810</y>
-      <width>421</width>
+      <width>331</width>
       <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(238, 238, 236);</string>
+     <string notr="true">background-color: rgba(255,255,255,80);
+color: rgb(98, 114, 164);</string>
     </property>
     <property name="text">
      <string>TextLabel</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QSlider" name="horizontalSlider">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>310</x>
       <y>810</y>
-      <width>851</width>
+      <width>931</width>
       <height>51</height>
      </rect>
     </property>
@@ -72,8 +76,8 @@ background-color: rgba(238, 238, 236, 180);</string>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>830</y>
+      <x>110</x>
+      <y>810</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -85,10 +89,10 @@ background-color: rgba(238, 238, 236, 180);</string>
    <widget class="QListWidget" name="label_3">
     <property name="geometry">
      <rect>
-      <x>15</x>
+      <x>20</x>
       <y>600</y>
-      <width>271</width>
-      <height>221</height>
+      <width>270</width>
+      <height>201</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -98,8 +102,8 @@ background-color: rgba(238, 238, 236, 180);</string>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>140</y>
+      <x>20</x>
+      <y>50</y>
       <width>271</width>
       <height>201</height>
      </rect>
@@ -109,13 +113,146 @@ background-color: rgba(238, 238, 236, 180);</string>
    <widget class="QWidget" name="gridLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>1210</x>
-      <y>530</y>
-      <width>361</width>
-      <height>261</height>
+      <x>310</x>
+      <y>10</y>
+      <width>1271</width>
+      <height>791</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2"/>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>1249</x>
+      <y>529</y>
+      <width>321</width>
+      <height>261</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_3"/>
+   </widget>
+   <widget class="QLabel" name="P_label">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>270</y>
+      <width>50</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 30pt &quot;Ubuntu Mono&quot;;
+color: rgb(40, 42, 54);
+background-color: rgba(255, 255, 255,0);psql -h localhost -p 5432 -U diva -d &quot;diva&quot;</string>
+    </property>
+    <property name="text">
+     <string>P</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="R_label">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>270</y>
+      <width>50</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 30pt &quot;Ubuntu Mono&quot;;
+color: rgb(40, 42, 54);
+background-color: rgba(255, 255, 255,0);psql -h localhost -p 5432 -U diva -d &quot;diva&quot;</string>
+    </property>
+    <property name="text">
+     <string>R</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="N_label">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>270</y>
+      <width>50</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 30pt &quot;Ubuntu Mono&quot;;
+color: rgb(40, 42, 54);
+background-color: rgba(255, 255, 255,0);psql -h localhost -p 5432 -U diva -d &quot;diva&quot;</string>
+    </property>
+    <property name="text">
+     <string>N</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="D_label">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>270</y>
+      <width>50</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 30pt &quot;Ubuntu Mono&quot;;
+color: rgb(40, 42, 54);
+background-color: rgba(255, 255, 255,0);psql -h localhost -p 5432 -U diva -d &quot;diva&quot;</string>
+    </property>
+    <property name="text">
+     <string>D</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>340</y>
+      <width>80</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255,0)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>rightarrowbefore.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>340</y>
+      <width>80</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255,0)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>leftarrowbefore.png</pixmap>
+    </property>
    </widget>
    <zorder>label_3</zorder>
    <zorder>label_5</zorder>
@@ -124,13 +261,20 @@ background-color: rgba(238, 238, 236, 180);</string>
    <zorder>pushButton</zorder>
    <zorder>gridLayoutWidget</zorder>
    <zorder>gridLayoutWidget_2</zorder>
+   <zorder>gridLayoutWidget_3</zorder>
+   <zorder>P_label</zorder>
+   <zorder>R_label</zorder>
+   <zorder>N_label</zorder>
+   <zorder>D_label</zorder>
+   <zorder>label</zorder>
+   <zorder>label_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1600</width>
+     <width>1602</width>
      <height>22</height>
     </rect>
    </property>
@@ -156,6 +300,8 @@ color: rgba(103, 73, 203, 230);</string>
     </property>
     <addaction name="actionInitializing_2"/>
     <addaction name="actionGet_Log"/>
+    <addaction name="actionFinish"/>
+    <addaction name="actionTest"/>
    </widget>
    <addaction name="menuStreaming"/>
    <addaction name="menuPlayback"/>
@@ -193,6 +339,16 @@ color: rgba(103, 73, 203, 230);</string>
   <action name="actionStroing_To_DB">
    <property name="text">
     <string>Stroing To DB</string>
+   </property>
+  </action>
+  <action name="actionFinish">
+   <property name="text">
+    <string>Finish</string>
+   </property>
+  </action>
+  <action name="actionTest">
+   <property name="text">
+    <string>Test</string>
    </property>
   </action>
  </widget>

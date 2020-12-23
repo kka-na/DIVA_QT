@@ -13,6 +13,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/diva.dir/lidarvtkwidget.cpp.o"
   "CMakeFiles/diva.dir/glwidget.cpp.o"
   "CMakeFiles/diva.dir/qcgaugewidget.cpp.o"
+  "CMakeFiles/diva.dir/storingdb.cpp.o"
   "CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o"
   "diva.pdb"
   "diva"

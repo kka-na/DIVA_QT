@@ -19,9 +19,11 @@ void glwidget::initializeGL(){
         glEnable(GL_DEPTH_TEST);
 }
 
+mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM1", 115200);
+mscl::InertialNode node(connection);
+
 void glwidget::paintGL(){
-    mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM0", 115200);
-    mscl::InertialNode node(connection);
+    
 
     mscl::MipDataPackets packets = node.getDataPackets(500);
     IMUdata temp;

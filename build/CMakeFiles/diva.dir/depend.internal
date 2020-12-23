@@ -273,6 +273,7 @@ CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o
  /home/kanakim/DIVA_QT/lidarvtkwidget.h
  /home/kanakim/DIVA_QT/mainwindow.h
  /home/kanakim/DIVA_QT/qcgaugewidget.h
+ /home/kanakim/DIVA_QT/storingdb.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QByteArray
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCoreApplication
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCryptographicHash
@@ -9039,6 +9040,7 @@ CMakeFiles/diva.dir/main.cpp.o
  /home/kanakim/DIVA_QT/main.cpp
  /home/kanakim/DIVA_QT/mainwindow.h
  /home/kanakim/DIVA_QT/qcgaugewidget.h
+ /home/kanakim/DIVA_QT/storingdb.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QByteArray
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCoreApplication
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCryptographicHash
@@ -12003,6 +12005,7 @@ CMakeFiles/diva.dir/mainwindow.cpp.o
  /home/kanakim/DIVA_QT/mainwindow.cpp
  /home/kanakim/DIVA_QT/mainwindow.h
  /home/kanakim/DIVA_QT/qcgaugewidget.h
+ /home/kanakim/DIVA_QT/storingdb.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QByteArray
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCoreApplication
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCryptographicHash
@@ -15069,3 +15072,83 @@ CMakeFiles/diva.dir/qcgaugewidget.cpp.o
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtWidgets/qtwidgets-config.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtWidgets/qtwidgetsglobal.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtWidgets/qwidget.h
+CMakeFiles/diva.dir/storingdb.cpp.o
+ /home/kanakim/DIVA_QT/storingdb.cpp
+ /home/kanakim/DIVA_QT/storingdb.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDebug
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QFile
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QString
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QTextStream
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qalgorithms.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qarraydata.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qatomic.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qatomic_bootstrap.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qatomic_cxx11.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qatomic_msvc.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qbasicatomic.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qbytearray.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qbytearraylist.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qchar.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qcompilerdetection.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qconfig-bootstrapped.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qconfig.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qcontainerfwd.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qcontiguouscache.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qcoreevent.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qdebug.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qfile.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qfiledevice.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qflags.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qgenericatomic.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qglobal.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qglobalstatic.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qhash.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qhashfunctions.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qiodevice.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qiterator.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qlist.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qlocale.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qlogging.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qmap.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qmetatype.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qmutex.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qnamespace.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qnumeric.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qobject.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qobject_impl.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qobjectdefs.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qobjectdefs_impl.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qpair.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qpoint.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qprocessordetection.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qrefcount.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qregexp.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qscopedpointer.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qset.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qshareddata.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qsharedpointer.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qsharedpointer_impl.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstring.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringalgorithms.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringbuilder.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringlist.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringliteral.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringmatcher.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringview.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qsysinfo.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qsystemdetection.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qtcore-config.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qtextstream.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qtypeinfo.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qvariant.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qvarlengtharray.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qvector.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qversiontagging.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtSql/QSqlDatabase
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtSql/QSqlError
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtSql/QSqlQuery
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtSql/qsqldatabase.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtSql/qsqlerror.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtSql/qsqlquery.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtSql/qtsql-config.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtSql/qtsqlglobal.h

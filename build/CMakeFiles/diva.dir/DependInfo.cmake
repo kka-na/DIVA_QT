@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/kanakim/DIVA_QT/main.cpp" "/home/kanakim/DIVA_QT/build/CMakeFiles/diva.dir/main.cpp.o"
   "/home/kanakim/DIVA_QT/mainwindow.cpp" "/home/kanakim/DIVA_QT/build/CMakeFiles/diva.dir/mainwindow.cpp.o"
   "/home/kanakim/DIVA_QT/qcgaugewidget.cpp" "/home/kanakim/DIVA_QT/build/CMakeFiles/diva.dir/qcgaugewidget.cpp.o"
+  "/home/kanakim/DIVA_QT/storingdb.cpp" "/home/kanakim/DIVA_QT/build/CMakeFiles/diva.dir/storingdb.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

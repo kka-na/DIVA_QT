@@ -567,6 +567,33 @@ src/viz.cpp.s:
 	$(MAKE) -f CMakeFiles/ouster_viz.dir/build.make CMakeFiles/ouster_viz.dir/src/viz.cpp.s
 .PHONY : src/viz.cpp.s
 
+storingdb.o: storingdb.cpp.o
+
+.PHONY : storingdb.o
+
+# target to build an object file
+storingdb.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/storingdb.cpp.o
+.PHONY : storingdb.cpp.o
+
+storingdb.i: storingdb.cpp.i
+
+.PHONY : storingdb.i
+
+# target to preprocess a source file
+storingdb.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/storingdb.cpp.i
+.PHONY : storingdb.cpp.i
+
+storingdb.s: storingdb.cpp.s
+
+.PHONY : storingdb.s
+
+# target to generate assembly for a file
+storingdb.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/storingdb.cpp.s
+.PHONY : storingdb.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -624,6 +651,9 @@ help:
 	@echo "... src/viz.o"
 	@echo "... src/viz.i"
 	@echo "... src/viz.s"
+	@echo "... storingdb.o"
+	@echo "... storingdb.i"
+	@echo "... storingdb.s"
 .PHONY : help
 
 

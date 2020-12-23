@@ -19,6 +19,18 @@
 
 #include "Timestamp.h"
 
+class CANdata {
+public:
+    CANdata(){
+        handle_angle = 0;
+        handle_accel = 0;
+        vehicle_speed = 0;
+        gear = 0;
+        turn_indicator = 2;
+    }
+    int handle_angle, handle_accel, vehicle_speed,gear, turn_indicator;
+};
+
 
 class canThread : public QThread
 {
@@ -77,7 +89,8 @@ public:
 signals:
 	void send_speed(int);
 	void send_handle(QString,  QString);
-	void send_handle2(QString);
+	void send_gear(int);
+	void send_turn(int);
 	void send_end();
 
 
@@ -85,9 +98,7 @@ public slots:
 	void stop();
 
 private slots:
-    string hexToBinary(char);
-    int S2Bconvert(int start, int end, std::string binary);
-
+    string hexToBinary(string, int);
 
 private:
 	void run() override;

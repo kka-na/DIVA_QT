@@ -49,8 +49,8 @@ void imuWidget::resizeGL(int w, int h){
         glMatrixMode(GL_MODELVIEW);
 }
 
-void imuWidget::doWork(){
-    updateGL();
+void imuWidget::clear(){
+    initializeGL();
 }
 
 void imuWidget::streaming_start(float ax, float ay, float az){
@@ -58,10 +58,6 @@ void imuWidget::streaming_start(float ax, float ay, float az){
     updateGL();
 }
 
-void imuWidget::initialize_glwidget(){
-    disconnect(&timer, SIGNAL(timeout()),this, SLOT(updateGL()));
-    timer.stop();
-}
 
 void imuWidget::draw_obj(ObjParser *objParser) {
     glTranslated(0.0, 0.0, -0.5);

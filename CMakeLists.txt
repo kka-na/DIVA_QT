@@ -93,7 +93,7 @@ target_include_directories(ouster_viz PUBLIC include)
 target_include_directories(ouster_viz SYSTEM PRIVATE ${jsoncpp_INCLUDE_DIRS})
 
 #set(project_SOURCES main.cpp mainwindow.cpp camthread.cpp glwidget.cpp gpsthread.cpp lidarthread.cpp lidarvtkwidget.cpp)
-set(project_SOURCES main.cpp  canthread.cpp imuwidget.cpp  mainwindow.cpp camthread.cpp gpsthread.cpp lidarthread.cpp lidarvtkwidget.cpp  glwidget.cpp qcgaugewidget.cpp )
+set(project_SOURCES main.cpp  canthread.cpp imuwidget.cpp  mainwindow.cpp camthread.cpp gpsthread.cpp lidarthread.cpp lidarvtkwidget.cpp  glwidget.cpp qcgaugewidget.cpp storingdb.cpp)
 #
 add_executable(${PROJECT_NAME} ${project_SOURCES} ${MSCL_INC_PATH} ${MSCL_LIB} ${MSCL_INC})
 
@@ -104,10 +104,10 @@ ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${CMAKE_THREAD_LIBS_INIT}
         Qt5::Widgets
         Qt5::Sql
         Qt5::PrintSupport
- 	Qt5::Network
+      	Qt5::Network
         Qt5::WebEngineWidgets
         Qt5::SerialBus
-	Qt5::OpenGL
+	     Qt5::OpenGL
 
 	/usr/share/c++-mscl/libmscl.so
 	GL

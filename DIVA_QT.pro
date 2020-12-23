@@ -32,7 +32,8 @@ SOURCES += \
     lidarvtkwidget.cpp \
     main.cpp \
     mainwindow.cpp \
-    qcgaugewidget.cpp
+    qcgaugewidget.cpp \
+    storingdb.cpp
 
 HEADERS += \
     Can_serial.h \
@@ -49,7 +50,8 @@ HEADERS += \
     lidarthread.h \
     lidarvtkwidget.h \
     mainwindow.h \
-    qcgaugewidget.h
+    qcgaugewidget.h \
+    storingdb.h
 
 FORMS += \
     mainwindow.ui
@@ -83,3 +85,6 @@ INCLUDEPATH += /usr/include/pcl-1.8
 
 RESOURCES += \
     formap.qrc
+
+DISTFILES += \
+    leftarrowbefore.png

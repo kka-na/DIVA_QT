@@ -13,7 +13,7 @@ void lidarVTKWidget::initialVtkWidget(){
     viewer->addPointCloud(defcloud, "cloud");
     viewer->addCoordinateSystem(1.0, "cloud");
     viewer->setBackgroundColor(0.05, 0.05, 0.05, 0);
-    viewer->setCameraPosition(0,-8,30,1,0,0,0,0,0,0);
+    viewer->setCameraPosition(0,-8,50,1,0,0,0,0,0,0);
     this->render_window = viewer->getRenderWindow();
     this->SetRenderWindow(render_window);
     this->render_window_interactor = this->GetInteractor();
@@ -31,15 +31,6 @@ void lidarVTKWidget::display_lidar(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud){ /
 
 void lidarVTKWidget::display_pcd(QString fileName){ //Const& ::Ptr
     std::string file_name = fileName.toStdString();
-   /* pcl::PCLPointCloud2 cloud2;
-    Eigen::Vector4f origin;
-    Eigen::Quaternionf orientation;
-    int pcd_version;
-    int data_type;
-    unsigned int data_idx;
-    pcl::PCDReader rd;
-    rd.readHeader(file_name, cloud2, origin, orientation, pcd_version, data_type, data_idx);
-*/
     pcl::io::loadPCDFile(fileName.toStdString(), *defcloud);
     pcl::transformPointCloud(*defcloud, *defcloud, transform);
     viewer->updatePointCloud(defcloud, "cloud");
@@ -48,6 +39,7 @@ void lidarVTKWidget::display_pcd(QString fileName){ //Const& ::Ptr
        viewer->spinOnce ();
     }
 }
+
 
 void lidarVTKWidget::init(){
     this->initialVtkWidget();

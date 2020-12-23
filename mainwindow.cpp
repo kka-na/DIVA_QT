@@ -8,10 +8,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    
     QThread::msleep(1000);
     qRegisterMetaType<pcl::PointCloud<pcl::PointXYZ>::Ptr >("pcl::PointCloud<pcl::PointXYZ>::Ptr");
     gpscnt = 0;
-
     connect(ui->actionInitializing, SIGNAL(triggered()), this, SLOT(Initializing_for_Live()));  
     connect(ui->actionInitializing_2, SIGNAL(triggered()), this, SLOT(Initializing_for_Playback()));  
 }
@@ -32,7 +32,7 @@ void MainWindow::display_gps_info(QString latitude, QString longitude){
 
         if(wifi_use){
             mpage->runJavaScript(QString("addMarker(%1, %2);").arg(latitude).arg(longitude));  
-                    if(gpscnt==0 || gpscnt%50 == 0){
+                    if(gpscnt==0 || gpscnt%10 == 0){
                     mpage->runJavaScript(QString("getAddr();"),[this](const QVariant &v){
                         addr = v.toString();
                         gpsWidget->setText(addr);
@@ -47,7 +47,6 @@ void MainWindow::display_gps_info(QString latitude, QString longitude){
 }
 
 void MainWindow::gps_view_initialize(){
-
     if(wifi_use){
         mpage->runJavaScript(QString("resetMarker();"));
         mpage->runJavaScript(QString("initMap();"));
@@ -59,12 +58,11 @@ void MainWindow::gps_view_initialize(){
 void MainWindow::display_cam(QImage image){
     //std::cout<<"display_cam"<<std::endl;
     camWidget->setPixmap(QPixmap::fromImage(image).scaled(camWidget->width(),camWidget->height(), Qt::KeepAspectRatio));
-    camWidget->show();
-    
+    camWidget->show();  
     QCoreApplication::processEvents();
 }
 
-void MainWindow::display_can_info(QString str, QString str2){
+void MainWindow::display_handle_data(QString str, QString str2){
     //std::cout<<"display_cam"<<std::endl;
     str.prepend("Handle degree : ");
     str.append("\nHandle acceleration : ");
@@ -79,9 +77,49 @@ void MainWindow::speedChanged(int value){
     QCoreApplication::processEvents();
 }
 
+void MainWindow::display_gear(int gear){
+    if(gear == 0){//P
+        redRectLabel->move(57, 295); //p
+        //redRectLabel->show();
+        QCoreApplication::processEvents();
+    }else if(gear == 1){//R
+        redRectLabel->move(107, 295); //R
+        //redRectLabel->show();
+        QCoreApplication::processEvents();
+    }else if(gear == 2){//N
+        redRectLabel->move(157, 295); //N
+        //redRectLabel->show();
+        QCoreApplication::processEvents();
+    }else if(gear == 3){//D
+        redRectLabel->move(207, 295); //D
+        //redRectLabel->show();
+        QCoreApplication::processEvents();
+    }else{
+        return;
+    }
+    
+    //QCoreApplication::processEvents();
+}
+
+void MainWindow::display_turn_indicator(int turn){
+    if(turn == 0){//left
+        lArrowLabel->show();
+        lArrowLabel->hide();
+        QCoreApplication::processEvents();
+    }else if(turn == 1){//right
+        rArrowLabel->show();
+        rArrowLabel->hide();
+        QCoreApplication::processEvents();
+    }else if(turn == 2){//none
+        lArrowLabel->hide();
+        rArrowLabel->hide();
+        QCoreApplication::processEvents();
+    }
+    //QCoreApplication::processEvents();
+}
+
+
 void MainWindow::Make(){
-
-
     ct = new camThread(this);
     gt = new gpsThread(this);
     lt = new lidarThread(this);
@@ -94,20 +132,47 @@ void MainWindow::Make(){
     gpsWidget2 = new QLabel(this);
     mpage = new QWebEnginePage(this);
     mview = new QWebEngineView(this);
-    
-    layout()->addWidget(lvw);
-    lvw->setGeometry(300, 40,1280, 780);
-    mview->setGeometry(1240,80,352,462);
-    mpage->setUrl(QUrl("http://localhost:8080/map_display.html"));
-    mpage->setView(mview);
-    
 
-    gpsWidget->setGeometry(1240, 50, 352, 32);
+    QPixmap lpix("/home/kanakim/DIVA_QT/resource/leftarrowbefore.png");
+    QPixmap rpix("/home/kanakim/DIVA_QT/resource/rightarrowbefore.png");
+    ui->label->setPixmap(rpix);
+    ui->label_2->setPixmap(lpix);
+    
+    QPixmap redRectPixm("/home/kanakim/DIVA_QT/resource/square.png");
+    redRectLabel = new QLabel(this);
+    redRectLabel->setStyleSheet("QLabel { background-color: rgba(255, 255, 255, 0); }");
+    redRectLabel->setPixmap(redRectPixm);
+    redRectLabel->resize(35,35);
+    redRectLabel->move(57, 295); //p
+    redRectLabel->show();
+
+
+    QPixmap lArrowPixm("/home/kanakim/DIVA_QT/resource/leftarrow.png");
+    QPixmap rArrowPixm("/home/kanakim/DIVA_QT/resource/rightarrow.png");
+    lArrowLabel  = new QLabel(this); lArrowLabel->setStyleSheet("QLabel { background-color: rgba(255, 255, 255, 0); }");
+    rArrowLabel = new QLabel(this); rArrowLabel->setStyleSheet("QLabel { background-color: rgba(255, 255, 255, 0); }");
+    lArrowLabel->setPixmap(lArrowPixm);
+    lArrowLabel->resize(80, 80);
+    lArrowLabel->move(50,360);
+    rArrowLabel->setPixmap(rArrowPixm);
+    rArrowLabel->resize(80, 80);
+    rArrowLabel->move(170,360);
+    lArrowLabel->hide(); rArrowLabel->hide();
+
+
+    ui->gridLayout_2->layout()->addWidget(lvw);
+    lvw->setGeometry(300, 40,1280, 780);
+
+    mview->setGeometry(1250,80,320,462);
+    mpage->setUrl(QUrl("http://127.0.0.1:8080/map_display.html"));
+    mpage->setView(mview);
+
+    gpsWidget->setGeometry(1250, 50, 320, 32);
     gpsWidget->setStyleSheet("background-color: rgb(255, 255, 255);");
     gpsWidget->setAlignment(Qt::AlignCenter);
-    camWidget->setGeometry(310, 50, 352,200);
+    camWidget->setGeometry(320, 50, 352,200);
     camWidget->setStyleSheet("background-color: rgb(255, 255, 255);");
-    gpsWidget2->setGeometry(1240, 470, 352, 32);
+    gpsWidget2->setGeometry(1250, 470, 320, 32);
     gpsWidget2->setStyleSheet("background-color: rgb(255, 255, 255);");
     gpsWidget2->setAlignment(Qt::AlignCenter);
     gpsWidget2->raise();
@@ -137,7 +202,6 @@ void MainWindow::Make(){
     mSpeedGauge->addGlass(88);
     ui->gridLayout->layout()->addWidget(mSpeedGauge);
 
-
 }
 
 void MainWindow::Initializing_for_Live(){
@@ -148,114 +212,94 @@ void MainWindow::Initializing_for_Live(){
     diva->setStyleSheet("background-color: rgb(255, 255, 255);");
     diva->setAlignment(Qt::AlignCenter);
     QPixmap temp_jpeg; 
-    temp_jpeg.load("/home/kanakim/DIVA_QT/diva_logo.jpg");
+    temp_jpeg.load("/home/kanakim/DIVA_QT/resource/diva_logo.jpg");
     diva->setPixmap(temp_jpeg.scaled(diva->width(), diva->height(),Qt::KeepAspectRatio));
     diva->show();
 
     gw = new glwidget();
-    layout()->addWidget(gw);
-    gw->setGeometry(1160, 540, 420, 260);
-    
+    ui->gridLayout_3->layout()->addWidget(gw);
+
+    QString live_str = "Data Capturing Date : ";
+    live_str.append(QString::fromLocal8Bit(ts.getDate().c_str()));
+    ui->label_7->setText(live_str);
+
+
     connect(ui->actionLive_Streaming, SIGNAL(triggered()), ct, SLOT(start()));
     connect(ui->actionLive_Streaming, SIGNAL(triggered()), gt, SLOT(start()));
     connect(ui->actionLive_Streaming, SIGNAL(triggered()), lt, SLOT(start()), Qt::QueuedConnection);
     connect(ui->actionLive_Streaming, SIGNAL(triggered()), lvw, SLOT(init()), Qt::QueuedConnection);
     connect(ui->actionLive_Streaming, SIGNAL(triggered()), cant, SLOT(start()));
+    connect(ui->actionLive_Streaming, SIGNAL(triggered()), gw, SLOT(streaming_start()));
+
     
     connect(ct, SIGNAL(send_qimage(QImage)), this, SLOT(display_cam(QImage)));
     connect(lt, SIGNAL(send_lidar(pcl::PointCloud<pcl::PointXYZ>::Ptr)), lvw, SLOT(display_lidar(pcl::PointCloud<pcl::PointXYZ>::Ptr)), Qt::QueuedConnection);
 
     connect(lt, SIGNAL(connectedOK()), this, SLOT(initial_map()));
     connect(gt, SIGNAL(send_ll(QString, QString)), this, SLOT(display_gps_info(QString, QString)));
-
-    connect(cant, SIGNAL(send_handle(QString, QString)),this, SLOT(display_can_info(QString, QString)));
-    //connect(cant, SIGNAL(send_handle(QString)),this, SLOT(display_can_info(QString)));
+    connect(cant, SIGNAL(send_handle(QString, QString)),this, SLOT(display_handle_data(QString, QString)));
     connect(cant, SIGNAL(send_speed(int)),this, SLOT(speedChanged(int)));
+    connect(cant, SIGNAL(send_gear(int)), this, SLOT(display_gear(int)));
+    connect(cant, SIGNAL(send_turn(int)), this, SLOT(display_turn_indicator(int)));
 
-    connect(ui->actionLive_Streaming, SIGNAL(triggered()), gw, SLOT(streaming_start()));
-
-
+    
     //conenct to widget for close
     connect(ui->actionStreaming_End, SIGNAL(triggered()), ct, SLOT(stop()));
     connect(ui->actionStreaming_End, SIGNAL(triggered()), gw, SLOT(initialize_glwidget()));
     connect(ui->actionStreaming_End, SIGNAL(triggered()), gt, SLOT(stop()));
     connect(ui->actionStreaming_End, SIGNAL(triggered()), lt, SLOT(stop()));
     connect(gt, SIGNAL(send_end()), this, SLOT(gps_view_initialize()));
-
     connect(ui->actionStreaming_End, SIGNAL(triggered()), cant, SLOT(stop()));
     
 }
 
 
 void MainWindow::initial_map(){
-
-    mpage->setUrl(QUrl("http://localhost:8080/map_display.html"));
+    mpage->setUrl(QUrl("http://127.0.0.1:8080/map_display.html"));
     mpage->setView(mview);
 }
 
 
 
 void MainWindow::on_actionStroing_To_DB_triggered(){
-
-    if(this->setting_db()){
-        dir = QFileDialog::getExistingDirectory(this, "Select Driving Directory to Stroing JSON to DB", QDir::currentPath(),QFileDialog::ShowDirsOnly);
-        string log_json_path =dir.toStdString()+"/JSON/log.json";
-        string scene_json_path =dir.toStdString()+"/JSON/scene.json";
-        string frame_json_path =dir.toStdString()+"/JSON/frame.json";
-        string frame_data_json_path =dir.toStdString()+"/JSON/frame_data.json";
-        string gps_json_path =dir.toStdString()+"/JSON/gps_data.json";
-        string imu_json_path =dir.toStdString()+"/JSON/imu_data.json";
-        string can_json_path = dir.toStdString()+"/JSON/can_data.json";
-
-        json_to_DB_log(log_json_path);
-        json_to_DB_scene(scene_json_path);
-        json_to_DB_frame(frame_json_path);
-        json_to_DB_frame_data(frame_data_json_path);
-        json_to_DB_gps(gps_json_path);
-        json_to_DB_imu(imu_json_path);
-        json_to_DB_can(can_json_path);
-
-    }else{
-        std::cout<<"Can't connect to DB"<<std::endl;
-    } 
-
+    dir = QFileDialog::getExistingDirectory(this, "Select Driving Directory to Stroing JSON to DB", QDir::currentPath(),QFileDialog::ShowDirsOnly);
+    string fpath = dir.toStdString();
+    sdb = new storingDB(fpath);
 }
 
 void MainWindow::Initializing_for_Playback(){
 
     this->Make();
-    workerThread_imu = new QThread;
     iw = new imuWidget();
-    iw->setGeometry(1160, 540, 420, 260);
-    layout()->addWidget(iw);
-    iw->moveToThread(workerThread_imu);
-    connect(workerThread_imu, SIGNAL(started()), iw, SLOT(doWork()));
-
-    if(this->setting_db()){
-        workerThread_imu->start();
+    ui->gridLayout_3->layout()->addWidget(iw);
+    //iw->setGeometry(1160, 540, 420, 260);
+    
+    if(this->setting_DB()){
         connect(ui->actionGet_Log, SIGNAL(triggered()), this, SLOT(get_log_token()));
         connect(ui->actionGet_Log, SIGNAL(triggered()), lvw, SLOT(init()), Qt::QueuedConnection);
         connect(this, SIGNAL(send_pcd(QString)), lvw, SLOT(display_pcd(QString)));
         connect(this, SIGNAL(send_imu(float, float, float)), iw, SLOT(streaming_start(float,float,float)));
+        connect(ui->actionFinish, SIGNAL(triggered()), this, SLOT(Display_Stop()));
     }else{
         std::cout<<"Can't connect to DB"<<std::endl;
     }
-
-    //connect(ui->actionFinish, SIGNAL(triggered()), wokerThread_imu, SLOT(quit()));
-
 }
 
 //psql -h localhost -p 5432 -U diva -d "diva"
+
 
 void MainWindow::get_log_token(){
 
     this->log_from_db = new QSqlQuery(this->database);
     this->log_from_db->exec("SELECT * FROM LOG;");
     this->log_from_db->first();
-
     QString log_token = this->log_from_db->value(0).toString(); //just get the first log token
+    QString log_str = "Vehicle : ";
+    log_str.append(this->log_from_db->value(2).toString());
+    log_str.append(", Captured Date : ");
+    log_str.append(this->log_from_db->value(1).toString());
+    ui->label_7->setText(log_str);
     this->Display_Scene(log_token);
-
 }
 
 void MainWindow::Display_Scene(QString Text){
@@ -296,13 +340,29 @@ void MainWindow::on_pushButton_clicked()
     this->Setting_Frames(fftoken);
 }
 
+
+void MainWindow::on_label_3_itemClicked(QListWidgetItem *item)
+{
+    camWidget->clear();
+    this->display_flag = true;
+    this->gps_view_initialize();
+    iw->clear();
+    saved_idx_for_cnt_frames = new int[200];
+    saved_token_for_cnt_frames = new QString[200];
+    ui->horizontalSlider->setRange(0, 200);
+    ui->horizontalSlider->setValue(0);
+    idx_for_cnt_frames = 0;
+}
+
+
+
 void MainWindow::Setting_Frames(QString Text){
     QString current_frame_token = Text;
     this->frame_from_db = new QSqlQuery(this->database);
     QString selectq = "SELECT * FROM FRAME;";
     this->frame_from_db -> exec(selectq);
 
-    while(1){
+    while(display_flag){
         if(counted_frames > nbr_frames-1){
             break;
         }
@@ -311,14 +371,17 @@ void MainWindow::Setting_Frames(QString Text){
             if(idx_frame_token == current_frame_token){
                 saved_idx_for_cnt_frames[counted_frames] = idx_for_cnt_frames;
                 saved_token_for_cnt_frames[counted_frames] = idx_frame_token;
+
                 ui->horizontalSlider->setValue(counted_frames);
 
                 this->Display_Frame_Datas(current_frame_token);
                 QCoreApplication::processEvents();
 
                 current_frame_token =this->frame_from_db->value(1).toString(); //next token
+                if(current_frame_token == ""){
+                    display_flag=false;
+                }
                 counted_frames++;
-                QThread::msleep(100);
             }
             idx_for_cnt_frames++;
         }
@@ -371,10 +434,10 @@ void MainWindow::Display_Gps_Data(QString Text){
     selectq.append(Text);
     selectq.append("';");
     this->gps_from_db -> exec(selectq);
-
     this->gps_from_db->first();
     idx_lat = this->gps_from_db->value(1).toString();
     idx_lng =this->gps_from_db->value(2).toString();
+
     this->display_gps_info(idx_lat, idx_lng);
     QCoreApplication::processEvents();
 }
@@ -396,8 +459,7 @@ void MainWindow::Display_Imu_Data(QString Text){
     idx_az =this->imu_from_db->value(6).toString();
     
     emit send_imu(idx_ax.toFloat(), idx_ay.toFloat(), idx_az.toFloat());
-    QCoreApplication::processEvents();
-    
+    QCoreApplication::processEvents();   
 }
 
 
@@ -405,6 +467,8 @@ void MainWindow::Display_Can_Data(QString Text){
     QString handle;
     QString handle_ac;
     QString speed;
+    QString gear;
+    QString turn;
 
     this->can_from_db = new QSqlQuery(this->database);
     QString selectq = "SELECT * FROM CAN_DATA WHERE token = '";
@@ -416,27 +480,19 @@ void MainWindow::Display_Can_Data(QString Text){
     handle = this->can_from_db->value(2).toString();
     handle_ac =this->can_from_db->value(3).toString();
     speed =this->can_from_db->value(4).toString(); //speed 
+    gear=this->can_from_db->value(5).toString();
+    turn=this->can_from_db->value(6).toString();
     
-    this->display_can_info(handle, handle_ac);
+    this->display_handle_data(handle, handle_ac);
+    this->display_gear(gear.toInt());
+    this->display_turn_indicator(turn.toInt());
     this->speedChanged(speed.toInt());
     QCoreApplication::processEvents();
 
 }
 
-void MainWindow::on_label_3_itemClicked(QListWidgetItem *item)
-{
-    camWidget->clear();
-    this->gps_view_initialize();
-    saved_idx_for_cnt_frames = new int[200];
-    saved_token_for_cnt_frames = new QString[200];
-    ui->horizontalSlider->setRange(0, 200);
-    ui->horizontalSlider->setValue(0);
-    idx_for_cnt_frames = 0;
-}
 
-
-
-bool MainWindow::setting_db(){
+bool MainWindow::setting_DB(){
         // *****Set DB Information*****
         QSqlDatabase database=QSqlDatabase::addDatabase("QPSQL7");
         database.setDatabaseName("diva");
@@ -457,294 +513,20 @@ bool MainWindow::setting_db(){
 }
 
 
+void MainWindow::Display_Stop(){
+    this->display_flag=false;
+}
 
+void MainWindow::on_horizontalSlider_sliderMoved(int position){
+    initialize_for_slider();
+    idx_for_cnt_frames = saved_idx_for_cnt_frames[position];
+    counted_frames = position;
+    this->Setting_Frames(saved_token_for_cnt_frames[position]);
+}
 
-
-
-
-
-// - - - - - - - - -- -- - --storing to db - - - - - - - -  - - -  - -- //
-
-bool  MainWindow::json_to_DB_log(string path){
-
-        QSqlQuery input(database);
-        database.transaction();
-        input.exec("create table LOG(token text,date_captured text,vehicle text);"); // *****Set table and column*****
-        database.commit();
-      
-        Json::Value Logs;
-        ifstream in(path.c_str());
-        if(in.is_open()) in >> Logs;
-
-        QString temp1;
-        QString temp2;
-        QString temp3;
-
-        for(int i=0;i<Logs.size();i++)
-        {   
-            temp2=QString::fromLocal8Bit((Logs[i]["date_captured"].asString()).c_str());
-            temp1=QString::fromLocal8Bit((Logs[i]["token"].asString()).c_str());
-            temp3=QString::fromLocal8Bit((Logs[i]["vehicle"].asString()).c_str());
-
-            database.transaction();
-            QString query_string;
-            query_string.append("insert into LOG values('"); // *****Set table*****
-            query_string.append(temp1);
-            query_string.append("','");
-            query_string.append(temp2);
-            query_string.append("','");
-            query_string.append(temp3);
-            query_string.append("');");
-            input.exec(query_string);
-            database.commit();
-        }
-        return 1;
-    }
-
-
-
-    bool  MainWindow::json_to_DB_scene(string path){
-
-        QSqlQuery input(database);
-        database.transaction();
-        input.exec("create table SCENE(first_frame_token text,log_token text, nbr_frames text);"); // *****Set table and column*****
-        database.commit();
-
-        Json::Value Scenes;
-        ifstream scene_in(path.c_str());
-        if(scene_in.is_open()) scene_in>>Scenes;
-
-        QString temp1;
-        QString temp2;
-        QString temp3;
-
-        for(int i=0; i<Scenes.size(); i++)
-        {
-            temp1=QString::fromLocal8Bit((Scenes[i]["first_frame_token"].asString()).c_str());
-            temp2=QString::fromLocal8Bit((Scenes[i]["log_token"].asString()).c_str());
-            temp3=QString::fromLocal8Bit((Scenes[i]["nbr_frames"].asString()).c_str());
-
-            database.transaction();
-            QString query_string;
-            query_string.append("insert into SCENE values('"); // *****Set table*****
-            query_string.append(temp1);
-            query_string.append("','");
-            query_string.append(temp2);
-            query_string.append("','");
-            query_string.append(temp3);
-            query_string.append("');");
-            input.exec(query_string);
-            database.commit();
-        }
-        return 1;
-    }
-
-
-    bool  MainWindow::json_to_DB_frame(string path){
-
-        QSqlQuery input(database);
-        database.transaction();
-        input.exec("create table FRAME(frame_token text,token_next text);"); // *****Set table and column*****
-        database.commit();
-
-        Json::Value Frames;
-        ifstream scene_in(path.c_str());
-        if(scene_in.is_open()) scene_in>>Frames;
-
-        QString temp1;
-        QString temp2;
-
-        for(int i=0; i<Frames.size(); i++)
-        {
-            temp1=QString::fromLocal8Bit((Frames[i]["frame_token"].asString()).c_str());
-            temp2=QString::fromLocal8Bit((Frames[i]["token_next"].asString()).c_str());
-
-            database.transaction();
-            QString query_string;
-            query_string.append("insert into FRAME values('"); // *****Set table*****
-            query_string.append(temp1);
-            query_string.append("','");
-            query_string.append(temp2);
-            query_string.append("');");
-            input.exec(query_string);
-            database.commit();
-        }
-        return 1;
-    }
-
-    bool  MainWindow::json_to_DB_frame_data(string path){
-
-        QSqlQuery input(database);
-        database.transaction();
-        input.exec("create table FRAME_DATA(frame_token text,frame_data_token text,fileformat text, filename text);"); // *****Set table and column*****
-        database.commit();
-
-        Json::Value Frame_datas;
-        ifstream scene_in(path.c_str());
-        if(scene_in.is_open()) scene_in>>Frame_datas;
-
-        QString temp1;
-        QString temp2;
-        QString temp3;
-        QString temp4;
-
-        for(int i=0; i<Frame_datas.size(); i++)
-        {
-            temp3=QString::fromLocal8Bit((Frame_datas[i]["fileformat"].asString()).c_str());
-            temp4=QString::fromLocal8Bit((Frame_datas[i]["filename"].asString()).c_str());
-            temp1=QString::fromLocal8Bit((Frame_datas[i]["frame_token"].asString()).c_str());
-            temp2=QString::fromLocal8Bit((Frame_datas[i]["frame_data_token"].asString()).c_str());
-            
-
-            database.transaction();
-            QString query_string;
-            query_string.append("insert into FRAME_DATA values('"); // *****Set table*****
-            query_string.append(temp1);
-            query_string.append("','");
-            query_string.append(temp2);
-            query_string.append("','");
-            query_string.append(temp3);
-            query_string.append("','");
-            query_string.append(temp4);
-            query_string.append("');");
-            input.exec(query_string);
-            database.commit();
-        }
-        return 1;
-    }
-
-
-    bool  MainWindow::json_to_DB_gps(string path){
-
-        QSqlQuery input(database);
-        database.transaction();
-        input.exec("create table GPS_DATA(token text,latitude text,longitude text);"); // *****Set table and column*****
-        database.commit();
-
-        Json::Value Gps_datas;
-        ifstream scene_in(path.c_str());
-        if(scene_in.is_open()) scene_in>>Gps_datas;
-
-        QString temp1;
-        QString temp2;
-        QString temp3;
-
-        for(int i=0; i<Gps_datas.size(); i++)
-        {
-            
-            temp2=QString::fromLocal8Bit((Gps_datas[i]["latitude"].asString()).c_str());
-            temp3=QString::fromLocal8Bit((Gps_datas[i]["longitude"].asString()).c_str());
-            temp1=QString::fromLocal8Bit((Gps_datas[i]["token"].asString()).c_str());
-
-            database.transaction();
-            QString query_string;
-            query_string.append("insert into GPS_DATA values('"); // *****Set table*****
-            query_string.append(temp1);
-            query_string.append("','");
-            query_string.append(temp2);
-            query_string.append("','");
-            query_string.append(temp3);
-            query_string.append("');");
-            input.exec(query_string);
-            database.commit();
-        }
-        return 1;
-    }
-
-    bool  MainWindow::json_to_DB_imu(string path){
-
-        QSqlQuery input(database);
-        database.transaction();
-        input.exec("create table IMU_DATA(token text,gyx text, gyy text,gyz text, acx text, acy text,acz text, max text, may text,maz text);"); // *****Set table and column*****
-        database.commit();
-
-        Json::Value Imu_datas;
-        ifstream scene_in(path.c_str());
-        if(scene_in.is_open()) scene_in>>Imu_datas;
-
-        QString idx_gyx;QString idx_gyy;QString idx_gyz;
-        QString idx_acx;QString idx_acy;QString idx_acz;
-        QString idx_max;QString idx_may;QString idx_maz;
-        QString idx_token;
-
-        for(int i=0; i<Imu_datas.size(); i++)
-        {   
-            
-            idx_gyx =  QString::fromLocal8Bit((Imu_datas[i]["gyroscope"][0].asString()).c_str());
-            idx_gyy =  QString::fromLocal8Bit((Imu_datas[i]["gyroscope"][1].asString()).c_str());
-            idx_gyz =  QString::fromLocal8Bit((Imu_datas[i]["gyroscope"][2].asString()).c_str());
-            idx_acx =  QString::fromLocal8Bit((Imu_datas[i]["acceleration"][0].asString()).c_str());
-            idx_acy =  QString::fromLocal8Bit((Imu_datas[i]["acceleration"][1].asString()).c_str());
-            idx_acz =  QString::fromLocal8Bit((Imu_datas[i]["acceleration"][2].asString()).c_str());
-            idx_max =  QString::fromLocal8Bit((Imu_datas[i]["magnetic"][0].asString()).c_str());
-            idx_may =  QString::fromLocal8Bit((Imu_datas[i]["magnetic"][1].asString()).c_str());
-            idx_maz =  QString::fromLocal8Bit((Imu_datas[i]["magnetic"][2].asString()).c_str());
-            idx_token = QString::fromLocal8Bit((Imu_datas[i]["token"].asString()).c_str());
-
-            database.transaction();
-            QString query_string;
-            query_string.append("insert into IMU_DATA values('"); // *****Set table*****
-            query_string.append(idx_token);
-            query_string.append("','");
-            query_string.append(idx_gyx);
-            query_string.append("','");
-            query_string.append(idx_gyy);
-            query_string.append("','");
-            query_string.append(idx_gyz);
-            query_string.append("','");
-            query_string.append(idx_acx);
-            query_string.append("','");
-            query_string.append(idx_acy);
-            query_string.append("','");
-            query_string.append(idx_acz);
-            query_string.append("','");
-            query_string.append(idx_max);
-            query_string.append("','");
-            query_string.append(idx_may);
-            query_string.append("','");
-            query_string.append(idx_maz);
-            query_string.append("');");
-            input.exec(query_string);
-            database.commit();
-        }
-        return 1;
-    }
-
-
-    bool  MainWindow::json_to_DB_can(string path){
-
-        QSqlQuery input(database);
-        database.transaction();
-        input.exec("create table CAN_DATA(token text,handle text,handle_ac text,speed text);"); // *****Set table and column*****
-        database.commit();
-
-        Json::Value Can_datas;
-        ifstream scene_in(path.c_str());
-        if(scene_in.is_open()) scene_in>>Can_datas;
-
-        QString temp1;
-        QString temp2;
-        QString temp3;
-
-        for(int i=0; i<Can_datas.size(); i++)
-        {
-            
-            temp1=QString::fromLocal8Bit((Can_datas[i]["Handle_Angle"].asString()).c_str());
-            temp2=QString::fromLocal8Bit((Can_datas[i]["Handle_accelaration"].asString()).c_str());
-            temp3=QString::fromLocal8Bit((Can_datas[i]["Speed"].asString()).c_str());
-
-            database.transaction();
-            QString query_string;
-            query_string.append("insert into CAN_DATA values('"); // *****Set table*****
-            query_string.append(temp1);
-            query_string.append("','");
-            query_string.append(temp2);
-            query_string.append("','");
-            query_string.append(temp3);
-            query_string.append("');");
-            input.exec(query_string);
-            database.commit();
-        }
-        return 1;
-    }
-
+void MainWindow::initialize_for_slider(){
+    camWidget->clear();
+    this->display_flag = true;
+    this->gps_view_initialize();
+    iw->clear();
+}

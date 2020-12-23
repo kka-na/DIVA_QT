@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_imuWidget_t {
-    QByteArrayData data[8];
-    char stringdata0[63];
+    QByteArrayData data[6];
+    char stringdata0[36];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,17 +32,14 @@ struct qt_meta_stringdata_imuWidget_t {
 static const qt_meta_stringdata_imuWidget_t qt_meta_stringdata_imuWidget = {
     {
 QT_MOC_LITERAL(0, 0, 9), // "imuWidget"
-QT_MOC_LITERAL(1, 10, 6), // "doWork"
-QT_MOC_LITERAL(2, 17, 0), // ""
-QT_MOC_LITERAL(3, 18, 15), // "streaming_start"
-QT_MOC_LITERAL(4, 34, 2), // "ax"
-QT_MOC_LITERAL(5, 37, 2), // "ay"
-QT_MOC_LITERAL(6, 40, 2), // "az"
-QT_MOC_LITERAL(7, 43, 19) // "initialize_glwidget"
+QT_MOC_LITERAL(1, 10, 15), // "streaming_start"
+QT_MOC_LITERAL(2, 26, 0), // ""
+QT_MOC_LITERAL(3, 27, 2), // "ax"
+QT_MOC_LITERAL(4, 30, 2), // "ay"
+QT_MOC_LITERAL(5, 33, 2) // "az"
 
     },
-    "imuWidget\0doWork\0\0streaming_start\0ax\0"
-    "ay\0az\0initialize_glwidget"
+    "imuWidget\0streaming_start\0\0ax\0ay\0az"
 };
 #undef QT_MOC_LITERAL
 
@@ -52,7 +49,7 @@ static const uint qt_meta_data_imuWidget[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       1,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,14 +57,10 @@ static const uint qt_meta_data_imuWidget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x0a /* Public */,
-       3,    3,   30,    2, 0x08 /* Private */,
-       7,    0,   37,    2, 0x08 /* Private */,
+       1,    3,   19,    2, 0x08 /* Private */,
 
  // slots: parameters
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Float, QMetaType::Float, QMetaType::Float,    4,    5,    6,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Float, QMetaType::Float, QMetaType::Float,    3,    4,    5,
 
        0        // eod
 };
@@ -78,9 +71,7 @@ void imuWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         auto *_t = static_cast<imuWidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->doWork(); break;
-        case 1: _t->streaming_start((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2])),(*reinterpret_cast< float(*)>(_a[3]))); break;
-        case 2: _t->initialize_glwidget(); break;
+        case 0: _t->streaming_start((*reinterpret_cast< float(*)>(_a[1])),(*reinterpret_cast< float(*)>(_a[2])),(*reinterpret_cast< float(*)>(_a[3]))); break;
         default: ;
         }
     }
@@ -115,13 +106,13 @@ int imuWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 1)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 1;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 1)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 3;
+        _id -= 1;
     }
     return _id;
 }

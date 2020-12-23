@@ -10,6 +10,8 @@
 #include <QObject>
 #include <QThread>
 #include <QLabel>
+#include <QRect>
+#include <QLayout>
 #include <QMap>
 #include <QUrl>
 #include <QTimer>
@@ -56,9 +58,10 @@
 #include "lidarvtkwidget.h"
 #include "canthread.h"
 #include "qcgaugewidget.h"
-
-
+#include "storingdb.h"
 #include "imuwidget.h"
+
+#include "Timestamp.h"
 
 
 typedef pcl::PointXYZ PointT;
@@ -102,8 +105,12 @@ public:
     QcNeedleItem *mSpeedNeedle;
 
     int gpscnt = 0;
+    bool display_flag = true;
     QString addr;
 
+    QLabel *redRectLabel;
+    QLabel *lArrowLabel;
+    QLabel *rArrowLabel;
     void Make();
     void Display_Scene(QString Text);
     void Setting_Frames(QString Text);
@@ -112,14 +119,7 @@ public:
     void Display_Imu_Data(QString Text);
     void Display_Can_Data(QString Text);
 
-    bool setting_db();
-    bool json_to_DB_log(string log_json_path);
-    bool json_to_DB_scene(string scene_json_path);
-    bool json_to_DB_frame(string frame_json_path);
-    bool json_to_DB_frame_data(string frame_data_json_path);
-    bool json_to_DB_gps(string gps_json_path);
-    bool json_to_DB_imu(string imu_json_path);
-    bool json_to_DB_can(string can_json_path);
+    bool setting_DB();
 
 private:
     Ui::MainWindow *ui;
@@ -133,18 +133,20 @@ private:
     class lidarThread::lidarThread *lt;
     class lidarVTKWidget::lidarVTKWidget *lvw;
     class canThread::canThread *cant;
+    class storingDB::storingDB *sdb;
 
     glwidget *gw;
-    QThread *workerThread_gl;
     imuWidget *iw;
-    QThread *workerThread_imu;
+    Timestamp ts;
 
 
 public slots:
-
-
     void display_gps_info(QString latitude, QString longitude);
-    void display_can_info(QString handle, QString handle_acceleration);
+    void display_handle_data(QString handle, QString handle_acceleration);
+    void display_gear(int);
+    void display_turn_indicator(int);
+    void Display_Stop();
+
     void gps_view_initialize();
     void display_cam(QImage image);
     void speedChanged(int value);
@@ -153,6 +155,7 @@ private slots:
 
     void Initializing_for_Live();
     void Initializing_for_Playback();
+    void initialize_for_slider();
     void initial_map();
     void get_log_token();
     
@@ -161,6 +164,9 @@ private slots:
     void on_label_3_itemClicked(QListWidgetItem *item);
 
     void on_actionStroing_To_DB_triggered();
+
+    void on_horizontalSlider_sliderMoved(int position);
+
 
 signals:
     void send_pcd(QString);

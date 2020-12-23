@@ -1,22 +1,22 @@
 Determining if the pthread_create exist failed with the following output:
 Change Dir: /home/kanakim/DIVA_QT/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_22360/fast"
-/usr/bin/make -f CMakeFiles/cmTC_22360.dir/build.make CMakeFiles/cmTC_22360.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_32823/fast"
+/usr/bin/make -f CMakeFiles/cmTC_32823.dir/build.make CMakeFiles/cmTC_32823.dir/build
 make[1]: Entering directory '/home/kanakim/DIVA_QT/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_22360.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_22360.dir/CheckSymbolExists.c.o   -c /home/kanakim/DIVA_QT/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_22360
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_22360.dir/link.txt --verbose=1
-/usr/bin/cc      CMakeFiles/cmTC_22360.dir/CheckSymbolExists.c.o  -o cmTC_22360 
-CMakeFiles/cmTC_22360.dir/CheckSymbolExists.c.o: In function `main':
+Building C object CMakeFiles/cmTC_32823.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_32823.dir/CheckSymbolExists.c.o   -c /home/kanakim/DIVA_QT/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_32823
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_32823.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_32823.dir/CheckSymbolExists.c.o  -o cmTC_32823 
+CMakeFiles/cmTC_32823.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_22360.dir/build.make:97: recipe for target 'cmTC_22360' failed
-make[1]: *** [cmTC_22360] Error 1
+CMakeFiles/cmTC_32823.dir/build.make:97: recipe for target 'cmTC_32823' failed
+make[1]: *** [cmTC_32823] Error 1
 make[1]: Leaving directory '/home/kanakim/DIVA_QT/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_22360/fast' failed
-make: *** [cmTC_22360/fast] Error 2
+Makefile:126: recipe for target 'cmTC_32823/fast' failed
+make: *** [cmTC_32823/fast] Error 2
 
 File /home/kanakim/DIVA_QT/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
@@ -36,20 +36,20 @@ int main(int argc, char** argv)
 Determining if the function pthread_create exists in the pthreads failed with the following output:
 Change Dir: /home/kanakim/DIVA_QT/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_d097a/fast"
-/usr/bin/make -f CMakeFiles/cmTC_d097a.dir/build.make CMakeFiles/cmTC_d097a.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_d14cf/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d14cf.dir/build.make CMakeFiles/cmTC_d14cf.dir/build
 make[1]: Entering directory '/home/kanakim/DIVA_QT/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_d097a.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d097a.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
-Linking C executable cmTC_d097a
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d097a.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_d097a.dir/CheckFunctionExists.c.o  -o cmTC_d097a -lpthreads 
+Building C object CMakeFiles/cmTC_d14cf.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d14cf.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d14cf
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d14cf.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_d14cf.dir/CheckFunctionExists.c.o  -o cmTC_d14cf -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_d097a.dir/build.make:97: recipe for target 'cmTC_d097a' failed
-make[1]: *** [cmTC_d097a] Error 1
+CMakeFiles/cmTC_d14cf.dir/build.make:97: recipe for target 'cmTC_d14cf' failed
+make[1]: *** [cmTC_d14cf] Error 1
 make[1]: Leaving directory '/home/kanakim/DIVA_QT/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_d097a/fast' failed
-make: *** [cmTC_d097a/fast] Error 2
+Makefile:126: recipe for target 'cmTC_d14cf/fast' failed
+make: *** [cmTC_d14cf/fast] Error 2
 
 

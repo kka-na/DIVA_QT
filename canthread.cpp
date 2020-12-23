@@ -7,7 +7,6 @@ canThread::canThread(QObject *parent) : QThread(parent)
         QString errorString;
           device = QCanBus::instance()->createDevice(QStringLiteral("socketcan"), QStringLiteral("can0"), &errorString);
          if (!device) {
-             // Error handling goes here
              qDebug() << errorString;
          }else {
              device->connectDevice();
@@ -18,23 +17,28 @@ canThread::canThread(QObject *parent) : QThread(parent)
 }
 
 void canThread::run(){
+
+	CANdata temp;
+    string automatic_transmission_mode;
+    string turn_signal_direction;
+    string turn_signal_blink;
+    string turn_signal_blink_left;
+    string turn_signal_blink_right;
+
 	
     path = "/home/kanakim/Documents/CAN/i30_CAN_"+ts.getMilliTime()+".csv";
 	writeFile.open(path.c_str());
 
-	int sssiabal = 0;
 	QCanBusFrame frame;
 	
     QString view;
-     int fid = 0;
-     string view_string;
-     string csv_string;
-     char cancsv[256];
+    int fid = 0;
+    string view_string;
+    string csv_string;
+    char cancsv[256];
 
-             //while(device->waitForFramesReceived(500)){
              while(!stop_flag){
-             	device->waitForFramesReceived(100);
-             	sssiabal++;
+             	device->waitForFramesReceived(10);
                  
                 frame = device->readFrame();
                 view = frame.toString();
@@ -43,55 +47,110 @@ void canThread::run(){
                  
              	view_string = view.toStdString();
 
-             	const char* mtime = ts.p_time();
+             	
 
                  if(fid == 688){
                  	
-                 	frame_bin += hexToBinary(view_string.at(19));
-                 	frame_bin += hexToBinary(view_string.at(20));
-                 	frame_bin += hexToBinary(view_string.at(16));
-                 	frame_bin += hexToBinary(view_string.at(17));
+                 	frame_bin += hexToBinary(view_string, 19);
+                 	frame_bin += hexToBinary(view_string, 20);
+                 	frame_bin += hexToBinary(view_string, 16);
+                 	frame_bin += hexToBinary(view_string, 17);
 
-                 	//handle_int = S2Bconvert(0, 15, frame_bin);
-                 	handle_int = std::stoi(frame_bin,nullptr,2);
-                 	handle_qstring = QString::number(handle_int);
-                 	//std::cout<<"handle "<<handle_qstring.toStdString()<<std::endl;
+                 	temp.handle_angle = std::stoi(frame_bin,nullptr,2);
+                 	handle_qstring = QString::number(temp.handle_angle);
             
                  	frame_bin = ""; 
 
-                 	frame_bin += hexToBinary(view_string.at(22));
-                 	frame_bin += hexToBinary(view_string.at(23));
-                 	handle_int2 =  std::stoi(frame_bin,nullptr,2);
-                 	handle_qstring2 = QString::number(handle_int2);
+                 	frame_bin += hexToBinary(view_string,22);
+                 	frame_bin += hexToBinary(view_string,23);
+                 	temp.handle_accel=  std::stoi(frame_bin,nullptr,2);
+                 	handle_qstring2 = QString::number(temp.handle_accel);
 
                  	emit send_handle(handle_qstring, handle_qstring2);
                 	QCoreApplication::processEvents();
                  	frame_bin = ""; 
 
-
                  }else if(fid == 790){
+                 	frame_bin += hexToBinary(view_string, 34);
+                 	frame_bin += hexToBinary(view_string, 35);
                  	
-                 	frame_bin += hexToBinary(view_string.at(34));
-                 	frame_bin += hexToBinary(view_string.at(35));
+                 	temp.vehicle_speed = std::stoi(frame_bin,nullptr,2);
                  	
-                 	speed_int = std::stoi(frame_bin,nullptr,2);
-                 	
-                 	emit send_speed(speed_int);
+                 	emit send_speed(temp.vehicle_speed);
                 	QCoreApplication::processEvents();
                 	frame_bin = "";
+              
+                 }else if(fid == 1322){//automatic transmission
+                 	automatic_transmission_mode = "";
+	             	automatic_transmission_mode += hexToBinary(view_string, 19);
+	             	automatic_transmission_mode += hexToBinary(view_string, 20);
+		            if(automatic_transmission_mode.at(7) == '0'){
+		                if(automatic_transmission_mode.at(6) == '1'){
+		                     //parking
+		                     temp.gear = 0; //'P';
+		                     emit send_gear(0);
+		                     cout<<"p"<<endl;
+		                     QCoreApplication::processEvents();
+		                 }
+		                 else if(automatic_transmission_mode.at(5) == '1'){
+		                     //rewind
+		                     temp.gear = 1; //'R';
+		                     emit send_gear(1);
+		                     QCoreApplication::processEvents();
+		                 }
+		                 else if(automatic_transmission_mode.at(4) == '1'){
+		                     //neutral
+		                     temp.gear = 2; //'N';
+		                     emit send_gear(2);
+		                     QCoreApplication::processEvents();
+		                 }
+		                 else if(automatic_transmission_mode.at(3) == '1'){
+		                     //drive
+		                     temp.gear = 3;//'D';
+		                     emit send_gear(3);
+		                     QCoreApplication::processEvents();
+		                 }
+		                // emit send_gear(temp.gear);
+          			}
+                }
+                else if(fid == 1345){ //direction light
+                	turn_signal_direction = "";
+		             turn_signal_blink_left = "";
+		             turn_signal_blink_right = "";
+		             turn_signal_direction += hexToBinary(view_string, 32);
+		             turn_signal_blink_left +=hexToBinary(view_string, 23); // left
+		             turn_signal_blink_right += hexToBinary(view_string, 37); // right
 
-                	sprintf(cancsv, "%s,%d,%d,%d\n", mtime, handle_int, handle_int2, speed_int);
-                	writeFile.write(cancsv,strlen(cancsv));
+		             //if(turn_signal_direction.at(1) == '1') <- When delay occures
+		             if(turn_signal_blink_left.at(0) == '1'){
+		                 temp.turn_indicator = 0;//'L';
+		                  emit send_turn(0);
+		                  QCoreApplication::processEvents();
+		             }
+		             //else if(turn_signal_direction.at(2) == '1') <- When delay occures
+		             else if(turn_signal_blink_right.at(1) == '1'){ // right
+		                 temp.turn_indicator = 1;//'R';
+		                  emit send_turn(1);
+		                  QCoreApplication::processEvents();
+		             }
+		             else{
+		                 temp.turn_indicator = 2;//' ';
+		                 emit send_turn(2);
+		                 QCoreApplication::processEvents();
+		             }
+		             //emit send_turn(temp.turn_indicator);
+                }
 
-                 }else{
+                const char* mtime = ts.p_time();
+                sprintf(cancsv, "%s,%d,%d,%d,%d,%d\n", mtime, temp.handle_angle, temp.handle_accel, temp.vehicle_speed, temp.gear, temp.turn_indicator);
+                writeFile.write(cancsv,strlen(cancsv));
 
-                 	continue;
-                 }
-
-                 device->clear();
+                device->clear();
+                QCoreApplication::processEvents();
          }
 
 }
+
 //sudo ip link set can0 type can bitrate 500000
 // sudo ip link set up can0
 // candump can0
@@ -102,8 +161,8 @@ void canThread::stop(){
     writeFile.close();
 }
 
-string canThread::hexToBinary(char str){
-    //char str = s.at(0);
+string canThread::hexToBinary(string s, int index){
+    char str = s.at(index);
     string result;
 
     switch(str){
@@ -159,14 +218,3 @@ string canThread::hexToBinary(char str){
     return result;
 }
 
-int canThread::S2Bconvert(int start, int end, std::string binary)
-{
-    std::string a;
-
-    for(int i = start; i<=end; i++){
-        a += binary.at(i);
-    }
-    int j = std::stoi(a,nullptr,2);
-
-    return j;
-}

@@ -44,11 +44,10 @@ class imuWidget : public QGLWidget
        float accel_y = 0.0;
        float accel_z = 0.0;
 
-public slots:
-  void doWork();
+       void clear();
+
 private slots:
   void streaming_start(float ax, float ay, float az);
-  void initialize_glwidget();
 
 };
 
