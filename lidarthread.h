@@ -68,6 +68,7 @@ public:
     OS1::lidar_mode mode = OS1::MODE_1024x10;
     std::string metadata{};
 
+    std::string dir;
     std::string path;
     std::ofstream writeFile;
 
@@ -80,6 +81,7 @@ public:
 
 public slots:
     void stop();
+    void get_dir(std::string);
 private:
     void run() override;
 

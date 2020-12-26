@@ -4,6 +4,7 @@
 #include <QtOpenGL/QGLWidget>
 #include <QTimer>
 #include <QObject>
+#include <QThread>
 #include <QWidget>
 
 #include <math.h>
@@ -38,6 +39,7 @@ public:
     void drawBitmapText(const char *str, float x, float y, float z);
     void draw_line(double roll, double pitch, double yaw);
 
+    string dir;
 
     ObjParser *car;
     QTimer timer;
@@ -54,6 +56,7 @@ public:
 
 
 private slots:
+    void get_dir(std::string);
 	void streaming_start();
     void initialize_glwidget();
 };

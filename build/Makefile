@@ -324,6 +324,33 @@ imuwidget.cpp.s:
 	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/imuwidget.cpp.s
 .PHONY : imuwidget.cpp.s
 
+indexandtimes.o: indexandtimes.cpp.o
+
+.PHONY : indexandtimes.o
+
+# target to build an object file
+indexandtimes.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/indexandtimes.cpp.o
+.PHONY : indexandtimes.cpp.o
+
+indexandtimes.i: indexandtimes.cpp.i
+
+.PHONY : indexandtimes.i
+
+# target to preprocess a source file
+indexandtimes.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/indexandtimes.cpp.i
+.PHONY : indexandtimes.cpp.i
+
+indexandtimes.s: indexandtimes.cpp.s
+
+.PHONY : indexandtimes.s
+
+# target to generate assembly for a file
+indexandtimes.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/indexandtimes.cpp.s
+.PHONY : indexandtimes.cpp.s
+
 lidarthread.o: lidarthread.cpp.o
 
 .PHONY : lidarthread.o
@@ -432,6 +459,33 @@ mainwindow.cpp.s:
 	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/mainwindow.cpp.s
 .PHONY : mainwindow.cpp.s
 
+makejson.o: makejson.cpp.o
+
+.PHONY : makejson.o
+
+# target to build an object file
+makejson.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/makejson.cpp.o
+.PHONY : makejson.cpp.o
+
+makejson.i: makejson.cpp.i
+
+.PHONY : makejson.i
+
+# target to preprocess a source file
+makejson.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/makejson.cpp.i
+.PHONY : makejson.cpp.i
+
+makejson.s: makejson.cpp.s
+
+.PHONY : makejson.s
+
+# target to generate assembly for a file
+makejson.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/makejson.cpp.s
+.PHONY : makejson.cpp.s
+
 ouster_viz_autogen/mocs_compilation.o: ouster_viz_autogen/mocs_compilation.cpp.o
 
 .PHONY : ouster_viz_autogen/mocs_compilation.o
@@ -485,6 +539,33 @@ qcgaugewidget.s: qcgaugewidget.cpp.s
 qcgaugewidget.cpp.s:
 	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/qcgaugewidget.cpp.s
 .PHONY : qcgaugewidget.cpp.s
+
+readfiles.o: readfiles.cpp.o
+
+.PHONY : readfiles.o
+
+# target to build an object file
+readfiles.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/readfiles.cpp.o
+.PHONY : readfiles.cpp.o
+
+readfiles.i: readfiles.cpp.i
+
+.PHONY : readfiles.i
+
+# target to preprocess a source file
+readfiles.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/readfiles.cpp.i
+.PHONY : readfiles.cpp.i
+
+readfiles.s: readfiles.cpp.s
+
+.PHONY : readfiles.s
+
+# target to generate assembly for a file
+readfiles.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/readfiles.cpp.s
+.PHONY : readfiles.cpp.s
 
 src/os1.o: src/os1.cpp.o
 
@@ -624,6 +705,9 @@ help:
 	@echo "... imuwidget.o"
 	@echo "... imuwidget.i"
 	@echo "... imuwidget.s"
+	@echo "... indexandtimes.o"
+	@echo "... indexandtimes.i"
+	@echo "... indexandtimes.s"
 	@echo "... lidarthread.o"
 	@echo "... lidarthread.i"
 	@echo "... lidarthread.s"
@@ -636,12 +720,18 @@ help:
 	@echo "... mainwindow.o"
 	@echo "... mainwindow.i"
 	@echo "... mainwindow.s"
+	@echo "... makejson.o"
+	@echo "... makejson.i"
+	@echo "... makejson.s"
 	@echo "... ouster_viz_autogen/mocs_compilation.o"
 	@echo "... ouster_viz_autogen/mocs_compilation.i"
 	@echo "... ouster_viz_autogen/mocs_compilation.s"
 	@echo "... qcgaugewidget.o"
 	@echo "... qcgaugewidget.i"
 	@echo "... qcgaugewidget.s"
+	@echo "... readfiles.o"
+	@echo "... readfiles.i"
+	@echo "... readfiles.s"
 	@echo "... src/os1.o"
 	@echo "... src/os1.i"
 	@echo "... src/os1.s"

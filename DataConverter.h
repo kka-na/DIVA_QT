@@ -1,0 +1,4 @@
+#ifndef DATACONVERTER_H
+#define DATACONVERTER_H
+
+#endif // DATACONVERTER_H

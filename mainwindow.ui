@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(238, 238, 236);</string>
     </property>
     <property name="text">
-     <string>CAN Bus Data</string>
+     <string/>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -50,7 +50,7 @@
 color: rgb(98, 114, 164);</string>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -292,7 +292,6 @@ color: rgba(103, 73, 203, 230);</string>
     <addaction name="actionInitializing"/>
     <addaction name="actionLive_Streaming"/>
     <addaction name="actionStreaming_End"/>
-    <addaction name="actionStroing_To_DB"/>
    </widget>
    <widget class="QMenu" name="menuPlayback">
     <property name="title">
@@ -301,9 +300,16 @@ color: rgba(103, 73, 203, 230);</string>
     <addaction name="actionInitializing_2"/>
     <addaction name="actionGet_Log"/>
     <addaction name="actionFinish"/>
-    <addaction name="actionTest"/>
+   </widget>
+   <widget class="QMenu" name="menuData_Processing">
+    <property name="title">
+     <string>Data Processing</string>
+    </property>
+    <addaction name="actionJSON_Parsing"/>
+    <addaction name="actionDB_Storing"/>
    </widget>
    <addaction name="menuStreaming"/>
+   <addaction name="menuData_Processing"/>
    <addaction name="menuPlayback"/>
   </widget>
   <action name="actionLive_Streaming">
@@ -349,6 +355,16 @@ color: rgba(103, 73, 203, 230);</string>
   <action name="actionTest">
    <property name="text">
     <string>Test</string>
+   </property>
+  </action>
+  <action name="actionJSON_Parsing">
+   <property name="text">
+    <string>JSON Parsing</string>
+   </property>
+  </action>
+  <action name="actionDB_Storing">
+   <property name="text">
+    <string>DB Storing</string>
    </property>
   </action>
  </widget>

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_canThread_t {
-    QByteArrayData data[10];
-    char stringdata0[87];
+    QByteArrayData data[14];
+    char stringdata0[119];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,14 +38,19 @@ QT_MOC_LITERAL(3, 22, 11), // "send_handle"
 QT_MOC_LITERAL(4, 34, 9), // "send_gear"
 QT_MOC_LITERAL(5, 44, 9), // "send_turn"
 QT_MOC_LITERAL(6, 54, 8), // "send_end"
-QT_MOC_LITERAL(7, 63, 4), // "stop"
-QT_MOC_LITERAL(8, 68, 11), // "hexToBinary"
-QT_MOC_LITERAL(9, 80, 6) // "string"
+QT_MOC_LITERAL(7, 63, 7), // "get_dir"
+QT_MOC_LITERAL(8, 71, 11), // "std::string"
+QT_MOC_LITERAL(9, 83, 5), // "event"
+QT_MOC_LITERAL(10, 89, 4), // "stop"
+QT_MOC_LITERAL(11, 94, 5), // "start"
+QT_MOC_LITERAL(12, 100, 11), // "hexToBinary"
+QT_MOC_LITERAL(13, 112, 6) // "string"
 
     },
     "canThread\0send_speed\0\0send_handle\0"
-    "send_gear\0send_turn\0send_end\0stop\0"
-    "hexToBinary\0string"
+    "send_gear\0send_turn\0send_end\0get_dir\0"
+    "std::string\0event\0stop\0start\0hexToBinary\0"
+    "string"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,7 +60,7 @@ static const uint qt_meta_data_canThread[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,15 +68,18 @@ static const uint qt_meta_data_canThread[] = {
        5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   49,    2, 0x06 /* Public */,
-       3,    2,   52,    2, 0x06 /* Public */,
-       4,    1,   57,    2, 0x06 /* Public */,
-       5,    1,   60,    2, 0x06 /* Public */,
-       6,    0,   63,    2, 0x06 /* Public */,
+       1,    1,   64,    2, 0x06 /* Public */,
+       3,    2,   67,    2, 0x06 /* Public */,
+       4,    1,   72,    2, 0x06 /* Public */,
+       5,    1,   75,    2, 0x06 /* Public */,
+       6,    0,   78,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    0,   64,    2, 0x0a /* Public */,
-       8,    2,   65,    2, 0x08 /* Private */,
+       7,    1,   79,    2, 0x0a /* Public */,
+       9,    0,   82,    2, 0x0a /* Public */,
+      10,    0,   83,    2, 0x0a /* Public */,
+      11,    0,   84,    2, 0x0a /* Public */,
+      12,    2,   85,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    2,
@@ -81,8 +89,11 @@ static const uint qt_meta_data_canThread[] = {
     QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void, 0x80000000 | 8,    2,
     QMetaType::Void,
-    0x80000000 | 9, 0x80000000 | 9, QMetaType::Int,    2,    2,
+    QMetaType::Void,
+    QMetaType::Void,
+    0x80000000 | 13, 0x80000000 | 13, QMetaType::Int,    2,    2,
 
        0        // eod
 };
@@ -98,8 +109,11 @@ void canThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 2: _t->send_gear((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 3: _t->send_turn((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->send_end(); break;
-        case 5: _t->stop(); break;
-        case 6: { string _r = _t->hexToBinary((*reinterpret_cast< string(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
+        case 5: _t->get_dir((*reinterpret_cast< std::string(*)>(_a[1]))); break;
+        case 6: _t->event(); break;
+        case 7: _t->stop(); break;
+        case 8: _t->start(); break;
+        case 9: { string _r = _t->hexToBinary((*reinterpret_cast< string(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< string*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -144,7 +158,7 @@ void canThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
 }
 
 QT_INIT_METAOBJECT const QMetaObject canThread::staticMetaObject = { {
-    &QThread::staticMetaObject,
+    &QObject::staticMetaObject,
     qt_meta_stringdata_canThread.data,
     qt_meta_data_canThread,
     qt_static_metacall,
@@ -163,22 +177,22 @@ void *canThread::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_canThread.stringdata0))
         return static_cast<void*>(this);
-    return QThread::qt_metacast(_clname);
+    return QObject::qt_metacast(_clname);
 }
 
 int canThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QThread::qt_metacall(_c, _id, _a);
+    _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 10;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 10)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 10;
     }
     return _id;
 }

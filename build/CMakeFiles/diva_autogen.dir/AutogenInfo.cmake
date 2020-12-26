@@ -7,7 +7,7 @@ set(AM_CMAKE_CURRENT_SOURCE_DIR "/home/kanakim/DIVA_QT/")
 set(AM_CMAKE_CURRENT_BINARY_DIR "/home/kanakim/DIVA_QT/build/")
 set(AM_CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE "")
 set(AM_BUILD_DIR "/home/kanakim/DIVA_QT/build/diva_autogen")
-set(AM_SOURCES "/home/kanakim/DIVA_QT/camthread.cpp;/home/kanakim/DIVA_QT/canthread.cpp;/home/kanakim/DIVA_QT/glwidget.cpp;/home/kanakim/DIVA_QT/gpsthread.cpp;/home/kanakim/DIVA_QT/imuwidget.cpp;/home/kanakim/DIVA_QT/lidarthread.cpp;/home/kanakim/DIVA_QT/lidarvtkwidget.cpp;/home/kanakim/DIVA_QT/main.cpp;/home/kanakim/DIVA_QT/mainwindow.cpp;/home/kanakim/DIVA_QT/qcgaugewidget.cpp;/home/kanakim/DIVA_QT/storingdb.cpp")
+set(AM_SOURCES "/home/kanakim/DIVA_QT/camthread.cpp;/home/kanakim/DIVA_QT/canthread.cpp;/home/kanakim/DIVA_QT/glwidget.cpp;/home/kanakim/DIVA_QT/gpsthread.cpp;/home/kanakim/DIVA_QT/imuwidget.cpp;/home/kanakim/DIVA_QT/indexandtimes.cpp;/home/kanakim/DIVA_QT/lidarthread.cpp;/home/kanakim/DIVA_QT/lidarvtkwidget.cpp;/home/kanakim/DIVA_QT/main.cpp;/home/kanakim/DIVA_QT/mainwindow.cpp;/home/kanakim/DIVA_QT/makejson.cpp;/home/kanakim/DIVA_QT/qcgaugewidget.cpp;/home/kanakim/DIVA_QT/readfiles.cpp;/home/kanakim/DIVA_QT/storingdb.cpp")
 set(AM_HEADERS "")
 # Qt environment
 set(AM_QT_VERSION_MAJOR "5")

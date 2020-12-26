@@ -11,7 +11,7 @@ gpsThread::gpsThread(QObject *parent) : QThread(parent)
 void gpsThread::run(){
     std::cout<<"GPS streaming_start"<<std::endl;
     
-    path = "/home/kanakim/Documents/GPS/i30_GPS_"+ts.getMilliTime()+".csv";
+    path = dir+"/GPS/i30_GPS_"+ts.getMilliTime()+".csv";
     writeFile.open(path.c_str());
     std::cout<<"The GPS.csv file saved to ["<<path<<"]\n";
 
@@ -61,6 +61,10 @@ void gpsThread::stop(){
     emit send_end();
     writeFile.close();
     cs.close_serial(iDev);
+}
+
+void gpsThread::get_dir(std::string dir_str){
+    dir = dir_str;
 }
 
 long double gpsThread::Convert_to_dd(long double raw){

@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QCoreApplication>
 #include <string>
+#include <iostream>
 #include <QtWebEngineWidgets/QtWebEngineWidgets>
 
 #include "Timestamp.h"
@@ -38,6 +39,7 @@ public:
     char cBuff[526];
 
     const char * mtime;
+    string dir;
     string path;
     ofstream writeFile;
     QTimer timer;
@@ -45,6 +47,7 @@ public:
     long double Convert_to_dd(long double raw);
 
 public slots:
+    void get_dir(std::string);
     void stop();
 
 private:

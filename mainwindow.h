@@ -23,8 +23,14 @@
 #include <QFile>
 #include <QString>
 #include <QDebug>
+#include <QDir>
 #include <QTextStream>
 
+
+#include <QCanBus>
+#include <QCanBusDevice>
+#include <QCanBusDeviceInfo>
+#include <QCanBusFrame>
 
 #include <QtWebEngineWidgets/QtWebEngineWidgets>
 
@@ -60,6 +66,7 @@
 #include "qcgaugewidget.h"
 #include "storingdb.h"
 #include "imuwidget.h"
+#include "makejson.h"
 
 #include "Timestamp.h"
 
@@ -80,6 +87,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+
 
     QSqlDatabase database;
     QVector<QString> scenes_ftoken;
@@ -104,6 +113,9 @@ public:
     QcGaugeWidget * mSpeedGauge;
     QcNeedleItem *mSpeedNeedle;
 
+    QString save_data_dir;
+    string save_data_str;
+
     int gpscnt = 0;
     bool display_flag = true;
     QString addr;
@@ -112,6 +124,7 @@ public:
     QLabel *lArrowLabel;
     QLabel *rArrowLabel;
     void Make();
+    QString Check_Directory(QString Path);
     void Display_Scene(QString Text);
     void Setting_Frames(QString Text);
     void Display_Frame_Datas(QString Text);
@@ -134,10 +147,12 @@ private:
     class lidarVTKWidget::lidarVTKWidget *lvw;
     class canThread::canThread *cant;
     class storingDB::storingDB *sdb;
+    class MakeJson::MakeJson *mj;
 
     glwidget *gw;
     imuWidget *iw;
     Timestamp ts;
+
 
 
 public slots:
@@ -152,23 +167,24 @@ public slots:
     void speedChanged(int value);
 
 private slots:
-
     void Initializing_for_Live();
     void Initializing_for_Playback();
     void initialize_for_slider();
     void initial_map();
     void get_log_token();
-    
     void on_pushButton_clicked();
 
     void on_label_3_itemClicked(QListWidgetItem *item);
 
-    void on_actionStroing_To_DB_triggered();
+    void on_actionDB_Storing_triggered();
+    void on_actionJSON_Parsing_triggered();
 
     void on_horizontalSlider_sliderMoved(int position);
 
 
 signals:
+    void start();
+    void send_dir(std::string);
     void send_pcd(QString);
     void send_imu(float, float, float);
 };

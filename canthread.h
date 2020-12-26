@@ -21,7 +21,7 @@
 
 class CANdata {
 public:
-    CANdata(){
+    CANdata(QObject *parent = 0){
         handle_angle = 0;
         handle_accel = 0;
         vehicle_speed = 0;
@@ -32,11 +32,12 @@ public:
 };
 
 
-class canThread : public QThread
+class canThread : public QObject
 {
 	Q_OBJECT
+
 public:
-    canThread(QObject *parent = 0);
+    canThread();
     Timestamp ts;
     ofstream writeFile;
 
@@ -44,16 +45,7 @@ public:
 
     QCanBusDevice *device;
 
-    typedef QPair<QCanBusDevice::ConfigurationKey, QVariant> ConfigurationItem;
-
-    struct Settings {
-        QString pluginName;
-        QString deviceInterfaceName;
-        QList<ConfigurationItem> configurations;
-        bool useConfigurationEnabled = false;
-    };
-
-
+    std::string dir;
     std::string path;
 
     vector<vector<string>> can_frame;
@@ -67,12 +59,7 @@ public:
      string frame_data_dlc;
      string frame_data_payload_temp;
      string frame_bin;
-     int speed_temp = 0;
-     int fuel_temp = 0;
-     int battery_temp = 0;
-     int wheel_temp = 0;
-     vector<string> frame_data_payload;
-
+    
      QString speed_qstring;
      QString handle_qstring;
      QString handle_qstring2;
@@ -82,7 +69,7 @@ public:
      int speed_int;
 
      string result_can;
-
+     QTimer timer;
      fstream fs;
      string frame_id_string;
 
@@ -95,20 +82,15 @@ signals:
 
 
 public slots:
+    void get_dir(std::string);
+	void event();
 	void stop();
+	void start();
 
 private slots:
     string hexToBinary(string, int);
 
 private:
-	void run() override;
-    qint64 numberFramesWritten = 0;
-   
-    Settings currentSettings;
-    std::unique_ptr<QCanBusDevice> canDevice;
-    QLabel *status = nullptr;
-    QLabel *written = nullptr;
-    QTimer *timer;
 
 };
 

@@ -321,9 +321,81 @@ CMakeFiles/diva.dir/storingdb.cpp.o.provides: CMakeFiles/diva.dir/storingdb.cpp.
 CMakeFiles/diva.dir/storingdb.cpp.o.provides.build: CMakeFiles/diva.dir/storingdb.cpp.o
 
 
+CMakeFiles/diva.dir/makejson.cpp.o: CMakeFiles/diva.dir/flags.make
+CMakeFiles/diva.dir/makejson.cpp.o: ../makejson.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kanakim/DIVA_QT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/diva.dir/makejson.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/diva.dir/makejson.cpp.o -c /home/kanakim/DIVA_QT/makejson.cpp
+
+CMakeFiles/diva.dir/makejson.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/diva.dir/makejson.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanakim/DIVA_QT/makejson.cpp > CMakeFiles/diva.dir/makejson.cpp.i
+
+CMakeFiles/diva.dir/makejson.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/diva.dir/makejson.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanakim/DIVA_QT/makejson.cpp -o CMakeFiles/diva.dir/makejson.cpp.s
+
+CMakeFiles/diva.dir/makejson.cpp.o.requires:
+
+.PHONY : CMakeFiles/diva.dir/makejson.cpp.o.requires
+
+CMakeFiles/diva.dir/makejson.cpp.o.provides: CMakeFiles/diva.dir/makejson.cpp.o.requires
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/makejson.cpp.o.provides.build
+.PHONY : CMakeFiles/diva.dir/makejson.cpp.o.provides
+
+CMakeFiles/diva.dir/makejson.cpp.o.provides.build: CMakeFiles/diva.dir/makejson.cpp.o
+
+
+CMakeFiles/diva.dir/readfiles.cpp.o: CMakeFiles/diva.dir/flags.make
+CMakeFiles/diva.dir/readfiles.cpp.o: ../readfiles.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kanakim/DIVA_QT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/diva.dir/readfiles.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/diva.dir/readfiles.cpp.o -c /home/kanakim/DIVA_QT/readfiles.cpp
+
+CMakeFiles/diva.dir/readfiles.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/diva.dir/readfiles.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanakim/DIVA_QT/readfiles.cpp > CMakeFiles/diva.dir/readfiles.cpp.i
+
+CMakeFiles/diva.dir/readfiles.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/diva.dir/readfiles.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanakim/DIVA_QT/readfiles.cpp -o CMakeFiles/diva.dir/readfiles.cpp.s
+
+CMakeFiles/diva.dir/readfiles.cpp.o.requires:
+
+.PHONY : CMakeFiles/diva.dir/readfiles.cpp.o.requires
+
+CMakeFiles/diva.dir/readfiles.cpp.o.provides: CMakeFiles/diva.dir/readfiles.cpp.o.requires
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/readfiles.cpp.o.provides.build
+.PHONY : CMakeFiles/diva.dir/readfiles.cpp.o.provides
+
+CMakeFiles/diva.dir/readfiles.cpp.o.provides.build: CMakeFiles/diva.dir/readfiles.cpp.o
+
+
+CMakeFiles/diva.dir/indexandtimes.cpp.o: CMakeFiles/diva.dir/flags.make
+CMakeFiles/diva.dir/indexandtimes.cpp.o: ../indexandtimes.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kanakim/DIVA_QT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/diva.dir/indexandtimes.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/diva.dir/indexandtimes.cpp.o -c /home/kanakim/DIVA_QT/indexandtimes.cpp
+
+CMakeFiles/diva.dir/indexandtimes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/diva.dir/indexandtimes.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanakim/DIVA_QT/indexandtimes.cpp > CMakeFiles/diva.dir/indexandtimes.cpp.i
+
+CMakeFiles/diva.dir/indexandtimes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/diva.dir/indexandtimes.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanakim/DIVA_QT/indexandtimes.cpp -o CMakeFiles/diva.dir/indexandtimes.cpp.s
+
+CMakeFiles/diva.dir/indexandtimes.cpp.o.requires:
+
+.PHONY : CMakeFiles/diva.dir/indexandtimes.cpp.o.requires
+
+CMakeFiles/diva.dir/indexandtimes.cpp.o.provides: CMakeFiles/diva.dir/indexandtimes.cpp.o.requires
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/indexandtimes.cpp.o.provides.build
+.PHONY : CMakeFiles/diva.dir/indexandtimes.cpp.o.provides
+
+CMakeFiles/diva.dir/indexandtimes.cpp.o.provides.build: CMakeFiles/diva.dir/indexandtimes.cpp.o
+
+
 CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o: CMakeFiles/diva.dir/flags.make
 CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o: diva_autogen/mocs_compilation.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kanakim/DIVA_QT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kanakim/DIVA_QT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o -c /home/kanakim/DIVA_QT/build/diva_autogen/mocs_compilation.cpp
 
 CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.i: cmake_force
@@ -358,6 +430,9 @@ diva_OBJECTS = \
 "CMakeFiles/diva.dir/glwidget.cpp.o" \
 "CMakeFiles/diva.dir/qcgaugewidget.cpp.o" \
 "CMakeFiles/diva.dir/storingdb.cpp.o" \
+"CMakeFiles/diva.dir/makejson.cpp.o" \
+"CMakeFiles/diva.dir/readfiles.cpp.o" \
+"CMakeFiles/diva.dir/indexandtimes.cpp.o" \
 "CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o"
 
 # External object files for target diva
@@ -374,6 +449,9 @@ diva: CMakeFiles/diva.dir/lidarvtkwidget.cpp.o
 diva: CMakeFiles/diva.dir/glwidget.cpp.o
 diva: CMakeFiles/diva.dir/qcgaugewidget.cpp.o
 diva: CMakeFiles/diva.dir/storingdb.cpp.o
+diva: CMakeFiles/diva.dir/makejson.cpp.o
+diva: CMakeFiles/diva.dir/readfiles.cpp.o
+diva: CMakeFiles/diva.dir/indexandtimes.cpp.o
 diva: CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o
 diva: CMakeFiles/diva.dir/build.make
 diva: /usr/lib/libpcl_keypoints.so
@@ -609,7 +687,7 @@ diva: /home/kanakim/Qt5.12.5/5.12.5/gcc_64/lib/libQt5Widgets.so.5.12.5
 diva: /home/kanakim/Qt5.12.5/5.12.5/gcc_64/lib/libQt5Gui.so.5.12.5
 diva: /home/kanakim/Qt5.12.5/5.12.5/gcc_64/lib/libQt5Core.so.5.12.5
 diva: CMakeFiles/diva.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kanakim/DIVA_QT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable diva"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kanakim/DIVA_QT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable diva"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/diva.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -628,6 +706,9 @@ CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/lidarvtkwidget.cpp.o.requires
 CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/glwidget.cpp.o.requires
 CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/qcgaugewidget.cpp.o.requires
 CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/storingdb.cpp.o.requires
+CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/makejson.cpp.o.requires
+CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/readfiles.cpp.o.requires
+CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/indexandtimes.cpp.o.requires
 CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o.requires
 
 .PHONY : CMakeFiles/diva.dir/requires

@@ -6,7 +6,7 @@ lidarThread::lidarThread(QObject* parent) : QThread(parent)
 }
 
 void lidarThread::run(){
-    path = "/home/kanakim/Documents/LiDAR/i30_LiDAR_ts_" + ts.getMilliTime() + ".txt";
+    path = dir+"/LiDAR/i30_LiDAR_ts_" + ts.getMilliTime() + ".txt";
     writeFile.open(path.c_str());
 
     std::shared_ptr<OS1::client> cli;
@@ -36,7 +36,7 @@ void lidarThread::run(){
 
             if(count == W*H){
                 std::string ch_ts = ts.getMilliTime();
-                std::string name = "/home/kanakim/Documents/LiDAR/PCD/i30_LiDAR_" + ch_ts + ".pcd";
+                std::string name = dir+"/LiDAR/PCD/i30_LiDAR_" + ch_ts + ".pcd";
                 pcl::io::savePCDFile(name, *cloud, true);
 
                 emit send_lidar(cloud); //emit signal
@@ -53,10 +53,14 @@ void lidarThread::run(){
     }
 }
 
+void lidarThread::get_dir(std::string dir_str){
+    dir = dir_str;
+}
 void lidarThread::stop(){
     stop_flag = true;
     writeFile.close();
 }
+
 
 void lidarThread::WritePCD(std::vector<double> xyz_lut, uint8_t* buf){
     //std::cout<<"WritePCD"<<std::endl;

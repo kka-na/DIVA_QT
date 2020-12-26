@@ -36,6 +36,8 @@ public:
     QAction *actionStroing_To_DB;
     QAction *actionFinish;
     QAction *actionTest;
+    QAction *actionJSON_Parsing;
+    QAction *actionDB_Storing;
     QWidget *centralwidget;
     QLabel *label_5;
     QLabel *label_7;
@@ -57,6 +59,7 @@ public:
     QMenuBar *menubar;
     QMenu *menuStreaming;
     QMenu *menuPlayback;
+    QMenu *menuData_Processing;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -82,6 +85,10 @@ public:
         actionFinish->setObjectName(QString::fromUtf8("actionFinish"));
         actionTest = new QAction(MainWindow);
         actionTest->setObjectName(QString::fromUtf8("actionTest"));
+        actionJSON_Parsing = new QAction(MainWindow);
+        actionJSON_Parsing->setObjectName(QString::fromUtf8("actionJSON_Parsing"));
+        actionDB_Storing = new QAction(MainWindow);
+        actionDB_Storing->setObjectName(QString::fromUtf8("actionDB_Storing"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         label_5 = new QLabel(centralwidget);
@@ -189,18 +196,21 @@ public:
         menuStreaming->setStyleSheet(QString::fromUtf8(""));
         menuPlayback = new QMenu(menubar);
         menuPlayback->setObjectName(QString::fromUtf8("menuPlayback"));
+        menuData_Processing = new QMenu(menubar);
+        menuData_Processing->setObjectName(QString::fromUtf8("menuData_Processing"));
         MainWindow->setMenuBar(menubar);
 
         menubar->addAction(menuStreaming->menuAction());
+        menubar->addAction(menuData_Processing->menuAction());
         menubar->addAction(menuPlayback->menuAction());
         menuStreaming->addAction(actionInitializing);
         menuStreaming->addAction(actionLive_Streaming);
         menuStreaming->addAction(actionStreaming_End);
-        menuStreaming->addAction(actionStroing_To_DB);
         menuPlayback->addAction(actionInitializing_2);
         menuPlayback->addAction(actionGet_Log);
         menuPlayback->addAction(actionFinish);
-        menuPlayback->addAction(actionTest);
+        menuData_Processing->addAction(actionJSON_Parsing);
+        menuData_Processing->addAction(actionDB_Storing);
 
         retranslateUi(MainWindow);
 
@@ -219,8 +229,10 @@ public:
         actionStroing_To_DB->setText(QApplication::translate("MainWindow", "Stroing To DB", nullptr));
         actionFinish->setText(QApplication::translate("MainWindow", "Finish", nullptr));
         actionTest->setText(QApplication::translate("MainWindow", "Test", nullptr));
-        label_5->setText(QApplication::translate("MainWindow", "CAN Bus Data", nullptr));
-        label_7->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        actionJSON_Parsing->setText(QApplication::translate("MainWindow", "JSON Parsing", nullptr));
+        actionDB_Storing->setText(QApplication::translate("MainWindow", "DB Storing", nullptr));
+        label_5->setText(QString());
+        label_7->setText(QString());
         pushButton->setText(QApplication::translate("MainWindow", "Start Play", nullptr));
         P_label->setText(QApplication::translate("MainWindow", "P", nullptr));
         R_label->setText(QApplication::translate("MainWindow", "R", nullptr));
@@ -230,6 +242,7 @@ public:
         label_2->setText(QString());
         menuStreaming->setTitle(QApplication::translate("MainWindow", "Streaming", nullptr));
         menuPlayback->setTitle(QApplication::translate("MainWindow", "Playback", nullptr));
+        menuData_Processing->setTitle(QApplication::translate("MainWindow", "Data Processing", nullptr));
     } // retranslateUi
 
 };

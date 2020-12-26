@@ -269,16 +269,20 @@ CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.o
  /home/kanakim/DIVA_QT/glwidget.h
  /home/kanakim/DIVA_QT/gpsthread.h
  /home/kanakim/DIVA_QT/imuwidget.h
+ /home/kanakim/DIVA_QT/indexandtimes.h
  /home/kanakim/DIVA_QT/lidarthread.h
  /home/kanakim/DIVA_QT/lidarvtkwidget.h
  /home/kanakim/DIVA_QT/mainwindow.h
+ /home/kanakim/DIVA_QT/makejson.h
  /home/kanakim/DIVA_QT/qcgaugewidget.h
+ /home/kanakim/DIVA_QT/readfiles.h
  /home/kanakim/DIVA_QT/storingdb.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QByteArray
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCoreApplication
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCryptographicHash
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDateTime
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDebug
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDir
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QEvent
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QFile
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QFlags
@@ -3223,6 +3227,7 @@ CMakeFiles/diva.dir/glwidget.cpp.o
  /home/kanakim/DIVA_QT/glwidget.cpp
  /home/kanakim/DIVA_QT/glwidget.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QObject
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QThread
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QTimer
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qalgorithms.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qarraydata.h
@@ -3291,6 +3296,7 @@ CMakeFiles/diva.dir/glwidget.cpp.o
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qt_windows.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qtcore-config.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qtextstream.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qthread.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qtimer.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qtypeinfo.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qurl.h
@@ -4541,6 +4547,10 @@ CMakeFiles/diva.dir/imuwidget.cpp.o
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtWidgets/qtwidgets-config.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtWidgets/qtwidgetsglobal.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtWidgets/qwidget.h
+CMakeFiles/diva.dir/indexandtimes.cpp.o
+ /home/kanakim/DIVA_QT/indexandtimes.cpp
+ /home/kanakim/DIVA_QT/indexandtimes.h
+ /home/kanakim/DIVA_QT/readfiles.h
 CMakeFiles/diva.dir/lidarthread.cpp.o
  ../include/ouster/lidar_scan.h
  ../include/ouster/os1.h
@@ -9035,17 +9045,21 @@ CMakeFiles/diva.dir/main.cpp.o
  /home/kanakim/DIVA_QT/glwidget.h
  /home/kanakim/DIVA_QT/gpsthread.h
  /home/kanakim/DIVA_QT/imuwidget.h
+ /home/kanakim/DIVA_QT/indexandtimes.h
  /home/kanakim/DIVA_QT/lidarthread.h
  /home/kanakim/DIVA_QT/lidarvtkwidget.h
  /home/kanakim/DIVA_QT/main.cpp
  /home/kanakim/DIVA_QT/mainwindow.h
+ /home/kanakim/DIVA_QT/makejson.h
  /home/kanakim/DIVA_QT/qcgaugewidget.h
+ /home/kanakim/DIVA_QT/readfiles.h
  /home/kanakim/DIVA_QT/storingdb.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QByteArray
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCoreApplication
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCryptographicHash
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDateTime
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDebug
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDir
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QEvent
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QFile
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QFlags
@@ -12000,17 +12014,21 @@ CMakeFiles/diva.dir/mainwindow.cpp.o
  /home/kanakim/DIVA_QT/glwidget.h
  /home/kanakim/DIVA_QT/gpsthread.h
  /home/kanakim/DIVA_QT/imuwidget.h
+ /home/kanakim/DIVA_QT/indexandtimes.h
  /home/kanakim/DIVA_QT/lidarthread.h
  /home/kanakim/DIVA_QT/lidarvtkwidget.h
  /home/kanakim/DIVA_QT/mainwindow.cpp
  /home/kanakim/DIVA_QT/mainwindow.h
+ /home/kanakim/DIVA_QT/makejson.h
  /home/kanakim/DIVA_QT/qcgaugewidget.h
+ /home/kanakim/DIVA_QT/readfiles.h
  /home/kanakim/DIVA_QT/storingdb.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QByteArray
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCoreApplication
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QCryptographicHash
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDateTime
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDebug
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDir
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QEvent
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QFile
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QFlags
@@ -14958,6 +14976,68 @@ CMakeFiles/diva.dir/mainwindow.cpp.o
  /usr/share/c++-mscl/source/mscl/mscl.h
  /usr/share/c++-mscl/source/mscl/simple_any.h
  diva_autogen/include/ui_mainwindow.h
+CMakeFiles/diva.dir/makejson.cpp.o
+ /home/kanakim/DIVA_QT/indexandtimes.h
+ /home/kanakim/DIVA_QT/makejson.cpp
+ /home/kanakim/DIVA_QT/makejson.h
+ /home/kanakim/DIVA_QT/readfiles.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/QDir
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qalgorithms.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qarraydata.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qatomic.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qatomic_bootstrap.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qatomic_cxx11.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qatomic_msvc.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qbasicatomic.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qbytearray.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qbytearraylist.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qchar.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qcompilerdetection.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qconfig-bootstrapped.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qconfig.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qcontainerfwd.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qcoreevent.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qdir.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qfile.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qfiledevice.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qfileinfo.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qflags.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qgenericatomic.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qglobal.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qglobalstatic.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qhash.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qhashfunctions.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qiodevice.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qiterator.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qlist.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qlogging.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qmetatype.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qmutex.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qnamespace.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qnumeric.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qobject.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qobject_impl.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qobjectdefs.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qobjectdefs_impl.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qpair.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qprocessordetection.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qrefcount.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qregexp.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qscopedpointer.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qshareddata.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstring.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringalgorithms.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringbuilder.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringlist.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringliteral.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringmatcher.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qstringview.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qsysinfo.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qsystemdetection.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qtcore-config.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qtypeinfo.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qvarlengtharray.h
+ /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtCore/qversiontagging.h
 CMakeFiles/diva.dir/qcgaugewidget.cpp.o
  /home/kanakim/DIVA_QT/qcgaugewidget.cpp
  /home/kanakim/DIVA_QT/qcgaugewidget.h
@@ -15072,6 +15152,9 @@ CMakeFiles/diva.dir/qcgaugewidget.cpp.o
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtWidgets/qtwidgets-config.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtWidgets/qtwidgetsglobal.h
  /home/kanakim/Qt5.12.5/5.12.5/gcc_64/include/QtWidgets/qwidget.h
+CMakeFiles/diva.dir/readfiles.cpp.o
+ /home/kanakim/DIVA_QT/readfiles.cpp
+ /home/kanakim/DIVA_QT/readfiles.h
 CMakeFiles/diva.dir/storingdb.cpp.o
  /home/kanakim/DIVA_QT/storingdb.cpp
  /home/kanakim/DIVA_QT/storingdb.h

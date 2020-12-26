@@ -19,11 +19,14 @@ void glwidget::initializeGL(){
         glEnable(GL_DEPTH_TEST);
 }
 
-mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM1", 115200);
-mscl::InertialNode node(connection);
+//mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM1", 115200);
+//mscl::InertialNode node(connection);
+
 
 void glwidget::paintGL(){
     
+    mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM1", 115200);
+    mscl::InertialNode node =  mscl::InertialNode(connection);
 
     mscl::MipDataPackets packets = node.getDataPackets(500);
     IMUdata temp;
@@ -60,17 +63,14 @@ void glwidget::paintGL(){
                 if(count == 2) temp.magy = dataPoint.as_float();
                 if(count == 1) temp.magz = dataPoint.as_float();
 
-                //if(0 < count && count <= 9) cout << dataPoint.channelName() << " : " << dataPoint.as_float() << endl;
                 count--;
-
+                mtime = ts.p_time();
                 if(count == 0) {
                     sprintf(fp, "%s,%f,%f,%f,%f,%f,%f,%f,%f,%f\n", mtime, temp.gyrox, temp.gyroy, temp.gyroz, temp.magx, temp.magy, temp.magz, temp.accelx, temp.accely, temp.accelz);
                     writeFile.write(fp, strlen(fp));
                     break;
                 }
             }
-            //QCoreApplication::processEvents();
-
             if(count == 0){
                 break;
             }
@@ -86,8 +86,6 @@ void glwidget::paintGL(){
         glRotatef(0, 0.0, 1.0, 0.0);
         glRotatef(45, 0.0, 0.0, 1.0);
 
-
-
         double pitch = 180 * atan(accel_x / sqrt(accel_y * accel_y + accel_z * accel_z)) / M_PI;
         double yaw = 180 * atan(accel_z / sqrt(accel_x * accel_x + accel_z * accel_z)) / M_PI;
         double roll =   180 * atan(accel_y / sqrt(accel_x * accel_x + accel_z * accel_z)) / M_PI;
@@ -96,11 +94,9 @@ void glwidget::paintGL(){
 
         glRotatef(float(roll), 1.0, 0.0, 0.0);
         glRotatef(float(pitch), 0.0, 1.0, 0.0);
-        //glRotatef(yaw, 0.0, 0.0, 1.0);
 
         draw_obj(car);
-        //QThread::msleep(10);
-
+        QThread::msleep(10);
 }
 
 void glwidget::resizeGL(int w, int h){
@@ -116,9 +112,7 @@ void glwidget::resizeGL(int w, int h){
 
 
 void glwidget::streaming_start(){
-
-    mtime = ts.p_time();
-    path = "/home/kanakim/Documents/IMU/i30_IMU_"+ts.getMilliTime()+".csv";
+    path = dir+"/IMU/i30_IMU_"+ts.getMilliTime()+".csv";
     writeFile.open(path.c_str());
     std::cout<<"The IMU.csv file saved to ["<<path<<"]\n";
 
@@ -130,6 +124,10 @@ void glwidget::initialize_glwidget(){
     disconnect(&timer, SIGNAL(timeout()),this, SLOT(updateGL()));
     timer.stop();
     writeFile.close();
+}
+
+void glwidget::get_dir(std::string dir_str){
+    dir = dir_str;
 }
 
 

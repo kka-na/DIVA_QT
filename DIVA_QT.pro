@@ -28,15 +28,19 @@ SOURCES += \
     glwidget.cpp \
     gpsthread.cpp \
     imuwidget.cpp \
+    indexandtimes.cpp \
     lidarthread.cpp \
     lidarvtkwidget.cpp \
     main.cpp \
     mainwindow.cpp \
+    makejson.cpp \
     qcgaugewidget.cpp \
+    readfiles.cpp \
     storingdb.cpp
 
 HEADERS += \
     Can_serial.h \
+    DataConverter.h \
     ObjParser.h \
     Strtok_m.h \
     Timestamp.h \
@@ -47,10 +51,13 @@ HEADERS += \
     glwidget.h \
     gpsthread.h \
     imuwidget.h \
+    indexandtimes.h \
     lidarthread.h \
     lidarvtkwidget.h \
     mainwindow.h \
+    makejson.h \
     qcgaugewidget.h \
+    readfiles.h \
     storingdb.h
 
 FORMS += \

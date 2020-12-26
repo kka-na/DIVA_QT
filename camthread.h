@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QThread>
 #include <QDebug>
+#include <iostream>
 #include <QCoreApplication>
 
 #include <opencv2/opencv.hpp>
@@ -26,13 +27,15 @@ public:
     cv::Mat mat;
     char buf[256];
 
+    string dir;
     string path;
-    ofstream wirteFile;
+    ofstream writeFile;
     vector<int> Compression_params;
     bool stop_flag = false;
 
 public slots:
     void stop();
+    void get_dir(std::string);
 
 private:
     void run() override;
