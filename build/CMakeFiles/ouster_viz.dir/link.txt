@@ -1,2 +1,0 @@
-/usr/bin/ar qc libouster_viz.a  CMakeFiles/ouster_viz.dir/src/viz.cpp.o CMakeFiles/ouster_viz.dir/src/os1.cpp.o CMakeFiles/ouster_viz.dir/src/os1_util.cpp.o CMakeFiles/ouster_viz.dir/ouster_viz_autogen/mocs_compilation.cpp.o
-/usr/bin/ranlib libouster_viz.a

@@ -4,7 +4,6 @@ MakeJson::MakeJson(string fpath)
 {
 
     dir = fpath;
-
     iat = new IndexAndTimes(dir);
 
     gps_csv_size = iat->gps_csv.size();
@@ -222,13 +221,16 @@ bool MakeJson::Scene()
     Json::Value a_scene;
     int scene_idx = this_frame_start;
     int frames = 200;
-
+    bool is_last = false;
     for(int i=0; i<scene_count; i++){
+        num_of_scene++;
         a_scene["scene_token"] = generate_token_2();
         a_scene["log_token"] = Logs[this_log_start]["token"];
 
-        if(((this_frame_start+iat->number_of_frames()+1) - (scene_idx)) < 200)
+        if(((this_frame_start+iat->number_of_frames()+1) - (scene_idx)) < 200){ 
             frames = (this_frame_start+iat->number_of_frames()+1)-(scene_idx);
+            is_last = true;
+        }
 
 
         a_scene["nbr_frames"] = frames;
@@ -238,6 +240,7 @@ bool MakeJson::Scene()
         Scenes.append(a_scene);
         a_scene.clear();
         scene_idx+=200;
+        if(is_last) break;
     }
 
     Json::StyledWriter writer;
@@ -274,7 +277,7 @@ bool MakeJson::Frame_Data()
     string lidar_path = dir+"/LiDAR/PCD/i30_LiDAR_";
 
 
-    for(int i=0; i<scene_count; i++){
+    for(int i=0; i<num_of_scene; i++){
         string token_prev1 = "";
         string token_prev2 = "";
         string token_curr1 = generate_token_2();
@@ -389,7 +392,7 @@ bool MakeJson::Gps_Data()
     int gps_data_idx = gps_data_start;
     int where_frame_started = this_frame_data_start;
 
-    for(int i=0; i<scene_count; i++){
+    for(int i=0; i<num_of_scene; i++){
         while(1){
 
             if(gps_data_idx > gps_data_start+199){
@@ -401,7 +404,7 @@ bool MakeJson::Gps_Data()
             gpses["token"] = Frame_data[where_frame_started]["frame_data_token"];
             gpses["sensor_token"] = Sensors[1]["sensor_token"];
             gpses["timestamp"] = iat->get_gps_timestamp(gps_data_idx);
-            Get_LLA(gps_data_idx);
+            this->Get_LLA(gps_data_idx);
             gpses["latitude"] = latitude;
             gpses["longitude"] = longitude;
             gpses["altitude"] = altitude;
@@ -434,24 +437,28 @@ bool MakeJson::Imu_Data()
     Json::Value acceleration;
     Json::Value magnetic;
 
-    int imu_data_start = gps_start;
+    int imu_data_start = imu_start;
+    int gps_data_idx = gps_start;
     int imu_data_idx = imu_data_start;
     int where_frame_started = this_frame_data_start;
+    int this_frame_count = 0;
+    int imu_idx_by_ts;
 
-    for(int i=0; i<scene_count; i++){
-
+    for(int i=0; i<num_of_scene; i++){
         while(1){
-            if(imu_data_idx > imu_data_start+199){
-                imu_data_start = imu_data_idx;
+            if(this_frame_count == 200){
+                this_frame_count = 0;
                 break;
-            }else if(imu_data_idx > gps_last){
+            }else if(gps_data_idx > gps_last){
                 break;
             }
+            imu_data_idx = iat->find_imu_idx_by_ts(imu_data_idx, iat->get_gps_timestamp(gps_data_idx));
+             //cout<<"["<<i<<"]"<<imu_data_idx<<"["<<this_frame_count<<"]"<<endl;
 
             imus["token"] = Frame_data[where_frame_started]["frame_data_token"];
             imus["sensor_token"] = Sensors[4]["sensor_token"];
             imus["timestamp"] = iat->get_imu_timestamp(imu_data_idx);
-            Get_GAM(imu_data_idx);
+            this->Get_GAM(imu_data_idx);
             gyroscope.append(gyro_x); gyroscope.append(gyro_y); gyroscope.append(gyro_z);
             imus["gyroscope"] = gyroscope;
             acceleration.append(accel_x); acceleration.append(accel_y); acceleration.append(accel_z);
@@ -465,9 +472,10 @@ bool MakeJson::Imu_Data()
             magnetic.clear();
             imus.clear();
 
-            imu_data_idx++;
+            //imu_data_idx++;
+            gps_data_idx++;
+            this_frame_count++;
             where_frame_started+=2;
-
         }
 
     }
@@ -487,8 +495,8 @@ bool MakeJson::Can_Data()
     if(in.is_open()) in >> Can_data;
     Json::Value cans;
 
-    int gps_data_start = gps_start;
-    int gps_data_idx = gps_data_start;
+    int gps_data_idx = gps_start;
+    int this_frame_count = 0;
 
     int can_data_start = can_start;
     int can_data_idx = can_data_start;
@@ -496,19 +504,20 @@ bool MakeJson::Can_Data()
 
     int where_frame_started = this_frame_data_start;
 
-    for(int i=0; i<scene_count; i++){
+    for(int i=0; i<num_of_scene; i++){
         while(1){
-            if(can_data_idx > can_data_start+199){
-                can_data_start = can_data_idx;
+            if(this_frame_count == 200){
+                this_frame_count = 0;
                 break;
-            }else if(can_data_idx > gps_last){
+            }else if(gps_data_idx > gps_last){
                 break;
             }
-
+            can_data_idx = iat->find_can_idx_by_ts(can_data_idx, iat->get_gps_timestamp(gps_data_idx));
+            //cout<<"["<<i<<"]"<<can_data_idx<<"["<<this_frame_count<<"]"<<endl;
             cans["token"] = Frame_data[where_frame_started]["frame_data_token"];
             cans["sensor_token"] = Sensors[5]["sensor_token"];
             cans["timestamp"] = iat->get_can_timestamp(can_data_idx);
-            Get_HSGT(can_data_idx);
+            this->Get_HSGT(can_data_idx);
             cans["Handle_Angle"] = handle_angle;
             cans["Handle_accelaration"] = handle_accelaration;
             cans["Speed"] = speed;
@@ -517,8 +526,9 @@ bool MakeJson::Can_Data()
             Can_data.append(cans);
             cans.clear();
 
-            gps_data_idx++;
-            can_data_idx++;
+            this_frame_count++;
+            gps_data_idx++; 
+            //can_data_idx++;
             where_frame_started += 2;
         }
     }
@@ -538,6 +548,7 @@ bool MakeJson::Check_Directory()
 }
 
 void MakeJson::Get_LLA(int gps_idx){
+    latitude, longitude, altitude = "";
 
     long double raw_latitude = stold(iat->gps_csv[gps_idx][1]); // latitude
     latitude = to_string(Convert_to_dd(raw_latitude));
@@ -560,6 +571,8 @@ long double MakeJson::Convert_to_dd(long double raw){
 
 void MakeJson::Get_GAM(int imu_idx){ //get Zyro, Acceleration, Magnetic by index
 
+    gyro_x, gyro_y, gyro_z, accel_x, accel_y, accel_z, mag_x, mag_y, mag_z = "";
+
     gyro_x = iat->imu_csv[imu_idx][1];
     gyro_y = iat->imu_csv[imu_idx][2];
     gyro_z = iat->imu_csv[imu_idx][3];
@@ -573,6 +586,8 @@ void MakeJson::Get_GAM(int imu_idx){ //get Zyro, Acceleration, Magnetic by index
 }
 
 void MakeJson::Get_HSGT(int can_idx){
+
+    handle_angle, handle_accelaration, speed, gear, turn = "";
 
     handle_angle = iat->can_csv[can_idx][1];
     handle_accelaration = iat->can_csv[can_idx][2];

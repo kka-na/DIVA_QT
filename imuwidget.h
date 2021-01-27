@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QWidget>
 #include <QThread>
+#include <QApplication>
 
 #include <math.h>
 #include <fstream>

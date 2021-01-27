@@ -17,6 +17,7 @@
 #include <QTimer>
 #include <QMetaType>
 
+
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -57,7 +58,7 @@
 #include <pcl/console/parse.h>
 
 
-#include "glwidget.h"
+#include "imuthread.h"
 #include "camthread.h"
 #include "gpsthread.h"
 #include "lidarthread.h"
@@ -80,6 +81,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -88,11 +90,20 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    bool use_gps = true;
+    bool use_cam = true;
+    bool use_lidar = true;
+    bool use_imu = true;
+    bool use_can = true;
 
 
     QSqlDatabase database;
+    struct CurrentLog;
+    QVector<CurrentLog> logs;
+   
     QVector<QString> scenes_ftoken;
     QVector<int> scenes_nbrframes;
+    bool this_is_get_log = false;
 
     QSqlQuery* log_from_db;
     QSqlQuery* scene_from_db;
@@ -112,6 +123,8 @@ public:
     QLabel *diva;
     QcGaugeWidget * mSpeedGauge;
     QcNeedleItem *mSpeedNeedle;
+
+    QThread *canTTT;
 
     QString save_data_dir;
     string save_data_str;
@@ -144,12 +157,12 @@ private:
     class camThread::camThread *ct;
     class gpsThread::gpsThread *gt;
     class lidarThread::lidarThread *lt;
+    class imuThread::imuThread *it;
     class lidarVTKWidget::lidarVTKWidget *lvw;
     class canThread::canThread *cant;
     class storingDB::storingDB *sdb;
     class MakeJson::MakeJson *mj;
 
-    glwidget *gw;
     imuWidget *iw;
     Timestamp ts;
 
@@ -161,7 +174,7 @@ public slots:
     void display_gear(int);
     void display_turn_indicator(int);
     void Display_Stop();
-
+    void start_can_streaming();
     void gps_view_initialize();
     void display_cam(QImage image);
     void speedChanged(int value);
@@ -182,9 +195,19 @@ private slots:
     void on_horizontalSlider_sliderMoved(int position);
 
 
+    void on_cam_cb_stateChanged(int arg1);
+
+    void on_lidar_cb_stateChanged(int arg1);
+
+    void on_imu_cb_stateChanged(int arg1);
+
+    void on_can_cb_stateChanged(int arg1);
+
+    void on_gps_cb_stateChanged(int arg1);
+
 signals:
     void start();
-    void send_dir(std::string);
+    void send_dir(QString);
     void send_pcd(QString);
     void send_imu(float, float, float);
 };

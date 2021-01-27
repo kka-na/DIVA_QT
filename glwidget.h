@@ -6,7 +6,7 @@
 #include <QObject>
 #include <QThread>
 #include <QWidget>
-
+#include <QApplication>
 #include <math.h>
 #include <fstream>
 #include <sstream>
@@ -56,7 +56,7 @@ public:
 
 
 private slots:
-    void get_dir(std::string);
+    void get_dir(QString);
 	void streaming_start();
     void initialize_glwidget();
 };

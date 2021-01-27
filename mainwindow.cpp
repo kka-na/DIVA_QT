@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     
-    QThread::msleep(1000);
+    //QThread::msleep(1000);
     qRegisterMetaType<pcl::PointCloud<pcl::PointXYZ>::Ptr >("pcl::PointCloud<pcl::PointXYZ>::Ptr");
     gpscnt = 0;
     connect(ui->actionInitializing, SIGNAL(triggered()), this, SLOT(Initializing_for_Live()));  
@@ -22,10 +22,53 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::on_gps_cb_stateChanged(int arg1){
+    if(arg1 > 0){
+        use_gps = true;
+    }else{
+        use_gps = false;
+    }
+}
+
+void MainWindow::on_cam_cb_stateChanged(int arg1){
+    if(arg1 > 0){
+        use_cam = true;
+    }else{
+        use_cam = false;
+    }
+}
+
+void MainWindow::on_lidar_cb_stateChanged(int arg1){
+    if(arg1 > 0){
+        use_lidar = true;
+    }else{
+        use_lidar = false;
+    }
+
+}
+
+void MainWindow::on_imu_cb_stateChanged(int arg1){
+    if(arg1 > 0){
+        use_imu = true;
+    }else{
+        use_imu = false;
+    }
+
+}
+
+void MainWindow::on_can_cb_stateChanged(int arg1){
+    if(arg1 > 0){
+        use_can = true;
+    }else{
+        use_can = false;
+    }
+
+}
+
 
 void MainWindow::display_gps_info(QString latitude, QString longitude){
     //mpage->setView(mview);
-    string latlong = " lat : "+latitude.toStdString()+" long : "+longitude.toStdString();
+    string latlong = " lat : "+latitude.toStdString()+" lng : "+longitude.toStdString();
 
     if(latitude != "0" && longitude != "0"){
         gpsWidget2->setText(QString::fromLocal8Bit(latlong.c_str()));
@@ -105,17 +148,14 @@ void MainWindow::display_turn_indicator(int turn){
 
 
 void MainWindow::Make(){
-    ct = new camThread(this);
-    gt = new gpsThread(this);
-    lt = new lidarThread(this);
     
     lvw = new lidarVTKWidget(this);
-    cant = new canThread();
     camWidget = new QLabel(this);
     gpsWidget = new QLabel(this);
+    iw = new imuWidget();
     
     
-
+    
     QPixmap lpix("/home/kanakim/DIVA_QT/resource/leftarrowbefore.png");
     QPixmap rpix("/home/kanakim/DIVA_QT/resource/rightarrowbefore.png");
     ui->label->setPixmap(rpix);
@@ -153,12 +193,13 @@ void MainWindow::Make(){
     gpsWidget->setGeometry(1250, 50, 320, 32);
     gpsWidget->setStyleSheet("background-color: rgb(255, 255, 255);");
     gpsWidget->setAlignment(Qt::AlignCenter);
-    camWidget->setGeometry(320, 50, 352,200);
+    camWidget->setGeometry(320, 50, 280,210);
     camWidget->setStyleSheet("background-color: rgb(255, 255, 255);");
     gpsWidget2->setGeometry(1250, 470, 320, 32);
     gpsWidget2->setStyleSheet("background-color: rgb(255, 255, 255);");
     gpsWidget2->setAlignment(Qt::AlignCenter);
     gpsWidget2->raise();
+    ui->gridLayout_3->layout()->addWidget(iw);
 
     mSpeedGauge = new QcGaugeWidget;
     mSpeedGauge->addBackground(99);
@@ -201,8 +242,17 @@ void MainWindow::Initializing_for_Live(){
     diva->setPixmap(temp_jpeg.scaled(diva->width(), diva->height(),Qt::KeepAspectRatio));
     diva->show();
     mview->show();
-    gw = new glwidget();
-    ui->gridLayout_3->layout()->addWidget(gw);
+    if(use_gps)
+        gt = new gpsThread(this);
+    if(use_cam)
+        ct = new camThread(this);
+    if(use_lidar)
+        lt = new lidarThread(this);
+    if(use_imu){
+        it = new imuThread(this);
+    }
+    if(use_can)
+       cant = new canThread();
 
     QString live_str = "Data Capturing Date : ";
     live_str.append(QString::fromLocal8Bit(ts.getDate().c_str()));
@@ -212,40 +262,57 @@ void MainWindow::Initializing_for_Live(){
     save_data_dir = this->Check_Directory(save_data_dir);
     save_data_str = save_data_dir.toStdString();
     
-    connect(this, SIGNAL(send_dir(std::string)), ct, SLOT(get_dir(std::string)));
-    connect(this, SIGNAL(send_dir(std::string)), gt, SLOT(get_dir(std::string)));
-    connect(this, SIGNAL(send_dir(std::string)), lt, SLOT(get_dir(std::string)));
-    connect(this, SIGNAL(send_dir(std::string)), gw, SLOT(get_dir(std::string)));
-    connect(this, SIGNAL(send_dir(std::string)), cant, SLOT(get_dir(std::string)));
-    emit send_dir(save_data_str);
+    if(use_gps)
+        connect(this, SIGNAL(send_dir(QString)), gt, SLOT(get_dir(QString)));
+    if(use_cam)
+        connect(this, SIGNAL(send_dir(QString)), ct, SLOT(get_dir(QString)));
+    if(use_lidar)
+        connect(this, SIGNAL(send_dir(QString)), lt, SLOT(get_dir(QString)));
+    if(use_imu)
+        connect(this, SIGNAL(send_dir(QString)), it, SLOT(get_dir(QString)));
+    if(use_can)
+        connect(this, SIGNAL(send_dir(QString)), cant, SLOT(get_dir(QString)));
+    emit send_dir(save_data_dir);
 
-    connect(ui->actionLive_Streaming, SIGNAL(triggered()), ct, SLOT(start()));
-    connect(ui->actionLive_Streaming, SIGNAL(triggered()), gt, SLOT(start()));
-    connect(ui->actionLive_Streaming, SIGNAL(triggered()), lt, SLOT(start()));
-    connect(ui->actionLive_Streaming, SIGNAL(triggered()), lvw, SLOT(init()));
-    connect(ui->actionLive_Streaming, SIGNAL(triggered()), cant, SLOT(start()));
-    connect(ui->actionLive_Streaming, SIGNAL(triggered()), gw, SLOT(streaming_start()));
-
-    connect(ct, SIGNAL(send_qimage(QImage)), this, SLOT(display_cam(QImage)));
-    connect(lt, SIGNAL(send_lidar(pcl::PointCloud<pcl::PointXYZ>::Ptr)), lvw, SLOT(display_lidar(pcl::PointCloud<pcl::PointXYZ>::Ptr)));
-    //connect(lt, SIGNAL(connectedOK()), this, SLOT(initial_map()));
-    connect(cant, SIGNAL(send_handle(QString, QString)),this, SLOT(display_handle_data(QString, QString)));
-    connect(cant, SIGNAL(send_speed(int)),this, SLOT(speedChanged(int)));
-    connect(cant, SIGNAL(send_gear(int)), this, SLOT(display_gear(int)));
-    connect(cant, SIGNAL(send_turn(int)), this, SLOT(display_turn_indicator(int)));
-
-    connect(gt, SIGNAL(send_ll(QString, QString)), this, SLOT(display_gps_info(QString, QString)));
-   
+    if(use_gps){
+        connect(ui->actionLive_Streaming, SIGNAL(triggered()), gt, SLOT(start()));
+        connect(gt, SIGNAL(send_ll(QString, QString)), this, SLOT(display_gps_info(QString, QString))); 
+        connect(ui->actionStreaming_End, SIGNAL(triggered()), gt, SLOT(stop()));
+        connect(gt, SIGNAL(send_end()), this, SLOT(gps_view_initialize()));
+    }
     
-    //conenct to widget for close
-    connect(ui->actionStreaming_End, SIGNAL(triggered()), ct, SLOT(stop()));
-    connect(ui->actionStreaming_End, SIGNAL(triggered()), gw, SLOT(initialize_glwidget()));
-    connect(ui->actionStreaming_End, SIGNAL(triggered()), gt, SLOT(stop()));
-    connect(ui->actionStreaming_End, SIGNAL(triggered()), lt, SLOT(stop()));
-    connect(gt, SIGNAL(send_end()), this, SLOT(gps_view_initialize()));
-    connect(ui->actionStreaming_End, SIGNAL(triggered()), cant, SLOT(stop()));
+    if(use_cam){
+        connect(ui->actionLive_Streaming, SIGNAL(triggered()), ct, SLOT(start()));
+        connect(ct, SIGNAL(send_qimage(QImage)), this, SLOT(display_cam(QImage)));
+        connect(ui->actionStreaming_End, SIGNAL(triggered()), ct, SLOT(stop()));
+    }
+    if(use_lidar){
+        connect(ui->actionLive_Streaming, SIGNAL(triggered()), lt, SLOT(start()));
+        connect(ui->actionLive_Streaming, SIGNAL(triggered()), lvw, SLOT(init()));
+        connect(lt, SIGNAL(send_lidar(pcl::PointCloud<pcl::PointXYZ>::Ptr)), lvw, SLOT(display_lidar(pcl::PointCloud<pcl::PointXYZ>::Ptr)));
+        connect(ui->actionStreaming_End, SIGNAL(triggered()), lt, SLOT(stop()));
+    }
+    if(use_imu){
+        connect(ui->actionLive_Streaming, SIGNAL(triggered()), it, SLOT(start()));
+        connect(it, SIGNAL(send_acc(float, float, float)), iw, SLOT(streaming_start(float,float,float)));
+        connect(ui->actionStreaming_End, SIGNAL(triggered()), it, SLOT(stop()));
+    }
+    if(use_can){
+        connect(ui->actionLive_Streaming, SIGNAL(triggered()), cant, SLOT(start()));
+        connect(cant, SIGNAL(send_handle(QString, QString)),this, SLOT(display_handle_data(QString, QString)));
+        connect(cant, SIGNAL(send_speed(int)),this, SLOT(speedChanged(int)));
+        connect(cant, SIGNAL(send_gear(int)), this, SLOT(display_gear(int)));
+        connect(cant, SIGNAL(send_turn(int)), this, SLOT(display_turn_indicator(int)));
+        connect(ui->actionStreaming_End, SIGNAL(triggered()), cant, SLOT(stop()));
+        connect(cant, SIGNAL(send_end()), cant, SLOT(deleteLater()));
+    }
     
 }
+
+void MainWindow::start_can_streaming(){
+    cout<<"here"<<endl;
+}  
+
 
 QString MainWindow::Check_Directory(QString dirpath){
     QDir root(dirpath);
@@ -303,7 +370,7 @@ void MainWindow::on_actionJSON_Parsing_triggered(){
     save_data_str = save_data_dir.toStdString();
     mj = new MakeJson(save_data_str);
     
-    cout<<save_data_str<<endl;
+   
     mj->Sensor(5);
     mj->Log(0);
     mj->Frame();
@@ -312,18 +379,27 @@ void MainWindow::on_actionJSON_Parsing_triggered(){
     mj->Gps_Data();
     mj->Imu_Data();
     mj->Can_Data();
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("JSON Parsing");
+    msgBox.setText("JSON Parsing process ended successfully. ");
+    msgBox.setStyleSheet("background-color: rgb(255, 255, 255)");
+    msgBox.exec();
+    
 }
 
 void MainWindow::on_actionDB_Storing_triggered(){
     dir = QFileDialog::getExistingDirectory(this, "Select Driving Directory to Saving JSON files to DB", QDir::currentPath(),QFileDialog::ShowDirsOnly);
     string fpath = dir.toStdString();
     sdb = new storingDB(fpath);
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("DB Storing");
+    msgBox.setText("DB Storing process ended successfully. ");
+    msgBox.setStyleSheet("background-color: rgb(255, 255, 255)");
+    msgBox.exec();
 }
 
 void MainWindow::Initializing_for_Playback(){
     this->Make();
-    iw = new imuWidget();
-    ui->gridLayout_3->layout()->addWidget(iw);
     mview->show();
 
     if(this->setting_DB()){
@@ -338,19 +414,31 @@ void MainWindow::Initializing_for_Playback(){
 }
 
 //psql -h localhost -p 5432 -U diva -d "diva"
+struct MainWindow::CurrentLog
+{
+    QString t;
+    QString v;
+    QString d;
+};
 
+//id MainWindow::get_log_token(){    cout<<"log_displayed"<<endl;}
 
 void MainWindow::get_log_token(){
+    ui->label_3->clear();
+    this_is_get_log = true;
     this->log_from_db = new QSqlQuery(this->database);
     this->log_from_db->exec("SELECT * FROM LOG;");
-    this->log_from_db->first();
-    QString log_token = this->log_from_db->value(0).toString(); //just get the first log token
-    QString log_str = "Vehicle : ";
-    log_str.append(this->log_from_db->value(2).toString());
-    log_str.append(", Captured Date : ");
-    log_str.append(this->log_from_db->value(1).toString());
-    ui->label_7->setText(log_str);
-    this->Display_Scene(log_token);
+    MainWindow::CurrentLog current_log;
+    //this->log_from_db->first();
+    while(1){
+        if(this->log_from_db->next()){
+            current_log.t = this->log_from_db->value(0).toString();
+            current_log.v = this->log_from_db->value(2).toString();
+            current_log.d =  this->log_from_db->value(1).toString();
+            logs.push_back(current_log);
+            ui->label_4->addItem(current_log.d);
+        }else break;
+    }
 }
 
 void MainWindow::Display_Scene(QString Text){
@@ -381,12 +469,23 @@ int idx_for_cnt_frames;
 int *saved_idx_for_cnt_frames;
 QString *saved_token_for_cnt_frames;
 void MainWindow::on_pushButton_clicked(){
-    QString index = ui->label_3->currentItem()->text();
-    index.remove(0,6);
-    QString fftoken=scenes_ftoken.at(index.toInt());
-    nbr_frames = scenes_nbrframes.at(index.toInt());
-    counted_frames = 0;
-    this->Setting_Frames(fftoken);
+    if(this_is_get_log){
+        int log_row = ui->label_4->currentRow();
+        CurrentLog current_log = logs.at(log_row);
+        QString log_str = "Vehicle : ";
+        log_str.append(current_log.v);
+        log_str.append(", Captured Date : ");
+        log_str.append(current_log.d);
+        ui->label_7->setText(log_str);
+        this_is_get_log = false;
+        this->Display_Scene(current_log.t);
+    }else{
+        int item_row =  ui->label_3->currentRow();
+        QString fftoken=scenes_ftoken.at(item_row);
+        nbr_frames = scenes_nbrframes.at(item_row);
+        counted_frames = 0;
+        this->Setting_Frames(fftoken);
+    }
 }
 
 
@@ -574,5 +673,6 @@ void MainWindow::initialize_for_slider(){
     camWidget->clear();
     this->display_flag = true;
     this->gps_view_initialize();
-    iw->clear();
+    //iw->clear();
 }
+

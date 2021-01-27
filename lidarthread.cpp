@@ -23,7 +23,6 @@ void lidarThread::run(){
     int cnt_ok = 0;
 
     while (!stop_flag) {
-            //std::cout<<"while"<<std::endl;
             OS1::client_state st = OS1::poll_client(*cli);
             if (st & OS1::client_state::LIDAR_DATA) {
                 if (OS1::read_lidar_packet(*cli, lidar_buf)){
@@ -45,16 +44,14 @@ void lidarThread::run(){
                 }
                 cloud.reset( new pcl::PointCloud<pcl::PointXYZ>);
                 count = 0;
-
-                //QThread::msleep(5);
             }
-            QCoreApplication::processEvents();
+            //QCoreApplication::processEvents();
             cnt_ok++;
     }
 }
 
-void lidarThread::get_dir(std::string dir_str){
-    dir = dir_str;
+void lidarThread::get_dir(QString dir_str){
+    dir = dir_str.toStdString();
 }
 void lidarThread::stop(){
     stop_flag = true;

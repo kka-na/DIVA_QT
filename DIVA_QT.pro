@@ -27,6 +27,7 @@ SOURCES += \
     displaythread.cpp \
     glwidget.cpp \
     gpsthread.cpp \
+    imuthread.cpp \
     imuwidget.cpp \
     indexandtimes.cpp \
     lidarthread.cpp \
@@ -50,6 +51,7 @@ HEADERS += \
     displaythread.h \
     glwidget.h \
     gpsthread.h \
+    imuthread.h \
     imuwidget.h \
     indexandtimes.h \
     lidarthread.h \

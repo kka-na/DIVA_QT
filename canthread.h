@@ -32,12 +32,12 @@ public:
 };
 
 
-class canThread : public QObject
+class canThread : public QThread
 {
 	Q_OBJECT
 
 public:
-    canThread();
+    canThread(QObject *parent = 0);
     Timestamp ts;
     ofstream writeFile;
 
@@ -63,6 +63,7 @@ public:
      QString speed_qstring;
      QString handle_qstring;
      QString handle_qstring2;
+     
 
      int handle_int;
      int handle_int2;
@@ -82,16 +83,16 @@ signals:
 
 
 public slots:
-    void get_dir(std::string);
+    void get_dir(QString);
 	void event();
 	void stop();
-	void start();
+	//void start();
 
 private slots:
     string hexToBinary(string, int);
 
 private:
-
+    void run() override;
 };
 
 #endif // CANTHREAD_H

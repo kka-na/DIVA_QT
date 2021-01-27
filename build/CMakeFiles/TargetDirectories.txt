@@ -1,6 +1,0 @@
-/home/kanakim/DIVA_QT/build/CMakeFiles/edit_cache.dir
-/home/kanakim/DIVA_QT/build/CMakeFiles/ouster_viz.dir
-/home/kanakim/DIVA_QT/build/CMakeFiles/rebuild_cache.dir
-/home/kanakim/DIVA_QT/build/CMakeFiles/diva.dir
-/home/kanakim/DIVA_QT/build/CMakeFiles/ouster_viz_autogen.dir
-/home/kanakim/DIVA_QT/build/CMakeFiles/diva_autogen.dir

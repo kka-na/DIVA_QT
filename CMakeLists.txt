@@ -38,7 +38,6 @@ find_package(PCL 1.11.1 REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
-#pkg_check_modules(jsoncpp REQUIRED jsoncpp)
 pkg_check_modules(JSONCPP jsoncpp)
 link_libraries(${JSONCPP_LIBRARIES})
 
@@ -69,7 +68,6 @@ find_library(MSCL_LIB_PATH NAMES libmscl.so PATHS "/usr/share/c++-mscl" DOC "MSC
 find_library(BOOST_LIB_PATH NAMES libboost_chrono.so PATHS "/usr/share/c++-mscl/Boost/lib" NO_DEFAULT_PATH)
 set(MSCL_INC_PATH "/usr/share/c++-mscl/source")
 set(BOOST_INC_PATH "/usr/share/c++-mscl/Boost/include")
-#find_path(MSCL_INC_PATH NAMES mscl.h PATHS "/usr/share/c++-mscl/source/mscl" DOC "MSCL Includes" NO_DEFAULT_PATH)
 set(MSCL_LIB "/usr/share/c++-mscl")
 add_definitions(-std=c++11)
 include_directories(/usr/share/c++-mscl/source /usr/share/c++-mscl/Boost/include /usr/include)
@@ -93,7 +91,9 @@ target_include_directories(ouster_viz PUBLIC include)
 target_include_directories(ouster_viz SYSTEM PRIVATE ${jsoncpp_INCLUDE_DIRS})
 
 #set(project_SOURCES main.cpp mainwindow.cpp camthread.cpp glwidget.cpp gpsthread.cpp lidarthread.cpp lidarvtkwidget.cpp)
-set(project_SOURCES main.cpp  canthread.cpp imuwidget.cpp  mainwindow.cpp camthread.cpp gpsthread.cpp lidarthread.cpp lidarvtkwidget.cpp  imutread.cpp qcgaugewidget.cpp storingdb.cpp makejson.cpp readfiles.cpp indexandtimes.cpp)
+set(project_SOURCES main.cpp  canthread.cpp imuwidget.cpp  mainwindow.cpp camthread.cpp gpsthread.cpp 
+  lidarthread.cpp lidarvtkwidget.cpp  imuthread.cpp qcgaugewidget.cpp storingdb.cpp makejson.cpp 
+  readfiles.cpp indexandtimes.cpp)
 #
 add_executable(${PROJECT_NAME} ${project_SOURCES} ${MSCL_INC_PATH} ${MSCL_LIB} ${MSCL_INC})
 

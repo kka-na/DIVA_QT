@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>DIVA _ Data Intergration for Vehicle Assistance</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background : qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(201, 255, 224, 152), stop:0.293532 rgba(190, 255, 254, 155), stop:0.587065 rgba(190, 223, 255, 155), stop:0.840796 rgba(190, 203, 255, 155), stop:0.995025 rgba(193, 190, 255, 155))</string>
@@ -90,9 +90,9 @@ background-color: rgba(238, 238, 236, 180);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>600</y>
+      <y>670</y>
       <width>270</width>
-      <height>201</height>
+      <height>131</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -103,7 +103,7 @@ background-color: rgba(238, 238, 236, 180);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>50</y>
+      <y>60</y>
       <width>271</width>
       <height>201</height>
      </rect>
@@ -254,6 +254,114 @@ background-color: rgba(255, 255, 255,0);psql -h localhost -p 5432 -U diva -d &qu
      <pixmap>leftarrowbefore.png</pixmap>
     </property>
    </widget>
+   <widget class="QListWidget" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>600</y>
+      <width>270</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(238, 238, 236, 180);</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cam_cb">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, 80);</string>
+    </property>
+    <property name="text">
+     <string>CAM</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="lidar_cb">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>10</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, 80);</string>
+    </property>
+    <property name="text">
+     <string>LiDAR</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="imu_cb">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>30</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, 80);</string>
+    </property>
+    <property name="text">
+     <string>IMU</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="can_cb">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>30</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, 80);</string>
+    </property>
+    <property name="text">
+     <string>CAN</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="gps_cb">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>61</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, 80);</string>
+    </property>
+    <property name="text">
+     <string>GPS</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
    <zorder>label_3</zorder>
    <zorder>label_5</zorder>
    <zorder>label_7</zorder>
@@ -268,6 +376,12 @@ background-color: rgba(255, 255, 255,0);psql -h localhost -p 5432 -U diva -d &qu
    <zorder>D_label</zorder>
    <zorder>label</zorder>
    <zorder>label_2</zorder>
+   <zorder>label_4</zorder>
+   <zorder>cam_cb</zorder>
+   <zorder>lidar_cb</zorder>
+   <zorder>imu_cb</zorder>
+   <zorder>can_cb</zorder>
+   <zorder>gps_cb</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
