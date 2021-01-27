@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_lidarThread_t {
-    QByteArrayData data[8];
-    char stringdata0[97];
+    QByteArrayData data[7];
+    char stringdata0[85];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,13 +37,12 @@ QT_MOC_LITERAL(2, 23, 0), // ""
 QT_MOC_LITERAL(3, 24, 35), // "pcl::PointCloud<pcl::PointXYZ..."
 QT_MOC_LITERAL(4, 60, 11), // "connectedOK"
 QT_MOC_LITERAL(5, 72, 4), // "stop"
-QT_MOC_LITERAL(6, 77, 7), // "get_dir"
-QT_MOC_LITERAL(7, 85, 11) // "std::string"
+QT_MOC_LITERAL(6, 77, 7) // "get_dir"
 
     },
     "lidarThread\0send_lidar\0\0"
     "pcl::PointCloud<pcl::PointXYZ>::Ptr\0"
-    "connectedOK\0stop\0get_dir\0std::string"
+    "connectedOK\0stop\0get_dir"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,7 +73,7 @@ static const uint qt_meta_data_lidarThread[] = {
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 7,    2,
+    QMetaType::Void, QMetaType::QString,    2,
 
        0        // eod
 };
@@ -88,7 +87,7 @@ void lidarThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 0: _t->send_lidar((*reinterpret_cast< pcl::PointCloud<pcl::PointXYZ>::Ptr(*)>(_a[1]))); break;
         case 1: _t->connectedOK(); break;
         case 2: _t->stop(); break;
-        case 3: _t->get_dir((*reinterpret_cast< std::string(*)>(_a[1]))); break;
+        case 3: _t->get_dir((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

@@ -11,7 +11,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/diva.dir/gpsthread.cpp.o"
   "CMakeFiles/diva.dir/lidarthread.cpp.o"
   "CMakeFiles/diva.dir/lidarvtkwidget.cpp.o"
-  "CMakeFiles/diva.dir/glwidget.cpp.o"
+  "CMakeFiles/diva.dir/imuthread.cpp.o"
   "CMakeFiles/diva.dir/qcgaugewidget.cpp.o"
   "CMakeFiles/diva.dir/storingdb.cpp.o"
   "CMakeFiles/diva.dir/makejson.cpp.o"

@@ -52,7 +52,7 @@ void gpsThread::run(){
             
             emit send_ll(QString::fromLocal8Bit(latitude.c_str()), QString::fromLocal8Bit(longitude.c_str()));
         }
-        QCoreApplication::processEvents();
+        //QCoreApplication::processEvents();
     }
 }
 
@@ -63,8 +63,8 @@ void gpsThread::stop(){
     cs.close_serial(iDev);
 }
 
-void gpsThread::get_dir(std::string dir_str){
-    dir = dir_str;
+void gpsThread::get_dir(QString dir_str){
+    dir = dir_str.toStdString();
 }
 
 long double gpsThread::Convert_to_dd(long double raw){

@@ -249,28 +249,28 @@ CMakeFiles/diva.dir/lidarvtkwidget.cpp.o.provides: CMakeFiles/diva.dir/lidarvtkw
 CMakeFiles/diva.dir/lidarvtkwidget.cpp.o.provides.build: CMakeFiles/diva.dir/lidarvtkwidget.cpp.o
 
 
-CMakeFiles/diva.dir/glwidget.cpp.o: CMakeFiles/diva.dir/flags.make
-CMakeFiles/diva.dir/glwidget.cpp.o: ../glwidget.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kanakim/DIVA_QT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/diva.dir/glwidget.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/diva.dir/glwidget.cpp.o -c /home/kanakim/DIVA_QT/glwidget.cpp
+CMakeFiles/diva.dir/imuthread.cpp.o: CMakeFiles/diva.dir/flags.make
+CMakeFiles/diva.dir/imuthread.cpp.o: ../imuthread.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kanakim/DIVA_QT/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/diva.dir/imuthread.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/diva.dir/imuthread.cpp.o -c /home/kanakim/DIVA_QT/imuthread.cpp
 
-CMakeFiles/diva.dir/glwidget.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/diva.dir/glwidget.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanakim/DIVA_QT/glwidget.cpp > CMakeFiles/diva.dir/glwidget.cpp.i
+CMakeFiles/diva.dir/imuthread.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/diva.dir/imuthread.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kanakim/DIVA_QT/imuthread.cpp > CMakeFiles/diva.dir/imuthread.cpp.i
 
-CMakeFiles/diva.dir/glwidget.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/diva.dir/glwidget.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanakim/DIVA_QT/glwidget.cpp -o CMakeFiles/diva.dir/glwidget.cpp.s
+CMakeFiles/diva.dir/imuthread.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/diva.dir/imuthread.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kanakim/DIVA_QT/imuthread.cpp -o CMakeFiles/diva.dir/imuthread.cpp.s
 
-CMakeFiles/diva.dir/glwidget.cpp.o.requires:
+CMakeFiles/diva.dir/imuthread.cpp.o.requires:
 
-.PHONY : CMakeFiles/diva.dir/glwidget.cpp.o.requires
+.PHONY : CMakeFiles/diva.dir/imuthread.cpp.o.requires
 
-CMakeFiles/diva.dir/glwidget.cpp.o.provides: CMakeFiles/diva.dir/glwidget.cpp.o.requires
-	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/glwidget.cpp.o.provides.build
-.PHONY : CMakeFiles/diva.dir/glwidget.cpp.o.provides
+CMakeFiles/diva.dir/imuthread.cpp.o.provides: CMakeFiles/diva.dir/imuthread.cpp.o.requires
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/imuthread.cpp.o.provides.build
+.PHONY : CMakeFiles/diva.dir/imuthread.cpp.o.provides
 
-CMakeFiles/diva.dir/glwidget.cpp.o.provides.build: CMakeFiles/diva.dir/glwidget.cpp.o
+CMakeFiles/diva.dir/imuthread.cpp.o.provides.build: CMakeFiles/diva.dir/imuthread.cpp.o
 
 
 CMakeFiles/diva.dir/qcgaugewidget.cpp.o: CMakeFiles/diva.dir/flags.make
@@ -427,7 +427,7 @@ diva_OBJECTS = \
 "CMakeFiles/diva.dir/gpsthread.cpp.o" \
 "CMakeFiles/diva.dir/lidarthread.cpp.o" \
 "CMakeFiles/diva.dir/lidarvtkwidget.cpp.o" \
-"CMakeFiles/diva.dir/glwidget.cpp.o" \
+"CMakeFiles/diva.dir/imuthread.cpp.o" \
 "CMakeFiles/diva.dir/qcgaugewidget.cpp.o" \
 "CMakeFiles/diva.dir/storingdb.cpp.o" \
 "CMakeFiles/diva.dir/makejson.cpp.o" \
@@ -446,7 +446,7 @@ diva: CMakeFiles/diva.dir/camthread.cpp.o
 diva: CMakeFiles/diva.dir/gpsthread.cpp.o
 diva: CMakeFiles/diva.dir/lidarthread.cpp.o
 diva: CMakeFiles/diva.dir/lidarvtkwidget.cpp.o
-diva: CMakeFiles/diva.dir/glwidget.cpp.o
+diva: CMakeFiles/diva.dir/imuthread.cpp.o
 diva: CMakeFiles/diva.dir/qcgaugewidget.cpp.o
 diva: CMakeFiles/diva.dir/storingdb.cpp.o
 diva: CMakeFiles/diva.dir/makejson.cpp.o
@@ -703,7 +703,7 @@ CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/camthread.cpp.o.requires
 CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/gpsthread.cpp.o.requires
 CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/lidarthread.cpp.o.requires
 CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/lidarvtkwidget.cpp.o.requires
-CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/glwidget.cpp.o.requires
+CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/imuthread.cpp.o.requires
 CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/qcgaugewidget.cpp.o.requires
 CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/storingdb.cpp.o.requires
 CMakeFiles/diva.dir/requires: CMakeFiles/diva.dir/makejson.cpp.o.requires

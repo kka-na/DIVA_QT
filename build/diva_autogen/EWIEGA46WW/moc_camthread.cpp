@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_camThread_t {
-    QByteArrayData data[6];
-    char stringdata0[48];
+    QByteArrayData data[5];
+    char stringdata0[36];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,12 +35,10 @@ QT_MOC_LITERAL(0, 0, 9), // "camThread"
 QT_MOC_LITERAL(1, 10, 11), // "send_qimage"
 QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 4), // "stop"
-QT_MOC_LITERAL(4, 28, 7), // "get_dir"
-QT_MOC_LITERAL(5, 36, 11) // "std::string"
+QT_MOC_LITERAL(4, 28, 7) // "get_dir"
 
     },
-    "camThread\0send_qimage\0\0stop\0get_dir\0"
-    "std::string"
+    "camThread\0send_qimage\0\0stop\0get_dir"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +67,7 @@ static const uint qt_meta_data_camThread[] = {
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 5,    2,
+    QMetaType::Void, QMetaType::QString,    2,
 
        0        // eod
 };
@@ -82,7 +80,7 @@ void camThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->send_qimage((*reinterpret_cast< QImage(*)>(_a[1]))); break;
         case 1: _t->stop(); break;
-        case 2: _t->get_dir((*reinterpret_cast< std::string(*)>(_a[1]))); break;
+        case 2: _t->get_dir((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

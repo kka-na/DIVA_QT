@@ -13,6 +13,8 @@ IndexAndTimes::IndexAndTimes(string fpath)
 
 int IndexAndTimes::get_hhmmsssss(string str){ return stoi(str.substr(8,9));}
 
+//difference_1 = 1000 / T + 10
+//difference_2 = ( 1000 / T ) / 2 + 5 
 int IndexAndTimes::find_cam_idx_by_ts(int now, string comp_timestamp){
     int cam_start_idx = now;
     for(int i=now; i<int(cam_txt.size()); i++){
@@ -41,7 +43,7 @@ int IndexAndTimes::find_lidar_idx_by_ts(int now, string comp_timestamp){
 }
 
 int IndexAndTimes::find_gps_idx_by_ts(int now, string comp_timestamp){
-    int gps_start_idx = 0;
+    int gps_start_idx = now;
     for(int i=now; i<gps_csv.size(); i++){
         int difference = get_hhmmsssss(comp_timestamp) - get_hhmmsssss(gps_csv[i][0]);
         if(difference < 0) difference = - difference;
@@ -54,11 +56,11 @@ int IndexAndTimes::find_gps_idx_by_ts(int now, string comp_timestamp){
 }
 
 int IndexAndTimes::find_imu_idx_by_ts(int now, string comp_timestamp){
-    int imu_start_idx = 0;
+    int imu_start_idx = now;
     for(int i=now; i<imu_csv.size(); i++){
         int difference = get_hhmmsssss(comp_timestamp) - get_hhmmsssss(imu_csv[i][0]);
-        if(difference<0) difference = -difference;
-        if(difference <= 55){ //25hz
+        if(difference < 0) difference = -difference;
+        if(difference <= 110){ //about 10hz 
             imu_start_idx = i;
             break;
         }
@@ -67,11 +69,11 @@ int IndexAndTimes::find_imu_idx_by_ts(int now, string comp_timestamp){
 }
 
 int IndexAndTimes::find_can_idx_by_ts(int now, string comp_timestamp){
-    int can_start_idx = 0;
+    int can_start_idx = now;
     for(int i=now; i<can_csv.size(); i++){
         int difference = get_hhmmsssss(comp_timestamp) - get_hhmmsssss(can_csv[i][0]);
         if(difference<0) difference = -difference;
-        if(difference <= 30){//about 50hz
+        if(difference <= 260){//about 4hz
             can_start_idx = i;
             break;
         }
@@ -132,7 +134,7 @@ int IndexAndTimes::find_can_start_idx(){
     int can_start_idx = 0;
     for(int i=0; i<can_csv.size(); i++){
         int difference = s_ts - get_hhmmsssss(can_csv[i][0]);
-        if(difference < 0 && -difference <= 30){
+        if(difference < 0 && -difference <= 60){
             can_start_idx = i;
             break;
         }
@@ -250,7 +252,7 @@ bool IndexAndTimes::txt_sensor_is_key_frame(int isSensor, int target_idx, int gp
     int dev = 0;
     if(isSensor == is_CAM){
         txts = cam_txt;
-        dev = 300;
+        dev = 30;
     }else if(isSensor == is_LiDAR){
         txts = lidar_txt;
         dev = 55;
@@ -269,10 +271,10 @@ bool IndexAndTimes::csv_sensor_is_key_frame(int isSensor, int target_idx, int gp
 
     if(isSensor == is_IMU){
         csvs = imu_csv;
-        dev = 23;
+        dev = 25;
     }else if(isSensor == is_CAN){
         csvs = can_csv;
-        dev = 15;
+        dev = 130;
     }
     int comp = get_hhmmsssss(gps_csv[gps_idx][0])- get_hhmmsssss(csvs[target_idx][0]);
 

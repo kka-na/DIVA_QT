@@ -34,7 +34,6 @@ void imuWidget::paintGL(){
         //glRotatef(yaw, 0.0, 0.0, 1.0);
 
         draw_obj(car);
-        //QThread::msleep(15);
 
 }
 

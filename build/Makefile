@@ -243,33 +243,6 @@ diva_autogen/mocs_compilation.cpp.s:
 	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/diva_autogen/mocs_compilation.cpp.s
 .PHONY : diva_autogen/mocs_compilation.cpp.s
 
-glwidget.o: glwidget.cpp.o
-
-.PHONY : glwidget.o
-
-# target to build an object file
-glwidget.cpp.o:
-	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/glwidget.cpp.o
-.PHONY : glwidget.cpp.o
-
-glwidget.i: glwidget.cpp.i
-
-.PHONY : glwidget.i
-
-# target to preprocess a source file
-glwidget.cpp.i:
-	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/glwidget.cpp.i
-.PHONY : glwidget.cpp.i
-
-glwidget.s: glwidget.cpp.s
-
-.PHONY : glwidget.s
-
-# target to generate assembly for a file
-glwidget.cpp.s:
-	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/glwidget.cpp.s
-.PHONY : glwidget.cpp.s
-
 gpsthread.o: gpsthread.cpp.o
 
 .PHONY : gpsthread.o
@@ -296,6 +269,33 @@ gpsthread.s: gpsthread.cpp.s
 gpsthread.cpp.s:
 	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/gpsthread.cpp.s
 .PHONY : gpsthread.cpp.s
+
+imuthread.o: imuthread.cpp.o
+
+.PHONY : imuthread.o
+
+# target to build an object file
+imuthread.cpp.o:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/imuthread.cpp.o
+.PHONY : imuthread.cpp.o
+
+imuthread.i: imuthread.cpp.i
+
+.PHONY : imuthread.i
+
+# target to preprocess a source file
+imuthread.cpp.i:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/imuthread.cpp.i
+.PHONY : imuthread.cpp.i
+
+imuthread.s: imuthread.cpp.s
+
+.PHONY : imuthread.s
+
+# target to generate assembly for a file
+imuthread.cpp.s:
+	$(MAKE) -f CMakeFiles/diva.dir/build.make CMakeFiles/diva.dir/imuthread.cpp.s
+.PHONY : imuthread.cpp.s
 
 imuwidget.o: imuwidget.cpp.o
 
@@ -696,12 +696,12 @@ help:
 	@echo "... diva_autogen/mocs_compilation.o"
 	@echo "... diva_autogen/mocs_compilation.i"
 	@echo "... diva_autogen/mocs_compilation.s"
-	@echo "... glwidget.o"
-	@echo "... glwidget.i"
-	@echo "... glwidget.s"
 	@echo "... gpsthread.o"
 	@echo "... gpsthread.i"
 	@echo "... gpsthread.s"
+	@echo "... imuthread.o"
+	@echo "... imuthread.i"
+	@echo "... imuthread.s"
 	@echo "... imuwidget.o"
 	@echo "... imuwidget.i"
 	@echo "... imuwidget.s"

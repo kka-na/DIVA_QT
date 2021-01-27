@@ -22,17 +22,16 @@ void glwidget::initializeGL(){
 //mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM1", 115200);
 //mscl::InertialNode node(connection);
 
-
 void glwidget::paintGL(){
-    
-    mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM1", 115200);
+
+    mscl::Connection connection = mscl::Connection::Serial("/dev/ttyACM0", 115200);
     mscl::InertialNode node =  mscl::InertialNode(connection);
 
     mscl::MipDataPackets packets = node.getDataPackets(500);
     IMUdata temp;
 
-        for(mscl::MipDataPacket packet : packets)
-        {
+        for(mscl::MipDataPacket packet : packets){ //
+
             int count = 0;
             packet.descriptorSet();
             mscl::MipDataPoints points = packet.data();
@@ -96,7 +95,9 @@ void glwidget::paintGL(){
         glRotatef(float(pitch), 0.0, 1.0, 0.0);
 
         draw_obj(car);
+
         QThread::msleep(10);
+
 }
 
 void glwidget::resizeGL(int w, int h){
@@ -126,8 +127,8 @@ void glwidget::initialize_glwidget(){
     writeFile.close();
 }
 
-void glwidget::get_dir(std::string dir_str){
-    dir = dir_str;
+void glwidget::get_dir(QString dir_str){
+    dir = dir_str.toStdString();
 }
 
 
@@ -166,13 +167,9 @@ void glwidget::draw_obj(ObjParser *objParser) {
 }
 
 
-void glwidget::drawBitmapText(const char *str, float x, float y, float z)
-{
+void glwidget::drawBitmapText(const char *str, float x, float y, float z){
     glRasterPos3f(x, y, z); //문자열이 그려질 위치 지정
-
-    while (*str)
-    {
-        //GLUT_BITMAP_TIMES_ROMAN_24 폰트를 사용하여 문자열을 그린다.
+    while (*str){
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *str);
 
         str++;
@@ -190,8 +187,6 @@ void glwidget::draw_line(double roll, double pitch, double yaw)
     sprintf(xroll, "R_%f", roll);
     sprintf(ypitch, "P_%f", pitch);
     sprintf(zyaw, "Y_%f", yaw);
-
-
 
     glPushMatrix();
 
@@ -225,4 +220,5 @@ void glwidget::draw_line(double roll, double pitch, double yaw)
     glPopMatrix();
 
     glFlush();
+
 }

@@ -10,7 +10,6 @@
 #include <QCoreApplication>
 #include <string>
 #include <iostream>
-#include <QtWebEngineWidgets/QtWebEngineWidgets>
 
 #include "Timestamp.h"
 #include "Strtok_m.h"
@@ -47,7 +46,7 @@ public:
     long double Convert_to_dd(long double raw);
 
 public slots:
-    void get_dir(std::string);
+    void get_dir(QString);
     void stop();
 
 private:

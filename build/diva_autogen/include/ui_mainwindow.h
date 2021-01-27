@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QListWidget>
@@ -56,6 +57,12 @@ public:
     QLabel *D_label;
     QLabel *label;
     QLabel *label_2;
+    QListWidget *label_4;
+    QCheckBox *cam_cb;
+    QCheckBox *lidar_cb;
+    QCheckBox *imu_cb;
+    QCheckBox *can_cb;
+    QCheckBox *gps_cb;
     QMenuBar *menubar;
     QMenu *menuStreaming;
     QMenu *menuPlayback;
@@ -113,11 +120,11 @@ public:
         pushButton->setGeometry(QRect(110, 810, 89, 25));
         label_3 = new QListWidget(centralwidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(20, 600, 270, 201));
+        label_3->setGeometry(QRect(20, 670, 270, 131));
         label_3->setStyleSheet(QString::fromUtf8("background-color: rgba(238, 238, 236, 180);"));
         gridLayoutWidget = new QWidget(centralwidget);
         gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(20, 50, 271, 201));
+        gridLayoutWidget->setGeometry(QRect(20, 60, 271, 201));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
@@ -171,6 +178,35 @@ public:
         label_2->setGeometry(QRect(50, 340, 80, 80));
         label_2->setStyleSheet(QString::fromUtf8("background-color: rgba(255, 255, 255,0)"));
         label_2->setPixmap(QPixmap(QString::fromUtf8("leftarrowbefore.png")));
+        label_4 = new QListWidget(centralwidget);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(20, 600, 270, 61));
+        label_4->setStyleSheet(QString::fromUtf8("background-color: rgba(238, 238, 236, 180);"));
+        cam_cb = new QCheckBox(centralwidget);
+        cam_cb->setObjectName(QString::fromUtf8("cam_cb"));
+        cam_cb->setGeometry(QRect(120, 10, 61, 23));
+        cam_cb->setStyleSheet(QString::fromUtf8("background-color: rgba(255, 255, 255, 80);"));
+        cam_cb->setChecked(true);
+        lidar_cb = new QCheckBox(centralwidget);
+        lidar_cb->setObjectName(QString::fromUtf8("lidar_cb"));
+        lidar_cb->setGeometry(QRect(220, 10, 61, 23));
+        lidar_cb->setStyleSheet(QString::fromUtf8("background-color: rgba(255, 255, 255, 80);"));
+        lidar_cb->setChecked(true);
+        imu_cb = new QCheckBox(centralwidget);
+        imu_cb->setObjectName(QString::fromUtf8("imu_cb"));
+        imu_cb->setGeometry(QRect(70, 30, 61, 23));
+        imu_cb->setStyleSheet(QString::fromUtf8("background-color: rgba(255, 255, 255, 80);"));
+        imu_cb->setChecked(true);
+        can_cb = new QCheckBox(centralwidget);
+        can_cb->setObjectName(QString::fromUtf8("can_cb"));
+        can_cb->setGeometry(QRect(170, 30, 61, 23));
+        can_cb->setStyleSheet(QString::fromUtf8("background-color: rgba(255, 255, 255, 80);"));
+        can_cb->setChecked(true);
+        gps_cb = new QCheckBox(centralwidget);
+        gps_cb->setObjectName(QString::fromUtf8("gps_cb"));
+        gps_cb->setGeometry(QRect(20, 10, 61, 23));
+        gps_cb->setStyleSheet(QString::fromUtf8("background-color: rgba(255, 255, 255, 80);"));
+        gps_cb->setChecked(true);
         MainWindow->setCentralWidget(centralwidget);
         label_3->raise();
         label_5->raise();
@@ -186,6 +222,12 @@ public:
         D_label->raise();
         label->raise();
         label_2->raise();
+        label_4->raise();
+        cam_cb->raise();
+        lidar_cb->raise();
+        imu_cb->raise();
+        can_cb->raise();
+        gps_cb->raise();
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 1602, 22));
@@ -219,7 +261,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "DIVA _ Data Intergration for Vehicle Assistance", nullptr));
         actionLive_Streaming->setText(QApplication::translate("MainWindow", "Live Streaming", nullptr));
         actionGet_Log->setText(QApplication::translate("MainWindow", "Get Log", nullptr));
         actionStreaming_End->setText(QApplication::translate("MainWindow", "Streaming End", nullptr));
@@ -240,6 +282,11 @@ public:
         D_label->setText(QApplication::translate("MainWindow", "D", nullptr));
         label->setText(QString());
         label_2->setText(QString());
+        cam_cb->setText(QApplication::translate("MainWindow", "CAM", nullptr));
+        lidar_cb->setText(QApplication::translate("MainWindow", "LiDAR", nullptr));
+        imu_cb->setText(QApplication::translate("MainWindow", "IMU", nullptr));
+        can_cb->setText(QApplication::translate("MainWindow", "CAN", nullptr));
+        gps_cb->setText(QApplication::translate("MainWindow", "GPS", nullptr));
         menuStreaming->setTitle(QApplication::translate("MainWindow", "Streaming", nullptr));
         menuPlayback->setTitle(QApplication::translate("MainWindow", "Playback", nullptr));
         menuData_Processing->setTitle(QApplication::translate("MainWindow", "Data Processing", nullptr));

@@ -81,7 +81,7 @@ public:
 
 public slots:
     void stop();
-    void get_dir(std::string);
+    void get_dir(QString);
 private:
     void run() override;
 

@@ -1,6 +1,6 @@
 #include "canthread.h"
 
-canThread::canThread() : QObject()
+canThread::canThread(QObject *parent) : QThread(parent)
 {
 	if (QCanBus::instance()->plugins().contains(QStringLiteral("socketcan"))) {
 		std::cout<<"socketcan"<<std::endl;
@@ -15,11 +15,16 @@ canThread::canThread() : QObject()
    			 
 }
 
-void canThread::start(){
+void canThread::run(){
 	path = dir+"/CAN/i30_CAN_"+ts.getMilliTime()+".csv";
 	writeFile.open(path.c_str());
-	connect(&timer, SIGNAL(timeout()), this, SLOT(event()));
-    timer.start(10);
+    while(!stop_flag){
+        event();
+        QThread::msleep(10);
+        QCoreApplication::processEvents();
+    }
+	//connect(&timer, SIGNAL(timeout()), this, SLOT(event()));
+    //timer.start(10);
 }
 
 void canThread::event(){
@@ -38,14 +43,14 @@ void canThread::event(){
     string view_string;
     string csv_string;
     char cancsv[256];
-
-     while(device->waitForFramesReceived(1000)){
+    //device->waitForFramesReceived(1000);            //sangjun
+    while(device->waitForFramesReceived(1000)){
+     //while(device->framesAvailable()){               //sangjun
      	
         frame = device->readFrame();
         view = frame.toString();
 
         fid = frame.frameId();
-        cout<<fid<<endl;
      	view_string = view.toStdString();
 
          if(fid == 688){
@@ -70,9 +75,10 @@ void canThread::event(){
 
         	//QCoreApplication::processEvents();
          	frame_bin = ""; 
-         	//device->clear();
+         	device->clear();
 
-         }else if(fid == 790){
+         }
+         if(fid == 790){
          	frame_bin += hexToBinary(view_string, 34);
          	frame_bin += hexToBinary(view_string, 35);
          	
@@ -81,9 +87,10 @@ void canThread::event(){
          	emit send_speed(temp.vehicle_speed);
         	//QCoreApplication::processEvents();
         	frame_bin = "";
-        	//device->clear();
+        	device->clear();
       
-         }else if(fid == 1322){//automatic transmission
+         }
+         if(fid == 1322){//automatic transmission
          	automatic_transmission_mode = "";
          	automatic_transmission_mode += hexToBinary(view_string, 19);
          	automatic_transmission_mode += hexToBinary(view_string, 20);
@@ -104,6 +111,7 @@ void canThread::event(){
                      //neutral
                      temp.gear = 2; //'N';
                      cout<<"N"<<endl;
+                     emit send_gear(2);
                  }
                  else if(automatic_transmission_mode.at(3) == '1'){
                      //drive
@@ -111,12 +119,11 @@ void canThread::event(){
                      cout<<"D"<<endl;
                      emit send_gear(3);
                  }
-                // emit send_gear(temp.gear);
     			}
                 //QCoreApplication::processEvents();
-    			//device->clear();
+    			device->clear();
         }
-        else if(fid == 1345){ //direction light
+        if(fid == 1345){ //direction light
         	turn_signal_direction = "";
              turn_signal_blink_left = "";
              turn_signal_blink_right = "";
@@ -140,15 +147,15 @@ void canThread::event(){
                  emit send_turn(2);
              }
              //QCoreApplication::processEvents();
-             //emit send_turn(temp.turn_indicator);
-             //device->clear();
+             device->clear();
         }
+
+
         const char* mtime = ts.p_time();
         sprintf(cancsv, "%s,%d,%d,%d,%d,%d\n", mtime, temp.handle_angle, temp.handle_accel, temp.vehicle_speed, temp.gear, temp.turn_indicator);
         writeFile.write(cancsv,strlen(cancsv));
         
         device->clear();
-        QCoreApplication::processEvents();
     }
 
 }
@@ -156,13 +163,15 @@ void canThread::event(){
 void canThread::stop(){
 	stop_flag = true;
     emit send_end();
-    disconnect(&timer, SIGNAL(timeout()), this, SLOT(event()));
-    timer.stop();
+    //disconnect(&timer, SIGNAL(timeout()), this, SLOT(event()));
+    //timer.stop();
+    device->disconnectDevice();
+    delete device;
     writeFile.close();
 }
 
-void canThread::get_dir(std::string dir_str){
-    dir = dir_str;
+void canThread::get_dir(QString dir_str){
+    dir = dir_str.toStdString();
 }
 
 string canThread::hexToBinary(string s, int index){

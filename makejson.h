@@ -73,6 +73,8 @@ public:
     string gear;
     string turn;
 
+    int num_of_scene = 0;
+
 };
 
 #endif // MAKEJSON_H
